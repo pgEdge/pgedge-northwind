@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.5",
+    "@cloudflare/workers-types": "^4.20231218.0",
     "@types/node": "^20",
     "@types/pg": "^8.10.9",
     "@types/react": "^18",
@@ -31,6 +32,6 @@
     "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.12.3",
     "postcss-simple-vars": "^7.0.1",
-    "typescript": "^5"
+    "typescript": "^5.3.3"
   }
 }
