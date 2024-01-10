@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { Group, Code, Title } from '@mantine/core';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
-  IconSwitchHorizontal,
-  IconLogout,
   IconSearch,
   IconHome,
   IconDashboard,
@@ -15,44 +13,36 @@ import {
 } from '@tabler/icons-react';
 import classes from './NavbarSimple.module.css';
 
+
 const data = [
-  { link: '', label: 'Home', icon: IconHome },
-  { link: '', label: 'Dashboard', icon: IconDashboard },
-  { link: '', label: 'Suppliers', icon: IconFileDatabase },
-  { link: '', label: 'Products', icon: IconShoppingCartStar },
-  { link: '', label: 'Orders', icon: IconShoppingCart },
-  { link: '', label: 'Employees', icon: IconBriefcase },
-  { link: '', label: 'Customers', icon: IconUser },
-  { link: '', label: 'Search', icon: IconSearch },
+  { link: '/', label: 'Home', icon: IconHome },
+//   { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
+  { link: '/suppliers', label: 'Suppliers', icon: IconFileDatabase },
+  { link: '/products', label: 'Products', icon: IconShoppingCartStar },
+//   { link: '/orders', label: 'Orders', icon: IconShoppingCart },
+//   { link: 'employees', label: 'Employees', icon: IconBriefcase },
+//   { link: '/customers', label: 'Customers', icon: IconUser },
+//   { link: '/search', label: 'Search', icon: IconSearch },
 ];
 
 export function NavbarSimple() {
-  const [active, setActive] = useState('Billing');
-
+  const pathname = usePathname()
+  console.log(pathname)
   const links = data.map((item) => (
-    <a
+    <Link
       className={classes.link}
-      data-active={item.label === active || undefined}
+      data-active={pathname === item.link || undefined}
       href={item.link}
       key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
-      }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
-    </a>
+    </Link>
   ));
 
   return (
-    <nav className={classes.navbar}>
+    <>
       <div className={classes.navbarMain}>
-        <Group className={classes.header} justify="space-between">
-          <Title order={4} className={classes.title}>
-            Northwind Traders
-          </Title>
-        </Group>
         {links}
       </div>
 
@@ -62,6 +52,6 @@ export function NavbarSimple() {
           <span>Github</span>
         </a>
       </div>
-    </nav>
+    </>
   );
 }

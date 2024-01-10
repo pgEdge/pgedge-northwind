@@ -1,12 +1,7 @@
-'use client';
-
-import { Container, Title } from '@mantine/core';
-import { NavbarSimple } from './components/NavbarSimple/NavbarSimple';
+import { Title} from '@mantine/core';
 
 export default function Home() {
   return (
-    <>
-    <NavbarSimple></NavbarSimple>
-  </>
+    <Title order={3}>Home</Title>
   )
 }
