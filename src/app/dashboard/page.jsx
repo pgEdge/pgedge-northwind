@@ -1,6 +1,8 @@
 import { Title, Text } from '@mantine/core';
 import { getUser, getDbInfo } from '../data/api';
 
+export const dynamic = "force-dynamic";
+
 export default async function Dashboard() {
   
   const userInfo = JSON.stringify(await getUser())

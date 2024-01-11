@@ -1,4 +1,3 @@
-'use client'
 import { DataTable } from 'mantine-datatable';
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
