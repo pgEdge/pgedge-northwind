@@ -45,22 +45,60 @@ router.get('/db', async ({ env }) => {
 router.get('/suppliers', async ({ req, env }) => {
 	const currentPage: number = Number(req.query?.page ?? 1)
 	const rowsPerPage: number = 20
-	const { data, count } = await getTableData(env.DB, "suppliers", currentPage, rowsPerPage)
+	const { data, count, log } = await getTableData(env.DB, "suppliers", currentPage, rowsPerPage)
 
     return Response.json({
 		data: data,
-		count: count
+		count: count,
+		log: log
 	})
 })
 
 router.get('/products', async ({ req, env }) => {
 	const currentPage: number = Number(req.query?.page ?? 1)
 	const rowsPerPage: number = 20
-	const { data, count } = await getTableData(env.DB, "products", currentPage, rowsPerPage)
+	const { data, count, log } = await getTableData(env.DB, "products", currentPage, rowsPerPage)
 
     return Response.json({
 		data: data,
-		count: count
+		count: count,
+		log: log
+	})
+})
+
+router.get('/orders', async ({ req, env }) => {
+	const currentPage: number = Number(req.query?.page ?? 1)
+	const rowsPerPage: number = 20
+	const { data, count, log } = await getTableData(env.DB, "orders", currentPage, rowsPerPage)
+
+    return Response.json({
+		data: data,
+		count: count,
+		log: log
+	})
+})
+
+router.get('/employees', async ({ req, env }) => {
+	const currentPage: number = Number(req.query?.page ?? 1)
+	const rowsPerPage: number = 20
+	const { data, count, log } = await getTableData(env.DB, "employees", currentPage, rowsPerPage)
+
+    return Response.json({
+		data: data,
+		count: count,
+		log: log
+	})
+})
+
+router.get('/customers', async ({ req, env }) => {
+	const currentPage: number = Number(req.query?.page ?? 1)
+	const rowsPerPage: number = 20
+	const { data, count, log } = await getTableData(env.DB, "customers", currentPage, rowsPerPage)
+
+    return Response.json({
+		data: data,
+		count: count,
+		log: log
 	})
 })
 

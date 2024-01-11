@@ -1,13 +1,17 @@
+'use client'
+
 import { DataTable } from 'mantine-datatable';
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 
 interface TableProps {
+    loading: boolean
     currentPage: number;
     rowCount: number
     rowsPerPage: number
     records: any[]
     columns: string[]
+    onPageChange: any
  }
 
 export function Table(props: TableProps) {
@@ -22,13 +26,16 @@ export function Table(props: TableProps) {
         withColumnBorders
         striped
         highlightOnHover
-        // provide data
+        minHeight={150}
+        fetching={props.loading}
         records={props.records}
         page={props.currentPage}
         recordsPerPage={props.rowsPerPage}
         totalRecords={props.rowCount}
-        onPageChange={(p) => router.push(pathname + `?page=${p}`)}
-        // define columns
+        onPageChange={(p) => {
+          router.push(pathname + `?page=${p}`)
+          props.onPageChange(p)
+        }}
         columns={columnData}
       />
   )

@@ -1,3 +1,5 @@
+export const Logs: any[] = []
+
 export async function getTableData(table: string, currentPage: number = 1) {
 
   const params = new URLSearchParams({
@@ -11,8 +13,11 @@ export async function getTableData(table: string, currentPage: number = 1) {
     },
   });
 
-  const json = await res.json()
-
+  const json: any = await res.json()
+  for (const log of json.log)
+  {
+    Logs.push(log)
+  }
   return json
 }
 
