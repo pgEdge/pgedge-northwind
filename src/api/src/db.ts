@@ -8,9 +8,7 @@ export async function getDbNodes(db: string, nodeList: string[]) {
     let nodeLocations: string[] = []
 
     for (const node of nodeList) {
-        const dbNode = db.replace(nearestClient.host, node)
-        const nodeClient = new Client(dbNode);
-        const nodeIP = await getNodeIP(nodeClient.host)
+        const nodeIP = await getNodeIP(node)
         const nodeLocation = getNodeLocation(node)
         nodeLocations.push(nodeLocation)
         if (nodeIP == nearestIP) {
