@@ -2,7 +2,7 @@ import { Title, Text } from '@mantine/core';
 import { getUser, getDbInfo } from '../data/api';
 
 export default async function Dashboard() {
-
+  
   const userInfo = JSON.stringify(await getUser())
   const dbInfo = JSON.stringify(await getDbInfo())
   return (
