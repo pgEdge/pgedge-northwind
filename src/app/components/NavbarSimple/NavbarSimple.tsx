@@ -16,7 +16,7 @@ import classes from './NavbarSimple.module.css';
 
 const data = [
   { link: '/', label: 'Home', icon: IconHome },
-//   { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
+  { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
   { link: '/suppliers', label: 'Suppliers', icon: IconFileDatabase },
   { link: '/products', label: 'Products', icon: IconShoppingCartStar },
 //   { link: '/orders', label: 'Orders', icon: IconShoppingCart },
@@ -27,7 +27,6 @@ const data = [
 
 export function NavbarSimple() {
   const pathname = usePathname()
-  console.log(pathname)
   const links = data.map((item) => (
     <Link
       className={classes.link}
