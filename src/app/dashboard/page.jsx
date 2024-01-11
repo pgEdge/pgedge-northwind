@@ -1,8 +1,6 @@
 import { Title, Text } from '@mantine/core';
 import { getUser, getDbInfo } from '../data/api';
 
-export const runtime = 'edge';
-
 export default async function Dashboard() {
 
   const userInfo = JSON.stringify(await getUser())
