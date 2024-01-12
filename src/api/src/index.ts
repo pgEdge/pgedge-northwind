@@ -34,7 +34,9 @@ router.get('/user', ({ req }) => {
 		country: req.cf?.country,
 		continent: req.cf?.continent,
 		region: req.cf?.region,
-		city: req.cf?.city
+		city: req.cf?.city,
+		lat: Number(req.cf?.latitude),
+		long: Number(req.cf?.longitude)
 	})
 })
 
