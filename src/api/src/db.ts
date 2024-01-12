@@ -1,4 +1,4 @@
-import { Client } from 'pg';
+import { Client, QueryResult } from 'pg';
 import { Locations } from './locations';
 
 async function query(client: Client, queryLog: any[], query: string, params?: any[]) {
@@ -29,14 +29,21 @@ export async function getDbNodes(db: string, nodeList: string[]) {
     let nearestLocation = ""
     let nodeLocations: any = {}
 
+    const nodeClients: Client[] = []
+    let connectPromises: Promise<void>[] = []
     for (const node of nodeList) {
-        const nodeIP = await getNodeIP(node)
-        const nodeLocation = getNodeLocation(node)
-        const nodeInfo = Locations[nodeLocation]
         const nodeDB = db.replace(nearestClient.host, node)
-        
-        const nodeClient = new Client(nodeDB);
-        await nodeClient.connect()
+        const nodeClient = new Client(nodeDB)
+        nodeClients.push(nodeClient);
+        connectPromises.push(nodeClient.connect())
+    }
+
+    await Promise.all(connectPromises);
+
+    for (const nodeClient of nodeClients) {
+        const nodeIP = await getNodeIP(nodeClient.host)
+        const nodeLocation = getNodeLocation(nodeClient.host)
+        const nodeInfo = Locations[nodeLocation]
         const start = performance.now();
         await nodeClient.query("SELECT 1")
         const end = performance.now();
