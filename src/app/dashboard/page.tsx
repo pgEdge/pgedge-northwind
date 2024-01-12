@@ -17,7 +17,7 @@ import {
   IconFlame,
   IconLocation,
 } from "@tabler/icons-react";
-import { DbInfo, Logs, UserInfo } from "../data/api";
+import { Logs } from "../data/api";
 import { UserInfoContext, DbInfoContext } from "../context"
 import React, { useState, useEffect, useContext } from "react";
 import Map from "../components/Map/Map";
