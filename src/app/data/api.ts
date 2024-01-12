@@ -33,7 +33,7 @@ export interface UserInfo {
   long: number
 }
 
-export async function getUser(): Promise<UserInfo> {
+export async function getUserInfo(): Promise<UserInfo> {
 
   const res = await fetch(process.env.NEXT_PUBLIC_API + "/user", {
     headers: {

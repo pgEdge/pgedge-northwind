@@ -18,7 +18,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState, useEffect } from "react";
 import { NavbarSimple } from "./components/NavbarSimple/NavbarSimple";
-import { UserInfo, DbInfo, getUser, getDbInfo } from "./data/api";
+import { UserInfo, DbInfo, getUserInfo, getDbInfo } from "./data/api";
 import { DbInfoContext, UserInfoContext } from "./context";
 
 export default function Document({ children }: { children: React.ReactNode }) {
@@ -27,12 +27,15 @@ export default function Document({ children }: { children: React.ReactNode }) {
   const [dbInfo, setDbInfo] = useState<DbInfo | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {    
-      setUserInfo(await getUser());
+    const fetchDbInfo = async () => {    
       setDbInfo(await getDbInfo());      
     };
+    const fetchUserInfo = async () => {    
+      setUserInfo(await getUserInfo());      
+    };
 
-    fetchData();
+    fetchDbInfo();
+    fetchUserInfo();
   }, []);
 
   return (
