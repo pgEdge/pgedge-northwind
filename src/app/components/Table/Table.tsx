@@ -26,7 +26,7 @@ export function Table(props: TableProps) {
         withColumnBorders
         striped
         highlightOnHover
-        minHeight={150}
+        minHeight={200}
         fetching={props.loading}
         records={props.records}
         page={props.currentPage}

@@ -10,7 +10,9 @@ import {
   Title,
   Burger,
   AppShell,
-  Text,
+  Box,
+  Image,
+  Text
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { NavbarSimple } from "./components/NavbarSimple/NavbarSimple";
@@ -27,7 +29,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
         <body>
           <MantineProvider>
             <AppShell
-              header={{ height: 40 }}
+              header={{ height: 50 }}
               navbar={{
                 width: 300,
                 breakpoint: "sm",
@@ -43,7 +45,19 @@ export default function Document({ children }: { children: React.ReactNode }) {
                     hiddenFrom="sm"
                     size="md"
                   />
-                  <Title pt={2} pl={15} order={3}><strong>Northwind</strong> Traders</Title>
+                  <Title pt={7} pl={25} order={3}>
+                    <strong>Northwind</strong> Traders
+                  </Title>
+                  <Flex align="center" ml="auto">
+                    <Text size="sm">Powered By</Text>
+                    <Image
+                      src={`/pgEdge_Cloud_logo_light_mode.png`}
+                      h={50}
+                      w="auto"
+                      alt="pgEdge logo"
+                      ml="auto"
+                    />
+                  </Flex>
                 </Flex>
               </AppShell.Header>
 
@@ -51,7 +65,12 @@ export default function Document({ children }: { children: React.ReactNode }) {
                 <NavbarSimple></NavbarSimple>
               </AppShell.Navbar>
 
-              <AppShell.Main>{children}</AppShell.Main>
+              <AppShell.Main>
+                {" "}
+                <Box py="lg" px="md">
+                  {children}
+                </Box>
+              </AppShell.Main>
             </AppShell>
           </MantineProvider>
         </body>

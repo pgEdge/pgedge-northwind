@@ -37,7 +37,7 @@ export default function TablePage(props: TablePageProps) {
    
     return (
       <>
-        <Title order={3}>{props.title}</Title>
+        <Title order={3} fw={600} mb="lg">{props.title}</Title>
         <Table loading={loading} currentPage={currentPage} rowCount={count} rowsPerPage={rowsPerPage} records={records} columns={columns} onPageChange={setCurrentPage} />
       </>
     )

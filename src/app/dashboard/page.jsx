@@ -1,18 +1,17 @@
 "use client";
 
-import { Title, List, ThemeIcon, rem, SimpleGrid, Space } from "@mantine/core";
+import { Title, List, ThemeIcon, rem, SimpleGrid, Space, Image } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
-import { IconDatabase, IconFlame, IconLocation } from "@tabler/icons-react";
+import { IconClock, IconDatabase, IconFlame, IconLocation } from "@tabler/icons-react";
 import { getUser, getDbInfo, Logs } from "../data/api";
 import React, { useState, useEffect } from "react";
 
 export default function Dashboard() {
   const [userInfo, setUserInfo] = useState(null);
   const [dbInfo, setDbInfo] = useState(null);
-  const logsPerPage = 20
+  const logsPerPage = 20;
   const [logPage, setLogPage] = useState(1);
   const [logs, setLogs] = useState(null);
-  
 
   const companies = [];
   useEffect(() => {
@@ -29,10 +28,14 @@ export default function Dashboard() {
 
   return (
     <>
-      <Title order={2}>Dashboard</Title>
+      <Title order={3} mb="lg">
+        Dashboard
+      </Title>
       <SimpleGrid cols={2}>
         <div>
-          <Title order={4}>User Info</Title>
+          <Title order={4} mb="lg">
+            User Info
+          </Title>
           {userInfo != null && (
             <List spacing="xs" size="sm" center>
               <List.Item
@@ -58,7 +61,9 @@ export default function Dashboard() {
           )}
         </div>
         <div>
-          <Title order={4}>DB Info</Title>
+          <Title order={4} mb="lg">
+            Database
+          </Title>
           {dbInfo != null && (
             <List spacing="xs" size="sm" center>
               <List.Item
@@ -74,7 +79,7 @@ export default function Dashboard() {
               <List.Item
                 icon={
                   <ThemeIcon color="blue" size={24} radius="xl">
-                    <IconDatabase style={{ width: rem(16), height: rem(16) }} />
+                    <IconClock style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }
               >
@@ -85,14 +90,16 @@ export default function Dashboard() {
         </div>
       </SimpleGrid>
       <Space h="md"></Space>
-      <Title order={4}>DB Logs</Title>
+      <Title order={4} mb="lg">
+        DB Logs
+      </Title>
       <DataTable
         withTableBorder
         borderRadius="sm"
         withColumnBorders
         striped
         highlightOnHover
-        minHeight={150}
+        minHeight={200}
         page={logPage}
         recordsPerPage={logsPerPage}
         onPageChange={(p) => setLogPage(p)}
