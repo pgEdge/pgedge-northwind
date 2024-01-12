@@ -36,27 +36,41 @@ export default function Dashboard() {
   const [logs, setLogs] = useState<any[]>([]);
 
   let markers = [];
+  let primaryConnections = [];
+  let secondaryConnections = [];
   if (dbInfo != null && userInfo != null) {
     for (const [node, nodeInfo] of Object.entries(dbInfo.nodes)) {
-      markers.push({
+      const marker = {
         location: {
           latitude: nodeInfo.lat,
           longitude: nodeInfo.long,
         },
         render: () => <RegionPin isSelected label={node} />
-      });
+      }
+      markers.push(marker);
+
+      if(dbInfo.nearest == node) {
+        primaryConnections.push(marker)
+      }
+
+      secondaryConnections.push(marker)
     }
 
     if (userInfo != null) {
-      markers.push({
+      const marker = {
         location: {
           latitude: userInfo.lat,
           longitude: userInfo.long,
         },
-        render: () => <UserPin label={"user"} />,
-      });
+        render: () => <UserPin />,
+      }
+      markers.push(marker);
+      primaryConnections.push(marker)
     }
   }
+
+  const connections = [primaryConnections, secondaryConnections]
+  
   useEffect(() => {
     const from = (logPage - 1) * logsPerPage;
     const to = from + logsPerPage;
@@ -72,7 +86,7 @@ export default function Dashboard() {
         <Map
           height={400}
           markers={markers}
-          connectedMarkers={markers}
+          connections={connections}
           enableClustering={false}
           // viewResetDeps={[router.query.databaseId]}
         />

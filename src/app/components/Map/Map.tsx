@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from 'react';
+} from "react";
 import {
   Box,
   Center,
@@ -14,7 +14,7 @@ import {
   Text,
   Tooltip,
   useMantineTheme,
-} from '@mantine/core';
+} from "@mantine/core";
 import ReactMapGL, {
   NavigationControl,
   Layer,
@@ -22,17 +22,18 @@ import ReactMapGL, {
   MapRef,
   Marker,
   useMap,
-} from 'react-map-gl';
+} from "react-map-gl";
 // @ts-ignore
-import * as turf from '@turf/turf';
+import * as turf from "@turf/turf";
 import Supercluster, {
   AnyProps,
   ClusterFeature,
   PointFeature,
-} from 'supercluster';
-import { IconGlobe, IconMap } from '@tabler/icons-react';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import MapMarker from '../MapMarker/MapMarker';
+} from "supercluster";
+import { IconGlobe, IconMap } from "@tabler/icons-react";
+import "mapbox-gl/dist/mapbox-gl.css";
+import MapMarker from "../MapMarker/MapMarker";
+import { group } from "console";
 
 export type TMapMarker = {
   location: {
@@ -47,7 +48,7 @@ export type TMapMarker = {
 type MapProps<T extends TMapMarker> = {
   height: number;
   markers?: T[];
-  connectedMarkers?: T[];
+  connections: T[][];
   maskCloudProvider?: boolean;
   viewResetDeps?: any[];
   color?: string;
@@ -73,7 +74,7 @@ export function makeMarkerKey(marker: TMapMarker): string {
 export default function Map<T extends TMapMarker>({
   height = 500,
   markers,
-  connectedMarkers,
+  connections,
   viewResetDeps = [],
   color: colorInput,
   enableClustering = true,
@@ -84,27 +85,26 @@ export default function Map<T extends TMapMarker>({
 
   const [averageLongitude, averageLatitude] = useMemo(
     () =>
-      !(connectedMarkers?.length || markers?.length)
+      !markers?.length
         ? [0, 0]
         : turf.center(
-          turf.featureCollection(
-            (connectedMarkers?.length ? connectedMarkers : markers || []).map(
-              (marker) =>
+            turf.featureCollection(
+              (markers || []).map((marker) =>
                 turf.point([
                   marker.location.longitude,
                   marker.location.latitude,
                 ])
+              )
             )
-          )
-        ).geometry.coordinates,
-    [markers, connectedMarkers]
+          ).geometry.coordinates,
+    [markers]
   );
 
   const currentProjection = mapRef.current?.getMap().getProjection();
 
   const initialZoom = useMemo(() => {
-    const items = connectedMarkers || markers || [];
-    const defaultZoom = currentProjection?.name === 'globe' ? 1 : 0;
+    const items = markers || [];
+    const defaultZoom = currentProjection?.name === "globe" ? 1 : 0;
 
     if (items.length === 0) return defaultZoom;
 
@@ -123,7 +123,7 @@ export default function Map<T extends TMapMarker>({
     averageLatitude,
     averageLongitude,
     markers,
-    connectedMarkers,
+    connections,
     currentProjection,
   ]);
 
@@ -150,21 +150,27 @@ export default function Map<T extends TMapMarker>({
   }, [initialViewState]);
 
   const straightConnectionLines = useMemo(() => {
-    return computeConnections(connectedMarkers || []).map(([start, end]) =>
-      turf.lineString([
-        [start.location.longitude, start.location.latitude],
-        [end.location.longitude, end.location.latitude],
-      ])
-    );
-  }, [connectedMarkers]);
+    let allConnections: [TMapMarker, TMapMarker][] = [];
 
-  const [mapPojection, setProjection] = useState<string>(
-    'mercator'
-  );
+    connections.forEach((connection) => {
+      allConnections = allConnections.concat(
+        computeConnections(connection || []).map(([start, end]) =>
+          turf.lineString([
+            [start.location.longitude, start.location.latitude],
+            [end.location.longitude, end.location.latitude],
+          ])
+        )
+      );
+    });
+
+    return allConnections;
+  }, [connections]);
+
+  const [mapPojection, setProjection] = useState<string>("mercator");
   const mapStyle = useMemo(() => {
-    return mapPojection === 'mercator'
+    return mapPojection === "mercator"
       ? `mapbox://styles/mapbox/light-v9`
-      : 'mapbox://styles/mapbox/streets-v12';
+      : "mapbox://styles/mapbox/streets-v12";
   }, [mapPojection]);
 
   // pan to initial center and zoom when viewResetDeps or map projection changes
@@ -175,11 +181,10 @@ export default function Map<T extends TMapMarker>({
   return (
     <Box h={height} pos="relative">
       <ReactMapGL
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''}
+        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ""}
         mapStyle={mapStyle}
         renderWorldCopies={false}
         initialViewState={initialViewState}
-        onZoomEnd={(e: any) => setZoom(e.target.getZoom())}
         attributionControl={false}
         fadeDuration={0}
         ref={mapRef}
@@ -206,16 +211,14 @@ export default function Map<T extends TMapMarker>({
                     style={{
                       width: `${10 + (point_count / points.length) * 20}px`,
                       height: `${10 + (point_count / points.length) * 20}px`,
-                      borderRadius: '50%',
+                      borderRadius: "50%",
                       borderColor: color,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                       color: theme.colors[theme.primaryColor][9],
                     }}
-                    bg={
-                        'rgba(255,255,255,0.3)'
-                    }
+                    bg={"rgba(255,255,255,0.3)"}
                     p="md"
                     withBorder
                   >
@@ -239,29 +242,29 @@ export default function Map<T extends TMapMarker>({
           </>
         )}
 
-        {connectedMarkers && connectedMarkers.length > 1 && (
+        {connections && connections.length > 1 && (
           <>
             <Source
               id="connection-source"
               type="geojson"
               data={{
-                type: 'FeatureCollection',
+                type: "FeatureCollection",
+                // @ts-ignore
                 features: straightConnectionLines,
               }}
             >
               <Layer
                 {...{
-                  id: 'connection-line',
-                  type: 'line',
+                  id: "connection-line",
+                  type: "line",
                   layout: {
-                    'line-join': 'round',
-                    'line-cap': 'round',
+                    "line-join": "round",
+                    "line-cap": "round",
                   },
                   paint: {
-                    'line-color':
-                        theme.colors.dark[3],
-                    'line-width': 1,
-                    'line-dasharray': [2, 3],
+                    "line-color": theme.colors.dark[3],
+                    "line-width": 1,
+                    "line-dasharray": [2, 3],
                   },
                 }}
               />
@@ -270,7 +273,7 @@ export default function Map<T extends TMapMarker>({
         )}
       </ReactMapGL>
 
-      <Tooltip label="change projection" position='bottom' withArrow>
+      <Tooltip label="change projection" position="bottom" withArrow>
         <Box
           pos="absolute"
           bottom={8}
@@ -285,33 +288,28 @@ export default function Map<T extends TMapMarker>({
             size="xs"
             orientation="vertical"
             value={mapPojection}
-            onChange={(projection) =>
-              setProjection(projection)
-            }
+            onChange={(projection) => setProjection(projection)}
             data={[
               {
-                value: 'globe',
+                value: "globe",
                 label: (
                   <Center p={4}>
                     <IconGlobe
                       size={19}
                       strokeWidth={2.3}
-                      color={
-                          theme.colors.dark[5]
-                      }
+                      color={theme.colors.dark[5]}
                     />
                   </Center>
                 ),
               },
               {
-                value: 'mercator',
+                value: "mercator",
                 label: (
                   <Center p={5}>
                     <IconMap
                       size={18}
                       strokeWidth={2.3}
-                      color={theme.colors.dark[5]
-                      }
+                      color={theme.colors.dark[5]}
                     />
                   </Center>
                 ),
@@ -324,8 +322,7 @@ export default function Map<T extends TMapMarker>({
               },
               indicator: {
                 margin: 2,
-                backgroundColor:
-                  theme.white,
+                backgroundColor: theme.white,
               },
               // controlActive: {
               //   backgroundColor:
@@ -380,13 +377,13 @@ function useMapClusters({
   )[] => {
     return (
       markers?.map((marker) => ({
-        type: 'Feature',
+        type: "Feature",
         properties: {
           cluster: false,
           marker,
         },
         geometry: {
-          type: 'Point',
+          type: "Point",
           coordinates: [marker.location.longitude, marker.location.latitude],
         },
       })) || []
