@@ -12,7 +12,8 @@ import {
   AppShell,
   Box,
   Image,
-  Text
+  Text,
+  rem
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { NavbarSimple } from "./components/NavbarSimple/NavbarSimple";
@@ -27,7 +28,18 @@ export default function Document({ children }: { children: React.ReactNode }) {
           <ColorSchemeScript />
         </head>
         <body>
-          <MantineProvider>
+        <MantineProvider
+              theme={{
+                primaryColor: 'cyan',
+                fontSizes: {
+                  xs: rem(14),
+                  sm: rem(16),
+                  md: rem(18),
+                  lg: rem(20),
+                  xl: rem(22),
+                },
+              }}
+            >
             <AppShell
               header={{ height: 50 }}
               navbar={{
