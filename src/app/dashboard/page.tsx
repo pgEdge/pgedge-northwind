@@ -67,16 +67,6 @@ export default function Dashboard() {
       markers.push(marker);
       primaryConnections.push(marker);
     }
-
-    const otherUserMarker = {
-      location: {
-        latitude: 40.4168,
-        longitude: 3.7038,
-      },
-      render: () => <UserPin color={"grey"} />,
-    };
-
-    markers.push(otherUserMarker);
   }
 
   const connections = [primaryConnections, secondaryConnections];

@@ -7,13 +7,13 @@ import {
   Flex,
   ColorSchemeScript,
   MantineProvider,
-  Title,
   Burger,
   AppShell,
   Box,
   Image,
   Text,
   rem,
+  Container
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState, useEffect } from "react";
@@ -69,7 +69,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   padding="md"
                 >
                   <AppShell.Header>
-                    <Flex align="center">
+                    <Flex align="center" h={50}>
                       <Burger
                         opened={opened}
                         onClick={toggle}
@@ -80,16 +80,18 @@ export default function Document({ children }: { children: React.ReactNode }) {
                         <strong>Northwind</strong> Traders
                       </Text>
                       <Flex align="center" ml="auto">
-                        <Text size="sm" fw={500} visibleFrom="md">
+                        <Text size="xs" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
-                        <Image
-                          src={`/pgEdge_Cloud_logo_light_mode.png`}
-                          h={50}
-                          w="auto"
-                          alt="pgEdge logo"
-                          ml="auto"
-                        />
+                        <Container>
+                          <Image
+                            src={`/pgEdge_Cloud_logo_light_mode.png`}
+                            h={30}
+                            alt="pgEdge logo"
+                            ml="auto"
+                          />
+                          <Text size="xs" ta="center" visibleFrom="md" pr={5}>Cloudflare®</Text>
+                        </Container>
                       </Flex>
                     </Flex>
                   </AppShell.Header>
@@ -103,7 +105,6 @@ export default function Document({ children }: { children: React.ReactNode }) {
                     <Box py="lg" px="md">
                       {children}
                     </Box>
-                    <Text size="xs">Cloudflare, the Cloudflare logo, and Cloudflare Workers are trademarks and/or registered trademarks of Cloudflare, Inc. in the United States and other jurisdictions.”</Text> 
                   </AppShell.Main>
                 </AppShell>
               </DbInfoContext.Provider>
