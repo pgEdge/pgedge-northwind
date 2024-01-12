@@ -23,6 +23,7 @@ import ReactMapGL, {
   Marker,
   useMap,
 } from 'react-map-gl';
+// @ts-ignore
 import * as turf from '@turf/turf';
 import Supercluster, {
   AnyProps,
@@ -157,7 +158,7 @@ export default function Map<T extends TMapMarker>({
     );
   }, [connectedMarkers]);
 
-  const [mapPojection, setProjection] = useState<'mercator' | 'globe'>(
+  const [mapPojection, setProjection] = useState<string>(
     'mercator'
   );
   const mapStyle = useMemo(() => {
@@ -284,7 +285,7 @@ export default function Map<T extends TMapMarker>({
             size="xs"
             orientation="vertical"
             value={mapPojection}
-            onChange={(projection: 'mercator' | 'globe') =>
+            onChange={(projection) =>
               setProjection(projection)
             }
             data={[
@@ -326,10 +327,10 @@ export default function Map<T extends TMapMarker>({
                 backgroundColor:
                   theme.white,
               },
-              controlActive: {
-                backgroundColor:
-                  theme.white,
-              },
+              // controlActive: {
+              //   backgroundColor:
+              //     theme.white,
+              // },
             }}
           />
         </Box>

@@ -3,6 +3,7 @@ import { Marker, Popup } from 'react-map-gl';
 import { TMapMarker } from '../Map/Map';
 import { Box, Text, Tooltip, useMantineTheme } from '@mantine/core';
 import Image from 'next/image';
+// @ts-ignore
 import * as turf from '@turf/turf';
 import * as z from 'zod';
 import { IconUserCircle } from '@tabler/icons-react';
@@ -233,9 +234,7 @@ export function ConnectionMarker({
             cy="2.5"
             r="2.5"
             fill={
-              theme.colorScheme === 'dark'
-                ? theme.colors.gray[5]
-                : theme.colors.dark[3]
+              theme.colors.dark[3]
             }
           />
         </svg>
