@@ -1,5 +1,6 @@
 import { Router } from '@tsndr/cloudflare-worker-router'
 import { getTableData, getDbNodes } from './db'
+import { cfLocations } from './cloudflare'
 
 // Env Types
 export type Var<T = string> = T
@@ -12,16 +13,6 @@ export type Env = {
 	NODELIST: Secret<string>
 }
 
-// Request Extension
-export type ExtReq = {
-    //userId?: number
-}
-
-// Context Extension
-export type ExtCtx = {
-    //sentry?: Toucan
-}
-
 // Initialize Router
 const router = new Router<Env>()
 
@@ -31,6 +22,8 @@ router.cors()
 router.get('/user', ({ req }) => {
     return Response.json({
 		colo: req.cf?.colo,
+		colo_lat: cfLocations[req.cf?.colo || ""].lat,
+		colo_long: cfLocations[req.cf?.colo || ""].lon,
 		country: req.cf?.country,
 		continent: req.cf?.continent,
 		region: req.cf?.region,

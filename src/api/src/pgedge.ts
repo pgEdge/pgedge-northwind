@@ -1,4 +1,4 @@
-export const Locations: any = {
+export const pgEdgeLocations: any = {
     "iad": {
       "city": "Northern Virginia",
       "country": "us",

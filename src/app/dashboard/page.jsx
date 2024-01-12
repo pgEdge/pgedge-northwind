@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   Space,
   Loader,
-  Box
+  Box,
 } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import {
@@ -55,18 +55,17 @@ export default function Dashboard() {
         ),
       });
     }
-  
 
-  if (userInfo != null) {
-    markers.push({
-      location: {
-        latitude: userInfo.lat,
-        longitude: userInfo.long,
-      },
-      render: () => <UserPin label={"user"} />,
-    });
+    if (userInfo != null) {
+      markers.push({
+        location: {
+          latitude: userInfo.lat,
+          longitude: userInfo.long,
+        },
+        render: () => <UserPin label={"user"} />,
+      });
+    }
   }
-}
   useEffect(() => {
     const fetchData = async () => {
       setUserInfo(await getUser());
@@ -89,6 +88,7 @@ export default function Dashboard() {
           height={400}
           markers={markers}
           connectedMarkers={markers}
+          enableClustering={false}
           // viewResetDeps={[router.query.databaseId]}
         />
       </Box>

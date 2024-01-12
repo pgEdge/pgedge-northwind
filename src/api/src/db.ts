@@ -1,5 +1,5 @@
 import { Client, QueryResult } from 'pg';
-import { Locations } from './locations';
+import { pgEdgeLocations } from './pgedge';
 
 async function query(client: Client, queryLog: any[], query: string, params?: any[]) {
     const start = performance.now();
@@ -43,7 +43,7 @@ export async function getDbNodes(db: string, nodeList: string[]) {
     for (const nodeClient of nodeClients) {
         const nodeIP = await getNodeIP(nodeClient.host)
         const nodeLocation = getNodeLocation(nodeClient.host)
-        const nodeInfo = Locations[nodeLocation]
+        const nodeInfo = pgEdgeLocations[nodeLocation]
         const start = performance.now();
         await nodeClient.query("SELECT 1")
         const end = performance.now();
