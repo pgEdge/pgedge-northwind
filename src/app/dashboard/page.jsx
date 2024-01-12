@@ -1,6 +1,6 @@
 "use client";
 
-import { Title, List, ThemeIcon, rem, SimpleGrid, Space, Image } from "@mantine/core";
+import { Title, List, ThemeIcon, rem, SimpleGrid, Space, Loader } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import { IconClock, IconDatabase, IconFlame, IconLocation } from "@tabler/icons-react";
 import { getUser, getDbInfo, Logs } from "../data/api";
@@ -36,11 +36,14 @@ export default function Dashboard() {
           <Title order={4} mb="lg">
             User Info
           </Title>
+          {userInfo == null && (
+            <Loader color="rgb(21, 170, 191)"></Loader>
+          )}
           {userInfo != null && (
             <List spacing="xs" size="sm" center>
               <List.Item
                 icon={
-                  <ThemeIcon color="orange" size={24} radius="xl">
+                  <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
                     <IconFlame style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }
@@ -49,7 +52,7 @@ export default function Dashboard() {
               </List.Item>
               <List.Item
                 icon={
-                  <ThemeIcon color="blue" size={24} radius="xl">
+                  <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
                     <IconLocation style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }
@@ -64,11 +67,14 @@ export default function Dashboard() {
           <Title order={4} mb="lg">
             Database
           </Title>
+          {dbInfo == null && (
+            <Loader color="rgb(21, 170, 191)"></Loader>
+          )}
           {dbInfo != null && (
             <List spacing="xs" size="sm" center>
               <List.Item
                 icon={
-                  <ThemeIcon color="blue" size={24} radius="xl">
+                  <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
                     <IconDatabase style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }
@@ -78,7 +84,7 @@ export default function Dashboard() {
               </List.Item>
               <List.Item
                 icon={
-                  <ThemeIcon color="blue" size={24} radius="xl">
+                  <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
                     <IconClock style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }

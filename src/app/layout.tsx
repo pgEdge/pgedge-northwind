@@ -49,7 +49,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                     <strong>Northwind</strong> Traders
                   </Title>
                   <Flex align="center" ml="auto">
-                    <Text size="sm">Powered By</Text>
+                    <Text size="sm" fw={500}>Powered By</Text>
                     <Image
                       src={`/pgEdge_Cloud_logo_light_mode.png`}
                       h={50}
