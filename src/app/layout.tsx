@@ -103,6 +103,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                     <Box py="lg" px="md">
                       {children}
                     </Box>
+                    <Text size="xs">Cloudflare, the Cloudflare logo, and Cloudflare Workers are trademarks and/or registered trademarks of Cloudflare, Inc. in the United States and other jurisdictions.”</Text> 
                   </AppShell.Main>
                 </AppShell>
               </DbInfoContext.Provider>

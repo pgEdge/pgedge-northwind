@@ -24,6 +24,7 @@ router.get('/user', ({ req }) => {
 		colo: req.cf?.colo,
 		colo_lat: cfLocations[req.cf?.colo || ""].lat,
 		colo_long: cfLocations[req.cf?.colo || ""].lon,
+		colo_name: cfLocations[req.cf?.colo || ""].name,
 		country: req.cf?.country,
 		continent: req.cf?.continent,
 		region: req.cf?.region,

@@ -18,7 +18,7 @@ import {
   IconLocation,
 } from "@tabler/icons-react";
 import { Logs } from "../data/api";
-import { UserInfoContext, DbInfoContext } from "../context"
+import { UserInfoContext, DbInfoContext } from "../context";
 import React, { useState, useEffect, useContext } from "react";
 import Map from "../components/Map/Map";
 import {
@@ -45,15 +45,15 @@ export default function Dashboard() {
           latitude: nodeInfo.lat,
           longitude: nodeInfo.long,
         },
-        render: () => <RegionPin isSelected label={node} />
-      }
+        render: () => <RegionPin isSelected label={node} />,
+      };
       markers.push(marker);
 
-      if(dbInfo.nearest == node) {
-        primaryConnections.push(marker)
+      if (dbInfo.nearest == node) {
+        primaryConnections.push(marker);
       }
 
-      secondaryConnections.push(marker)
+      secondaryConnections.push(marker);
     }
 
     if (userInfo != null) {
@@ -63,20 +63,30 @@ export default function Dashboard() {
           longitude: userInfo.long,
         },
         render: () => <UserPin />,
-      }
+      };
       markers.push(marker);
-      primaryConnections.push(marker)
+      primaryConnections.push(marker);
     }
+
+    const otherUserMarker = {
+      location: {
+        latitude: 40.4168,
+        longitude: 3.7038,
+      },
+      render: () => <UserPin color={"grey"} />,
+    };
+
+    markers.push(otherUserMarker);
   }
 
-  const connections = [primaryConnections, secondaryConnections]
-  
+  const connections = [primaryConnections, secondaryConnections];
+
   useEffect(() => {
     const from = (logPage - 1) * logsPerPage;
     const to = from + logsPerPage;
     setLogs(Logs.slice(from, to));
   }, [logPage]);
-  
+
   return (
     <>
       <Title order={3} mb="lg">
@@ -91,7 +101,7 @@ export default function Dashboard() {
           // viewResetDeps={[router.query.databaseId]}
         />
       </Box>
-      <SimpleGrid cols={2}>
+      <SimpleGrid cols={3}>
         <div>
           <Title order={4} mb="lg">
             User
@@ -102,28 +112,57 @@ export default function Dashboard() {
               <List.Item
                 icon={
                   <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
-                    <IconFlame style={{ width: rem(16), height: rem(16) }} />
-                  </ThemeIcon>
-                }
-              >
-                Cloudflare Colocation: {userInfo.colo}
-              </List.Item>
-              <List.Item
-                icon={
-                  <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
                     <IconLocation style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }
               >
-                Your Location: {userInfo.city}, {userInfo.region}{" "}
-                {userInfo.country}
+                {userInfo.city}, {userInfo.region}, {userInfo.country}
               </List.Item>
             </List>
           )}
         </div>
         <div>
           <Title order={4} mb="lg">
-            Database
+            Cloudflare® 
+          </Title>
+          {userInfo == null && <Loader></Loader>}
+          {userInfo != null && (
+            <List spacing="xs" size="sm" center>
+              <List.Item
+                icon={
+                  <ThemeIcon color="orange" size={24} radius="xl">
+                    <IconFlame style={{ width: rem(16), height: rem(16) }} />
+                  </ThemeIcon>
+                }
+              >
+                Cloudflare {userInfo.colo}
+              </List.Item>
+              <List.Item
+                  icon={
+                    <ThemeIcon color="orange" size={24} radius="xl">
+                      <IconLocation
+                        style={{ width: rem(16), height: rem(16) }}
+                      />
+                    </ThemeIcon>
+                  }
+                >
+                  {userInfo.colo_name}
+                </List.Item>
+              <List.Item
+                icon={
+                  <ThemeIcon color="orange" size={24} radius="xl">
+                    <IconClock style={{ width: rem(16), height: rem(16) }} />
+                  </ThemeIcon>
+                }
+              >
+                {userInfo.colo_latency}<em>ms</em>
+              </List.Item>
+            </List>
+          )}
+        </div>
+        <div>
+          <Title order={4} mb="lg">
+            pgEdge
           </Title>
           {dbInfo == null && <Loader color="rgb(21, 170, 191)"></Loader>}
           {dbInfo != null && (
@@ -138,8 +177,19 @@ export default function Dashboard() {
                     </ThemeIcon>
                   }
                 >
-                  pgEdge Nearest Node: pgedge-{dbInfo.nearest} in{" "}
+                  pgEdge {dbInfo.nearest.toUpperCase()}
+                </List.Item>
+                <List.Item
+                  icon={
+                    <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
+                      <IconLocation
+                        style={{ width: rem(16), height: rem(16) }}
+                      />
+                    </ThemeIcon>
+                  }
+                >
                   {dbInfo.nodes[dbInfo.nearest].city},{" "}
+                  {dbInfo.nodes[dbInfo.nearest].state && <>{dbInfo.nodes[dbInfo.nearest].state.toUpperCase()},{" "}</>}                  
                   {dbInfo.nodes[dbInfo.nearest].country.toUpperCase()}
                 </List.Item>
                 <List.Item
@@ -149,7 +199,7 @@ export default function Dashboard() {
                     </ThemeIcon>
                   }
                 >
-                  Latency: {dbInfo.nodes[dbInfo.nearest].latency}ms
+                  {dbInfo.nodes[dbInfo.nearest].latency}<em>ms</em>
                 </List.Item>
               </List>
             </>

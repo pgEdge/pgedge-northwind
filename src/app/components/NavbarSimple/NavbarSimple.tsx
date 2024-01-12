@@ -11,10 +11,11 @@ import {
   IconUser,
   IconGitBranch,
   IconDatabase,
+  IconFlame,
 } from "@tabler/icons-react";
 import classes from "./NavbarSimple.module.css";
 import React, { useContext } from "react";
-import { DbInfoContext } from "../../context";
+import { DbInfoContext, UserInfoContext } from "../../context";
 import { Text, Loader, Flex, Center } from "@mantine/core";
 
 const data = [
@@ -31,6 +32,7 @@ const data = [
 export function NavbarSimple() {
   const pathname = usePathname();
   const dbInfo = useContext(DbInfoContext);
+  const userInfo = useContext(UserInfoContext);
 
   const links = data.map((item) => (
     <Link
@@ -48,24 +50,39 @@ export function NavbarSimple() {
     <>
       <div className={classes.navbarMain}>{links}</div>
       <div>
-        {dbInfo == null && (
-          <Center>
-            <Loader size="xs"></Loader>
-          </Center>
-        )}
-        {dbInfo != null && (
-          <Flex align="center" justify="center">
-            <IconDatabase
-              className={classes.linkIcon}
-              color={"green"}
-              stroke={1.5}
-              size={5}
-            />
-            <Text span={true} size="s">
-              <strong>pgedge-{dbInfo.nearest}</strong>{" "}
-              <em>({dbInfo.nodes[dbInfo.nearest].latency}ms)</em>
-            </Text>
-          </Flex>
+        {dbInfo == null ||
+          (userInfo == null && (
+            <Center>
+              <Loader size="xs"></Loader>
+            </Center>
+          ))}
+        {dbInfo != null && userInfo != null && (
+          <>
+            <Flex align="center" justify="left" mb={10}>
+              <IconDatabase
+                className={classes.linkIcon}
+                color={"rgb(21, 170, 191)"}
+                stroke={1.5}
+                size={5}
+              />
+              <Text span={true} size="s">
+                <strong>pgEdge {dbInfo.nearest.toUpperCase()}</strong>{" "}
+                <em>({dbInfo.nodes[dbInfo.nearest].latency}ms)</em>
+              </Text>
+            </Flex>
+            <Flex align="center" justify="left">
+              <IconFlame
+                className={classes.linkIcon}
+                color={"orange"}
+                stroke={1.5}
+                size={5}
+              />
+              <Text span={true} size="s">
+                <strong>Cloudflare® {userInfo.colo}</strong>{" "}
+                <em>({userInfo.colo_latency}ms)</em>
+              </Text>
+            </Flex>
+          </>
         )}
       </div>
       <div className={classes.footer}>

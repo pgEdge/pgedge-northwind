@@ -6,12 +6,7 @@ export async function getTableData(table: string, currentPage: number = 1) {
     page: currentPage.toString(),
   });
   
-  const url = process.env.NEXT_PUBLIC_API + "/" + table + "?" + params.toString()
-  const res = await fetch(url, {
-    headers: {
-      "X-Source": "Cloudflare-Workers",
-    },
-  });
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/" + table + "?" + params.toString());
 
   const json: any = await res.json()
   for (const log of json.log)
@@ -25,6 +20,8 @@ export interface UserInfo {
   colo: string
   colo_lat: number
   colo_long: number
+  colo_latency: number,
+  colo_name: string,
   country: string,
   continent: string,
   region: string,
@@ -35,13 +32,12 @@ export interface UserInfo {
 
 export async function getUserInfo(): Promise<UserInfo> {
 
-  const res = await fetch(process.env.NEXT_PUBLIC_API + "/user", {
-    headers: {
-      "X-Source": "Cloudflare-Workers",
-    },
-  });
+  const start = performance.now();
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/user");
+  const end = performance.now();
 
   const json = await res.json<UserInfo>()
+  json.colo_latency = end - start
 
   return json
 }
@@ -62,11 +58,7 @@ export interface DbInfo {
 
 export async function getDbInfo() : Promise<DbInfo>  {
 
-  const res = await fetch(process.env.NEXT_PUBLIC_API + "/db", {
-    headers: {
-      "X-Source": "Cloudflare-Workers",
-    },
-  });
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/db");
 
   const json = await res.json<DbInfo>()
   return json
