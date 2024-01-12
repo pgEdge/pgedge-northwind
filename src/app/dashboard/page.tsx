@@ -80,7 +80,7 @@ export default function Dashboard() {
       <SimpleGrid cols={2}>
         <div>
           <Title order={4} mb="lg">
-            User Info
+            User
           </Title>
           {userInfo == null && <Loader color="rgb(21, 170, 191)"></Loader>}
           {userInfo != null && (

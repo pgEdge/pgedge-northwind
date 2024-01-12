@@ -69,18 +69,18 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   padding="md"
                 >
                   <AppShell.Header>
-                    <Flex>
+                    <Flex align="center">
                       <Burger
                         opened={opened}
                         onClick={toggle}
                         hiddenFrom="sm"
                         size="md"
                       />
-                      <Title pt={7} pl={25} order={3}>
+                      <Text pl={25} size={"lg"} span={true}>
                         <strong>Northwind</strong> Traders
-                      </Title>
+                      </Text>
                       <Flex align="center" ml="auto">
-                        <Text size="sm" fw={500}>
+                        <Text size="sm" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
                         <Image
