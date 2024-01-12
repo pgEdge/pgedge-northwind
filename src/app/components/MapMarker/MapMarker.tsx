@@ -17,9 +17,9 @@ const regionSchema = z.object({
   name: z.string(),
   active: z.boolean(),
   location: z.object({
-    code: z.string(),
+    // code: z.string(),
     name: z.string(),
-    country: z.string(),
+    // country: z.string(),
     latitude: z.number(),
     longitude: z.number(),
   }),

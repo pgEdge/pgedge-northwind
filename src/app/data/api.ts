@@ -1,5 +1,5 @@
+//Rudimentary stores
 export const Logs: any[] = []
-
 export async function getTableData(table: string, currentPage: number = 1) {
 
   const params = new URLSearchParams({
@@ -21,7 +21,19 @@ export async function getTableData(table: string, currentPage: number = 1) {
   return json
 }
 
-export async function getUser() {
+export interface UserInfo {
+  colo: string
+  colo_lat: number
+  colo_long: number
+  country: string,
+  continent: string,
+  region: string,
+  city: string,
+  lat: number,
+  long: number
+}
+
+export async function getUser(): Promise<UserInfo> {
 
   const res = await fetch(process.env.NEXT_PUBLIC_API + "/user", {
     headers: {
@@ -29,12 +41,26 @@ export async function getUser() {
     },
   });
 
-  const json = await res.json()
+  const json = await res.json<UserInfo>()
 
   return json
 }
 
-export async function getDbInfo() {
+export interface NodeInfo {
+  city: string
+  country: string
+  state: string
+  lat: number
+  long: number
+  latency: number
+}
+
+export interface DbInfo {
+  nearest: string
+  nodes: Record<string, NodeInfo>;
+}
+
+export async function getDbInfo() : Promise<DbInfo>  {
 
   const res = await fetch(process.env.NEXT_PUBLIC_API + "/db", {
     headers: {
@@ -42,7 +68,6 @@ export async function getDbInfo() {
     },
   });
 
-  const json = await res.json()
-
+  const json = await res.json<DbInfo>()
   return json
 }

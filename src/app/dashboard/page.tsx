@@ -17,8 +17,9 @@ import {
   IconFlame,
   IconLocation,
 } from "@tabler/icons-react";
-import { getUser, getDbInfo, Logs } from "../data/api";
-import React, { useState, useEffect } from "react";
+import { DbInfo, Logs, UserInfo } from "../data/api";
+import { UserInfoContext, DbInfoContext } from "../context"
+import React, { useState, useEffect, useContext } from "react";
 import Map from "../components/Map/Map";
 import {
   RegionPin,
@@ -27,11 +28,12 @@ import {
 } from "../components/MapMarker/MapMarker";
 
 export default function Dashboard() {
-  const [userInfo, setUserInfo] = useState(null);
-  const [dbInfo, setDbInfo] = useState(null);
+  const userInfo = useContext(UserInfoContext);
+  const dbInfo = useContext(DbInfoContext);
+
   const logsPerPage = 20;
   const [logPage, setLogPage] = useState(1);
-  const [logs, setLogs] = useState(null);
+  const [logs, setLogs] = useState<any[]>([]);
 
   let markers = [];
   if (dbInfo != null && userInfo != null) {
@@ -41,18 +43,7 @@ export default function Dashboard() {
           latitude: nodeInfo.lat,
           longitude: nodeInfo.long,
         },
-        render: () => <RegionPin isSelected label={node} />,
-        popup: (
-          <RegionPinPopup
-            point={{
-              location: {
-                latitude: nodeInfo.lat,
-                longitude: nodeInfo.long,
-              },
-              code: node,
-            }}
-          />
-        ),
+        render: () => <RegionPin isSelected label={node} />
       });
     }
 
@@ -67,17 +58,11 @@ export default function Dashboard() {
     }
   }
   useEffect(() => {
-    const fetchData = async () => {
-      setUserInfo(await getUser());
-      setDbInfo(await getDbInfo());
-    };
-
-    fetchData();
     const from = (logPage - 1) * logsPerPage;
     const to = from + logsPerPage;
     setLogs(Logs.slice(from, to));
   }, [logPage]);
-
+  
   return (
     <>
       <Title order={3} mb="lg">
