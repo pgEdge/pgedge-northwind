@@ -9,6 +9,8 @@ import {
   Space,
   Loader,
   Box,
+  Checkbox,
+  Flex,
 } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import {
@@ -17,59 +19,120 @@ import {
   IconFlame,
   IconLocation,
 } from "@tabler/icons-react";
-import { Logs } from "../data/api";
+import { Logs, Session, getRecentSessions } from "../data/api";
 import { UserInfoContext, DbInfoContext } from "../context";
 import React, { useState, useEffect, useContext } from "react";
-import Map from "../components/Map/Map";
-import {
-  RegionPin,
-  RegionPinPopup,
-  UserPin,
-} from "../components/MapMarker/MapMarker";
+import { default as DbMap } from "../components/Map/Map";
+import { CFPin, RegionPin, UserPin } from "../components/MapMarker/MapMarker";
 
 export default function Dashboard() {
   const userInfo = useContext(UserInfoContext);
   const dbInfo = useContext(DbInfoContext);
+
+  const [otherSessions, setOtherSessions] = useState<Session[] | null>(null);
+  const [showOtherSessions, setShowOtherSessions] = useState(true);
+  useEffect(() => {
+    const fetchRecentSessions = async () => {
+      const res = await getRecentSessions();
+      setOtherSessions(res.data);
+    };
+
+    fetchRecentSessions();
+  }, []);
 
   const logsPerPage = 20;
   const [logPage, setLogPage] = useState(1);
   const [logs, setLogs] = useState<any[]>([]);
 
   let markers = [];
-  let primaryConnections = [];
-  let secondaryConnections = [];
+  const connections = [];
+
+  let sessionConnections = [];
+  const dbMarkers = new Map<string, any>();
   if (dbInfo != null && userInfo != null) {
+    //Push the current user into the Map, connected with the nearest node
+    const userMarker = {
+      location: {
+        latitude: userInfo.lat,
+        longitude: userInfo.long,
+      },
+      render: () => <UserPin />,
+    };
+    markers.push(userMarker);
+
+    const coloMarker = {
+      location: {
+        latitude: userInfo.colo_lat,
+        longitude: userInfo.colo_long,
+      },
+      render: () => <CFPin color={"orange"} />,
+    };
+    markers.push(coloMarker);
+
+    //Connect the user with the CF colocation
+    sessionConnections.push([userMarker, coloMarker]);
+
+    //Push all the nodes into the map
     for (const [node, nodeInfo] of Object.entries(dbInfo.nodes)) {
-      const marker = {
+      const nodeMarker = {
         location: {
           latitude: nodeInfo.lat,
           longitude: nodeInfo.long,
         },
         render: () => <RegionPin isSelected label={node} />,
       };
-      markers.push(marker);
+      markers.push(nodeMarker);
+      dbMarkers.set(node, nodeMarker);
 
+      //Connect the colocation with the nearest DB node
       if (dbInfo.nearest == node) {
-        primaryConnections.push(marker);
+        sessionConnections.push([coloMarker, nodeMarker]);
       }
-
-      secondaryConnections.push(marker);
     }
 
-    if (userInfo != null) {
-      const marker = {
-        location: {
-          latitude: userInfo.lat,
-          longitude: userInfo.long,
-        },
-        render: () => <UserPin />,
-      };
-      markers.push(marker);
-      primaryConnections.push(marker);
+    //Connect all the DB nodes
+    // @ts-ignore
+    sessionConnections.push([...dbMarkers.values()]);
+
+    // Push other sessions into the map, connecting them with their nearest node
+    if (otherSessions && showOtherSessions) {
+      for (const session of otherSessions) {
+        if (
+          userInfo.lat != session.user_data.lat &&
+          userInfo.long != session.user_data.long
+        ) {
+          const sessionUserMarker = {
+            location: {
+              latitude: session.user_data.lat,
+              longitude: session.user_data.long,
+            },
+            render: () => <UserPin color={"grey"} />,
+          };
+          markers.push(sessionUserMarker);
+
+          const sessionColoMarker = {
+            location: {
+              latitude: session.user_data.colo_lat,
+              longitude: session.user_data.colo_long,
+            },
+            render: () => <CFPin color={"grey"} />,
+          };
+          markers.push(sessionColoMarker);
+
+          sessionConnections.push([sessionUserMarker, sessionColoMarker]);
+
+          const dbMarker = dbMarkers.get(session.user_data.pgedge_nearest_node);
+          if (dbMarker) {
+            sessionConnections.push([sessionColoMarker, dbMarker]);
+          }
+        }
+      }
     }
   }
 
-  const connections = [primaryConnections, secondaryConnections];
+  for (const connectionSet of sessionConnections) {
+    connections.push(connectionSet);
+  }
 
   useEffect(() => {
     const from = (logPage - 1) * logsPerPage;
@@ -82,8 +145,17 @@ export default function Dashboard() {
       <Title order={3} mb="lg">
         Dashboard
       </Title>
+      <Flex mb="sm" justify="flex-end">
+        <Checkbox
+          checked={showOtherSessions}
+          onChange={(event) =>
+            setShowOtherSessions(event.currentTarget.checked)
+          }
+          label="Show Other Sessions?"
+        />
+      </Flex>
       <Box mb="lg">
-        <Map
+        <DbMap
           height={400}
           markers={markers}
           connections={connections}
@@ -113,7 +185,7 @@ export default function Dashboard() {
         </div>
         <div>
           <Title order={4} mb="lg">
-            Cloudflare® 
+            Cloudflare®
           </Title>
           {userInfo == null && <Loader></Loader>}
           {userInfo != null && (
@@ -128,16 +200,14 @@ export default function Dashboard() {
                 Cloudflare {userInfo.colo}
               </List.Item>
               <List.Item
-                  icon={
-                    <ThemeIcon color="orange" size={24} radius="xl">
-                      <IconLocation
-                        style={{ width: rem(16), height: rem(16) }}
-                      />
-                    </ThemeIcon>
-                  }
-                >
-                  {userInfo.colo_name}
-                </List.Item>
+                icon={
+                  <ThemeIcon color="orange" size={24} radius="xl">
+                    <IconLocation style={{ width: rem(16), height: rem(16) }} />
+                  </ThemeIcon>
+                }
+              >
+                {userInfo.colo_name}
+              </List.Item>
               <List.Item
                 icon={
                   <ThemeIcon color="orange" size={24} radius="xl">
@@ -145,7 +215,8 @@ export default function Dashboard() {
                   </ThemeIcon>
                 }
               >
-                {userInfo.colo_latency}<em>ms</em>
+                {userInfo.colo_latency}
+                <em>ms</em>
               </List.Item>
             </List>
           )}
@@ -154,13 +225,13 @@ export default function Dashboard() {
           <Title order={4} mb="lg">
             pgEdge
           </Title>
-          {dbInfo == null && <Loader color="rgb(21, 170, 191)"></Loader>}
+          {dbInfo == null && <Loader></Loader>}
           {dbInfo != null && (
             <>
               <List spacing="xs" size="sm" center>
                 <List.Item
                   icon={
-                    <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
+                    <ThemeIcon color="yellow" size={24} radius="xl">
                       <IconDatabase
                         style={{ width: rem(16), height: rem(16) }}
                       />
@@ -171,7 +242,7 @@ export default function Dashboard() {
                 </List.Item>
                 <List.Item
                   icon={
-                    <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
+                    <ThemeIcon color="yellow" size={24} radius="xl">
                       <IconLocation
                         style={{ width: rem(16), height: rem(16) }}
                       />
@@ -179,17 +250,20 @@ export default function Dashboard() {
                   }
                 >
                   {dbInfo.nodes[dbInfo.nearest].city},{" "}
-                  {dbInfo.nodes[dbInfo.nearest].state && <>{dbInfo.nodes[dbInfo.nearest].state.toUpperCase()},{" "}</>}                  
+                  {dbInfo.nodes[dbInfo.nearest].state && (
+                    <>{dbInfo.nodes[dbInfo.nearest].state.toUpperCase()}, </>
+                  )}
                   {dbInfo.nodes[dbInfo.nearest].country.toUpperCase()}
                 </List.Item>
                 <List.Item
                   icon={
-                    <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
+                    <ThemeIcon color="yellow" size={24} radius="xl">
                       <IconClock style={{ width: rem(16), height: rem(16) }} />
                     </ThemeIcon>
                   }
                 >
-                  {dbInfo.nodes[dbInfo.nearest].latency}<em>ms</em>
+                  {dbInfo.nodes[dbInfo.nearest].latency}
+                  <em>ms</em>
                 </List.Item>
               </List>
             </>

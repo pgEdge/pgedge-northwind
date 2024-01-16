@@ -93,11 +93,11 @@ export default function Map<T extends TMapMarker>({
                 turf.point([
                   marker.location.longitude,
                   marker.location.latitude,
-                ])
-              )
-            )
+                ]),
+              ),
+            ),
           ).geometry.coordinates,
-    [markers]
+    [markers],
   );
 
   const currentProjection = mapRef.current?.getMap().getProjection();
@@ -111,8 +111,8 @@ export default function Map<T extends TMapMarker>({
     const distances = items.map((marker) =>
       turf.distance(
         turf.point([averageLongitude, averageLatitude]),
-        turf.point([marker.location.longitude, marker.location.latitude])
-      )
+        turf.point([marker.location.longitude, marker.location.latitude]),
+      ),
     );
     const maxDistance = Math.max(...distances);
 
@@ -133,7 +133,7 @@ export default function Map<T extends TMapMarker>({
       longitude: averageLongitude,
       zoom: initialZoom,
     }),
-    [averageLatitude, averageLongitude, initialZoom]
+    [averageLatitude, averageLongitude, initialZoom],
   );
 
   const { points, clusters, setZoom } = useMapClusters({
@@ -158,8 +158,8 @@ export default function Map<T extends TMapMarker>({
           turf.lineString([
             [start.location.longitude, start.location.latitude],
             [end.location.longitude, end.location.latitude],
-          ])
-        )
+          ]),
+        ),
       );
     });
 
@@ -360,7 +360,7 @@ function useMapClusters({
         maxZoom,
         radius,
       }),
-    [maxZoom, radius]
+    [maxZoom, radius],
   );
 
   const [zoom, setZoom] = useState<number>(initialZoom);

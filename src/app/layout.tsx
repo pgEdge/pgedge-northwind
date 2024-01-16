@@ -13,7 +13,7 @@ import {
   Image,
   Text,
   rem,
-  Container
+  Container,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState, useEffect } from "react";
@@ -27,11 +27,11 @@ export default function Document({ children }: { children: React.ReactNode }) {
   const [dbInfo, setDbInfo] = useState<DbInfo | null>(null);
 
   useEffect(() => {
-    const fetchDbInfo = async () => {    
-      setDbInfo(await getDbInfo());      
+    const fetchDbInfo = async () => {
+      setDbInfo(await getDbInfo());
     };
-    const fetchUserInfo = async () => {    
-      setUserInfo(await getUserInfo());      
+    const fetchUserInfo = async () => {
+      setUserInfo(await getUserInfo());
     };
 
     fetchDbInfo();
@@ -83,14 +83,13 @@ export default function Document({ children }: { children: React.ReactNode }) {
                         <Text size="xs" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
-                        <Container>
+                        <Container pl={0}>
                           <Image
                             src={`/pgEdge_Cloud_logo_light_mode.png`}
-                            h={30}
+                            h={40}
                             alt="pgEdge logo"
                             ml="auto"
                           />
-                          <Text size="xs" ta="center" visibleFrom="md" pr={5}>Cloudflare®</Text>
                         </Container>
                       </Flex>
                     </Flex>

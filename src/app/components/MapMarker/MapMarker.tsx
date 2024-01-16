@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import { Marker, Popup } from 'react-map-gl';
-import { TMapMarker } from '../Map/Map';
-import { Box, Text, Tooltip, useMantineTheme } from '@mantine/core';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import { Marker, Popup } from "react-map-gl";
+import { TMapMarker } from "../Map/Map";
+import { Box, Text, Tooltip, useMantineTheme } from "@mantine/core";
+import Image from "next/image";
 // @ts-ignore
-import * as turf from '@turf/turf';
-import * as z from 'zod';
-import { IconUserCircle } from '@tabler/icons-react';
+import * as turf from "@turf/turf";
+import * as z from "zod";
+import { IconFlame, IconUserCircle } from "@tabler/icons-react";
 
-export type ICloudProviderName = 'aws' | 'azure' | 'google';
+export type ICloudProviderName = "aws" | "azure" | "google";
 
 const regionSchema = z.object({
-  cloud: z.enum(['aws', 'google', 'azure']),
+  cloud: z.enum(["aws", "google", "azure"]),
   code: z.string(),
   parent: z.string(),
   name: z.string(),
@@ -81,14 +81,28 @@ export function UserPin({
     <Box>
       <IconUserCircle color={color} width={20} height={20} />
       {label && (
-        <Text
-          size={"sm"}
-          fw={500}
-          pos="absolute"
-          color={
-              theme.colors.dark[3]
-          }
-        >
+        <Text size={"sm"} fw={500} pos="absolute" color={theme.colors.dark[3]}>
+          {label}
+        </Text>
+      )}
+    </Box>
+  );
+}
+
+export function CFPin({
+  label,
+  color: colorInput,
+}: {
+  label?: string;
+  color?: string;
+}) {
+  const theme = useMantineTheme();
+  const color = colorInput || theme.colors[theme.primaryColor][6];
+  return (
+    <Box>
+      <IconFlame color={color} width={20} height={20} />
+      {label && (
+        <Text size={"sm"} fw={500} pos="absolute" color={theme.colors.dark[3]}>
           {label}
         </Text>
       )}
@@ -111,14 +125,7 @@ export function RegionPin({
     <Box>
       <Image src="/database-orange.png" width={14} height={15} alt="map pin" />
       {label && (
-        <Text
-          size={"sm"}
-          fw={500}
-          pos="absolute"
-          color={
-              theme.colors.dark[3]
-          }
-        >
+        <Text size={"sm"} fw={500} pos="absolute" color={theme.colors.dark[3]}>
           {label}
         </Text>
       )}
@@ -140,26 +147,26 @@ export function RegionPin({
   );
 }
 
-const cloudProviderLogoLinks: Record<ICloudProviderName | 'pgedge', string> = {
-  aws: '/images/cloud-providers/aws.svg',
-  azure: '/images/cloud-providers/azure.svg',
-  google: '/images/cloud-providers/google.svg',
-  pgedge: '/pgEDGE logo__icon white.svg',
+const cloudProviderLogoLinks: Record<ICloudProviderName | "pgedge", string> = {
+  aws: "/images/cloud-providers/aws.svg",
+  azure: "/images/cloud-providers/azure.svg",
+  google: "/images/cloud-providers/google.svg",
+  pgedge: "/pgEDGE logo__icon white.svg",
 };
 
 export function RegionPinPopup({
   point,
   maskCloudProvider,
 }: {
-  point: Pick<Region, 'code' | 'name' | 'location'> & {
+  point: Pick<Region, "code" | "name" | "location"> & {
     cloud?: ICloudProviderName;
   };
   maskCloudProvider?: boolean;
 }) {
   return (
     <Box bg="transparent" color="dark">
-      <Text size="xs" fw={600} style={{ lineBreak: 'anywhere' }} color="dark">
-        {maskCloudProvider || !point.name ? 'pgedge-' + point.code : point.name}
+      <Text size="xs" fw={600} style={{ lineBreak: "anywhere" }} color="dark">
+        {maskCloudProvider || !point.name ? "pgedge-" + point.code : point.name}
       </Text>
 
       <Text size="xs" color="dark">
@@ -201,7 +208,7 @@ export function ConnectionMarker({
       ]);
     }
 
-    const distance = turf.length(line, { units: 'miles' });
+    const distance = turf.length(line, { units: "miles" });
 
     const steps = 80;
     const step = distance / steps;
@@ -209,7 +216,7 @@ export function ConnectionMarker({
     let counter = 0;
     const interval = setInterval(() => {
       if (counter < distance) {
-        const point = turf.along(line, counter, { units: 'miles' });
+        const point = turf.along(line, counter, { units: "miles" });
         setCoordinates(point.geometry.coordinates);
         counter += step;
       } else {
@@ -229,14 +236,7 @@ export function ConnectionMarker({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle
-            cx="2.5"
-            cy="2.5"
-            r="2.5"
-            fill={
-              theme.colors.dark[3]
-            }
-          />
+          <circle cx="2.5" cy="2.5" r="2.5" fill={theme.colors.dark[3]} />
         </svg>
       )}
       {...marker}
