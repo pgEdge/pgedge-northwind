@@ -92,7 +92,7 @@ export function NavbarSimple(props: NavbarProps) {
       </div>
       <div className={classes.footer}>
         <a
-          href="https://github.com/pgedge/pgedge-northwind-traders"
+          href="https://github.com/pgedge/pgedge-northwind"
           className={classes.link}
         >
           <IconGitBranch className={classes.linkIcon} stroke={1.5} />
