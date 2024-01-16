@@ -22,6 +22,32 @@ export async function getTableData(db: string, table: string, currentPage: numbe
 	return { data: dataRes.rows, count: countRes.rows[0].count, log: queryLog };
 }
 
+export async function getOrders(db: string, currentPage: number = 1, rowsPerPage: number = 20) {
+	const queryLog: any[] = [];
+	const client = new Client(db);
+	await client.connect();
+
+	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM orders`);
+	const offset = (currentPage - 1) * rowsPerPage;
+	const dataRes = await query(
+		client,
+		queryLog,
+		`SELECT 
+		SUM(od.unit_price * od.discount * od.quantity) AS total_discount, 
+		SUM(od.unit_price * od.quantity) AS total_price, 
+		SUM(od.quantity) AS total_quantity, 
+		COUNT(od.order_id) AS total_products, 
+		o.* 
+		FROM orders o, order_details od 
+		WHERE od.order_id = o.order_id 
+		GROUP BY o.order_id LIMIT $1::integer OFFSET $2::integer`,
+		[rowsPerPage, offset]
+	);
+	client.end();
+
+	return { data: dataRes.rows, count: countRes.rows[0].count, log: queryLog };
+}
+
 export async function recordUser(db: string, userData: any) {
 	const queryLog: any[] = [];
 	const client = new Client(db);
@@ -31,7 +57,7 @@ export async function recordUser(db: string, userData: any) {
 		client,
 		queryLog,
 		`INSERT into sessions (id, created_at, user_data) VALUES ($1::uuid, $2::timestamp, $3::jsonb)`,
-		[crypto.randomUUID(), new Date(), userData],
+		[crypto.randomUUID(), new Date(), userData]
 	);
 	client.end();
 

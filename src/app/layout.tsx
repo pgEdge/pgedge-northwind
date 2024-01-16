@@ -75,18 +75,19 @@ export default function Document({ children }: { children: React.ReactNode }) {
                         onClick={toggle}
                         hiddenFrom="sm"
                         size="md"
+                        pl="sm"
                       />
-                      <Text pl={25} size={"lg"} span={true}>
+                      <Text pl="sm" size={"md"} span={true}>
                         <strong>Northwind</strong> Traders
                       </Text>
                       <Flex align="center" ml="auto">
                         <Text size="xs" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
-                        <Container pl={0}>
+                        <Container>
                           <Image
                             src={`/pgEdge_Cloud_logo_light_mode.png`}
-                            h={40}
+                            h={30}
                             alt="pgEdge logo"
                             ml="auto"
                           />

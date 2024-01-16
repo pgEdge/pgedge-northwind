@@ -7,6 +7,9 @@ export default function Orders() {
   const table = "orders";
   const columns = [
     "order_id",
+    "total_price",
+    "total_products",
+    "total_quantity",
     "shipped_date",
     "ship_name",
     "ship_city",

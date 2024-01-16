@@ -1,5 +1,5 @@
 import { Router } from '@tsndr/cloudflare-worker-router';
-import { getTableData, getDbNodes, recordUser, getDbNodes } from './db';
+import { getTableData, getDbNodes, recordUser, getOrders } from './db';
 import { cfLocations } from './cloudflare';
 
 // Env Types
@@ -89,7 +89,7 @@ router.get('/products', async ({ req, env }) => {
 router.get('/orders', async ({ req, env }) => {
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(env.DB, 'orders', currentPage, rowsPerPage);
+	const { data, count, log } = await getOrders(env.DB, currentPage, rowsPerPage);
 
 	return Response.json({
 		data: data,
