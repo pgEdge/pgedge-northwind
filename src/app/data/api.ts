@@ -62,7 +62,7 @@ export async function getTableData(
 
   const json: any = await res.json<DataResponse<any>>();
   for (const log of json.log) {
-    Logs.push(log);
+    Logs.unshift(log);
   }
   return json;
 }
@@ -82,7 +82,7 @@ export async function getRecentSessions(): Promise<DataResponse<Session>> {
   const res = await fetch(process.env.NEXT_PUBLIC_API + "/sessions");
   const json = await res.json<DataResponse<Session>>();
   for (const log of json.log) {
-    Logs.push(log);
+    Logs.unshift(log);
   }
   return json;
 }
