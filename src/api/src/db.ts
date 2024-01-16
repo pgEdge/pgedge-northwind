@@ -5,7 +5,7 @@ async function query(client: Client, queryLog: any[], query: string, params?: an
 	const start = performance.now();
 	const res = await client.query(query, params);
 	const end = performance.now();
-	queryLog.push({ query: query, results: res.rowCount, executionTime: end - start });
+	queryLog.push({ query: query, results: res.rowCount, executionTime: Math.round(end - start) });
 	return res;
 }
 
@@ -65,7 +65,7 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 		const end = performance.now();
 		nodeClient.end();
 
-		nodeInfo['latency'] = end - start;
+		nodeInfo['latency'] = Math.round(end - start);
 		nodeLocations[nodeLocation] = nodeInfo;
 		if (nodeIP == nearestIP) {
 			nearestLocation = nodeLocation;

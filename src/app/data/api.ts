@@ -73,7 +73,7 @@ export async function getUserInfo(): Promise<UserInfo> {
   const end = performance.now();
 
   const json = await res.json<UserInfo>();
-  json.colo_latency = end - start;
+  json.colo_latency = Math.round(end - start);
 
   return json;
 }
