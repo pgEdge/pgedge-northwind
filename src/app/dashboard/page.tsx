@@ -11,6 +11,7 @@ import {
   Box,
   Checkbox,
   Flex,
+  Tooltip,
 } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import {
@@ -216,16 +217,18 @@ export default function Dashboard() {
               >
                 {userInfo.colo_name}
               </List.Item>
-              <List.Item
-                icon={
-                  <ThemeIcon color="orange" size={24} radius="xl">
-                    <IconClock style={{ width: rem(16), height: rem(16) }} />
-                  </ThemeIcon>
-                }
-              >
-                {userInfo.colo_latency}
-                <em>ms</em>
-              </List.Item>
+              <Tooltip label="This is the latency from the user to the Cloudflare Colocation">
+                <List.Item
+                  icon={
+                    <ThemeIcon color="orange" size={24} radius="xl">
+                      <IconClock style={{ width: rem(16), height: rem(16) }} />
+                    </ThemeIcon>
+                  }
+                >
+                  {userInfo.colo_latency}
+                  <em>ms</em>
+                </List.Item>
+              </Tooltip>
             </List>
           )}
         </div>
@@ -263,16 +266,20 @@ export default function Dashboard() {
                   )}
                   {dbInfo.nodes[dbInfo.nearest].country.toUpperCase()}
                 </List.Item>
-                <List.Item
-                  icon={
-                    <ThemeIcon color="yellow" size={24} radius="xl">
-                      <IconClock style={{ width: rem(16), height: rem(16) }} />
-                    </ThemeIcon>
-                  }
-                >
-                  {dbInfo.nodes[dbInfo.nearest].latency}
-                  <em>ms</em>
-                </List.Item>
+                <Tooltip label="This is the latency from the Cloudflare Colocation to the nearest pgEdge Node">
+                  <List.Item
+                    icon={
+                      <ThemeIcon color="yellow" size={24} radius="xl">
+                        <IconClock
+                          style={{ width: rem(16), height: rem(16) }}
+                        />
+                      </ThemeIcon>
+                    }
+                  >
+                    {dbInfo.nodes[dbInfo.nearest].latency}
+                    <em>ms</em>
+                  </List.Item>
+                </Tooltip>
               </List>
             </>
           )}

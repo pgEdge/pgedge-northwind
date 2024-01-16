@@ -84,9 +84,9 @@ export default function Document({ children }: { children: React.ReactNode }) {
                         <Text size="xs" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
-                        <Container>
+                        <Container pl={5}>
                           <Image
-                            src={`/pgEdge_Cloud_logo_light_mode.png`}
+                            src={`/pgedge-cloud-logo.png`}
                             h={30}
                             alt="pgEdge logo"
                             ml="auto"
@@ -97,7 +97,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   </AppShell.Header>
 
                   <AppShell.Navbar p="md">
-                    <NavbarSimple></NavbarSimple>
+                    <NavbarSimple onClick={toggle}></NavbarSimple>
                   </AppShell.Navbar>
 
                   <AppShell.Main>

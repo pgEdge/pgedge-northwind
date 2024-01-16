@@ -29,7 +29,11 @@ const data = [
   //   { link: '/search', label: 'Search', icon: IconSearch },
 ];
 
-export function NavbarSimple() {
+interface NavbarProps {
+  onClick: any;
+}
+
+export function NavbarSimple(props: NavbarProps) {
   const pathname = usePathname();
   const dbInfo = useContext(DbInfoContext);
   const userInfo = useContext(UserInfoContext);
@@ -40,6 +44,7 @@ export function NavbarSimple() {
       data-active={pathname === item.link || undefined}
       href={item.link}
       key={item.label}
+      onClick={props.onClick}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
