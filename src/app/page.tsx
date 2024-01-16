@@ -28,9 +28,6 @@ export default function Home() {
         <GridCol span={{ base: 12, md: 6 }}>
           <Box
             p={20}
-            style={{
-              "background-color": "02062b",
-            }}
           >
             <Image
               src="/pgedge-logo.png"
