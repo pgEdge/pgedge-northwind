@@ -133,7 +133,7 @@ export default function Dashboard() {
                 priority: 1,
               },
               render: () => (
-                <UserPin color={"grey"} style={{ opacity: "0.5" }} />
+                <UserPin color={"silver"} />
               ),
             };
             markers.push(sessionUserMarker);
@@ -147,7 +147,7 @@ export default function Dashboard() {
                   priority: 2,
                 },
                 render: () => (
-                  <CFPin color={"grey"} style={{ opacity: "0.5" }} />
+                  <CFPin color={"silver"} />
                 ),
               };
               coloMarkers.set(session.user_data.colo, sessionColoMarker)
