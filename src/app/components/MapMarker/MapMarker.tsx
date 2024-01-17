@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { Marker, Popup } from "react-map-gl";
 import { TMapMarker } from "../Map/Map";
 import { Box, Text, Tooltip, useMantineTheme } from "@mantine/core";
@@ -31,12 +31,16 @@ export default function MapMarker({
   render,
   popup,
   onClick,
+  priority
 }: TMapMarker) {
   return (
     <Marker
       latitude={location.latitude}
       longitude={location.longitude}
       onClick={onClick}
+      style={{
+        zIndex: priority
+      }}
     >
       <Tooltip
         openDelay={0}
@@ -71,15 +75,17 @@ export default function MapMarker({
 export function UserPin({
   label,
   color: colorInput,
+  style
 }: {
   label?: string;
   color?: string;
+  style?: CSSProperties;
 }) {
   const theme = useMantineTheme();
   const color = colorInput || theme.colors[theme.primaryColor][6];
   return (
     <Box>
-      <IconUserCircle color={color} width={20} height={20} />
+      <IconUserCircle style={style}  color={color} width={20} height={20} />
       {label && (
         <Text size={"sm"} fw={500} pos="absolute" color={theme.colors.dark[3]}>
           {label}

@@ -12,6 +12,7 @@ import {
   Checkbox,
   Flex,
   Tooltip,
+  useMantineTheme,
 } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import {
@@ -30,6 +31,8 @@ export default function Dashboard() {
   const userInfo = useContext(UserInfoContext);
   const dbInfo = useContext(DbInfoContext);
 
+  const theme = useMantineTheme();
+
   const mapEnabled = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? true : false;
   const [otherSessions, setOtherSessions] = useState<Session[] | null>(null);
   const [showOtherSessions, setShowOtherSessions] = useState(true);
@@ -46,11 +49,11 @@ export default function Dashboard() {
   const [logPage, setLogPage] = useState(1);
   const [logs, setLogs] = useState<any[]>([]);
 
-  let markers = [];
+  const markers = [];
   const connections = [];
-
-  let sessionConnections = [];
-  const dbMarkers = new Map<string, any>();
+  const connectionSets = [];
+  const nodeMarkers = new Map<string, any>();
+  const coloMarkers = new Map<string, any>();
   if (mapEnabled) {
     if (dbInfo != null && userInfo != null) {
       //Push the current user into the Map, connected with the nearest node
@@ -59,21 +62,28 @@ export default function Dashboard() {
           latitude: userInfo.lat,
           longitude: userInfo.long,
         },
-        render: () => <UserPin />,
+        priority: 4,
+        render: () => <UserPin style={{ fill: "white" }} />,
       };
       markers.push(userMarker);
 
-      const coloMarker = {
-        location: {
-          latitude: userInfo.colo_lat,
-          longitude: userInfo.colo_long,
-        },
-        render: () => <CFPin color={"orange"} />,
-      };
-      markers.push(coloMarker);
+      let coloMarker = coloMarkers.get(userInfo.colo);
+      if (coloMarker == undefined) {
+        coloMarker = {
+          location: {
+            latitude: userInfo.colo_lat,
+            longitude: userInfo.colo_long,
+          },
+          priority: 3,
+          render: () => <CFPin color={"orange"} />,
+        };
+
+        coloMarkers.set(userInfo.colo, coloMarker);
+        markers.push(coloMarker);
+      }
 
       //Connect the user with the CF colocation
-      sessionConnections.push([userMarker, coloMarker]);
+      connectionSets.push([userMarker, coloMarker]);
 
       //Push all the nodes into the map
       for (const [node, nodeInfo] of Object.entries(dbInfo.nodes)) {
@@ -82,24 +92,36 @@ export default function Dashboard() {
             latitude: nodeInfo.lat,
             longitude: nodeInfo.long,
           },
+          priority: 5,
           render: () => <RegionPin isSelected label={node} />,
         };
         markers.push(nodeMarker);
-        dbMarkers.set(node, nodeMarker);
+        nodeMarkers.set(node, nodeMarker);
 
         //Connect the colocation with the nearest DB node
         if (dbInfo.nearest == node) {
-          sessionConnections.push([coloMarker, nodeMarker]);
+          connectionSets.push([coloMarker, nodeMarker]);
         }
       }
 
+      console.log(markers)
       //Connect all the DB nodes
       // @ts-ignore
-      sessionConnections.push([...dbMarkers.values()]);
+      connectionSets.push([...nodeMarkers.values()]);
 
-      // Push other sessions into the map, connecting them with their nearest node
       if (otherSessions && showOtherSessions) {
-        for (const session of otherSessions) {
+        const dedupedSessions = otherSessions.filter(
+          (value, index, self) =>
+            index ===
+            self.findIndex(
+              (t) =>
+                t.user_data.long === value.user_data.long &&
+                t.user_data.lat === value.user_data.lat
+            )
+        );
+
+        // Push other sessions into the map, connecting them with their nearest node
+        for (const session of dedupedSessions) {
           if (
             userInfo.lat != session.user_data.lat &&
             userInfo.long != session.user_data.long
@@ -108,34 +130,44 @@ export default function Dashboard() {
               location: {
                 latitude: session.user_data.lat,
                 longitude: session.user_data.long,
+                priority: 1,
               },
-              render: () => <UserPin color={"grey"} />,
+              render: () => (
+                <UserPin color={"grey"} style={{ opacity: "0.5" }} />
+              ),
             };
             markers.push(sessionUserMarker);
 
-            const sessionColoMarker = {
-              location: {
-                latitude: session.user_data.colo_lat,
-                longitude: session.user_data.colo_long,
-              },
-              render: () => <CFPin color={"grey"} />,
-            };
-            markers.push(sessionColoMarker);
+            let sessionColoMarker = coloMarkers.get(session.user_data.colo);
+            if (sessionColoMarker == undefined) {
+              sessionColoMarker = {
+                location: {
+                  latitude: session.user_data.colo_lat,
+                  longitude: session.user_data.colo_long,
+                  priority: 2,
+                },
+                render: () => (
+                  <CFPin color={"grey"} style={{ opacity: "0.5" }} />
+                ),
+              };
+              coloMarkers.set(session.user_data.colo, sessionColoMarker)
+              markers.push(sessionColoMarker);
+            }
 
-            sessionConnections.push([sessionUserMarker, sessionColoMarker]);
+            connectionSets.push([sessionUserMarker, sessionColoMarker]);
 
-            const dbMarker = dbMarkers.get(
+            const dbMarker = nodeMarkers.get(
               session.user_data.pgedge_nearest_node
             );
             if (dbMarker) {
-              sessionConnections.push([sessionColoMarker, dbMarker]);
+              connectionSets.push([sessionColoMarker, dbMarker]);
             }
           }
         }
       }
     }
 
-    for (const connectionSet of sessionConnections) {
+    for (const connectionSet of connectionSets) {
       connections.push(connectionSet);
     }
   }

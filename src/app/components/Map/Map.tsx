@@ -42,6 +42,7 @@ export type TMapMarker = {
   };
   render?: () => ReactNode;
   popup?: ReactNode;
+  priority?: number;
   onClick?: (_e: any) => void;
 };
 
