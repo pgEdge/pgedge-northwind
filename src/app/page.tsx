@@ -23,16 +23,18 @@ export default function Home() {
             </Anchor>
             .
           </Text>
-          <Text mb="lg">Use the navigation to browse Supplies, Products, Orders, Customers, and Employees, and view the resulting query performance statistics on the <Anchor href="/dashboard">Dashboard</Anchor>.</Text>
+          <Text mb="lg">
+            Use the navigation to browse Supplies, Products, Orders, Customers,
+            and Employees, and view the resulting query performance statistics
+            on the <Anchor href="/dashboard">Dashboard</Anchor>.
+          </Text>
         </GridCol>
         <GridCol span={{ base: 12, md: 6 }}>
-          <Box
-            p={20}
-          >
+          <Box p={20}>
             <Image
               src="/pgedge-logo.png"
               style={{
-                "max-width": "500px",
+                maxWidth: "500px",
               }}
               alt="pgEdge logo"
             />

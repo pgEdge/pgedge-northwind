@@ -33,7 +33,6 @@ import Supercluster, {
 import { IconGlobe, IconMap } from "@tabler/icons-react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapMarker from "../MapMarker/MapMarker";
-import { group } from "console";
 
 export type TMapMarker = {
   location: {

@@ -8,8 +8,6 @@ import * as turf from "@turf/turf";
 import * as z from "zod";
 import { IconFlame, IconUserCircle } from "@tabler/icons-react";
 
-export type ICloudProviderName = "aws" | "azure" | "google";
-
 const regionSchema = z.object({
   cloud: z.enum(["aws", "google", "azure"]),
   code: z.string(),
@@ -31,7 +29,7 @@ export default function MapMarker({
   render,
   popup,
   onClick,
-  priority
+  priority,
 }: TMapMarker) {
   return (
     <Marker
@@ -39,7 +37,7 @@ export default function MapMarker({
       longitude={location.longitude}
       onClick={onClick}
       style={{
-        zIndex: priority
+        zIndex: priority,
       }}
     >
       <Tooltip
@@ -75,7 +73,7 @@ export default function MapMarker({
 export function UserPin({
   label,
   color: colorInput,
-  style
+  style,
 }: {
   label?: string;
   color?: string;
@@ -85,7 +83,7 @@ export function UserPin({
   const color = colorInput || theme.colors[theme.primaryColor][6];
   return (
     <Box>
-      <IconUserCircle style={style}  color={color} width={20} height={20} />
+      <IconUserCircle style={style} color={color} width={20} height={20} />
       {label && (
         <Text size={"sm"} fw={500} pos="absolute" color={theme.colors.dark[3]}>
           {label}
@@ -152,21 +150,11 @@ export function RegionPin({
     </svg>
   );
 }
-
-const cloudProviderLogoLinks: Record<ICloudProviderName | "pgedge", string> = {
-  aws: "/images/cloud-providers/aws.svg",
-  azure: "/images/cloud-providers/azure.svg",
-  google: "/images/cloud-providers/google.svg",
-  pgedge: "/pgEDGE logo__icon white.svg",
-};
-
 export function RegionPinPopup({
   point,
   maskCloudProvider,
 }: {
-  point: Pick<Region, "code" | "name" | "location"> & {
-    cloud?: ICloudProviderName;
-  };
+  point: Pick<Region, "code" | "name" | "location">;
   maskCloudProvider?: boolean;
 }) {
   return (

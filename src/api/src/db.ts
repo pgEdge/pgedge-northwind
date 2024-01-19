@@ -41,7 +41,7 @@ export async function getOrders(db: string, currentPage: number = 1, rowsPerPage
 		FROM orders o, order_details od 
 		WHERE od.order_id = o.order_id 
 		GROUP BY o.order_id LIMIT $1::integer OFFSET $2::integer`,
-		[rowsPerPage, offset]
+		[rowsPerPage, offset],
 	);
 	client.end();
 
@@ -57,7 +57,7 @@ export async function recordUser(db: string, userData: any) {
 		client,
 		queryLog,
 		`INSERT into sessions (id, created_at, user_data) VALUES ($1::uuid, $2::timestamp, $3::jsonb)`,
-		[crypto.randomUUID(), new Date(), userData]
+		[crypto.randomUUID(), new Date(), userData],
 	);
 	client.end();
 

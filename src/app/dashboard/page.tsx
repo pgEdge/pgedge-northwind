@@ -104,7 +104,7 @@ export default function Dashboard() {
         }
       }
 
-      console.log(markers)
+      console.log(markers);
       //Connect all the DB nodes
       // @ts-ignore
       connectionSets.push([...nodeMarkers.values()]);
@@ -116,8 +116,8 @@ export default function Dashboard() {
             self.findIndex(
               (t) =>
                 t.user_data.long === value.user_data.long &&
-                t.user_data.lat === value.user_data.lat
-            )
+                t.user_data.lat === value.user_data.lat,
+            ),
         );
 
         // Push other sessions into the map, connecting them with their nearest node
@@ -132,9 +132,7 @@ export default function Dashboard() {
                 longitude: session.user_data.long,
                 priority: 1,
               },
-              render: () => (
-                <UserPin color={"silver"} />
-              ),
+              render: () => <UserPin color={"silver"} />,
             };
             markers.push(sessionUserMarker);
 
@@ -146,18 +144,16 @@ export default function Dashboard() {
                   longitude: session.user_data.colo_long,
                   priority: 2,
                 },
-                render: () => (
-                  <CFPin color={"silver"} />
-                ),
+                render: () => <CFPin color={"silver"} />,
               };
-              coloMarkers.set(session.user_data.colo, sessionColoMarker)
+              coloMarkers.set(session.user_data.colo, sessionColoMarker);
               markers.push(sessionColoMarker);
             }
 
             connectionSets.push([sessionUserMarker, sessionColoMarker]);
 
             const dbMarker = nodeMarkers.get(
-              session.user_data.pgedge_nearest_node
+              session.user_data.pgedge_nearest_node,
             );
             if (dbMarker) {
               connectionSets.push([sessionColoMarker, dbMarker]);
