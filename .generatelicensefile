@@ -1,0 +1,16 @@
+{
+  "inputs": [
+    "./package.json",
+    "src/api/package.json"
+  ],
+  "output": "./THIRD-PARTY-LICENSES",
+  "lineEnding": "lf",
+  "replace": {
+    "wrangler@3.22.4": "LICENSE",
+    "@cloudflare/kv-asset-handler@0.2.0": "LICENSE",
+    "type-fest@3.13.1": "LICENSE"
+  },
+  "exclude": [
+    "turf-jsts@1.2.3"
+  ]
+}

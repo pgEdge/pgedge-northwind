@@ -26,7 +26,6 @@ const data = [
   { link: "/orders", label: "Orders", icon: IconShoppingCart },
   { link: "employees", label: "Employees", icon: IconBriefcase },
   { link: "/customers", label: "Customers", icon: IconUser },
-  //   { link: '/search', label: 'Search', icon: IconSearch },
 ];
 
 interface NavbarProps {
