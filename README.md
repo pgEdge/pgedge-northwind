@@ -1,6 +1,6 @@
 # pgEdge Northwind Demo
 
-This repo has the code for https://northwind.pgedge.io/, which a demo of the Northwind dataset, running on Cloudflare Workers® and pgEdge Cloud, a fully-distributed PostgreSQL database, deployable across multiple cloud regions or data centers.
+This repo has the code for https://northwind.pgedge.com/, which a demo of the Northwind dataset, running on Cloudflare Workers® and pgEdge Cloud, a fully-distributed PostgreSQL database, deployable across multiple cloud regions or data centers.
 
 This code is inspired by the [Cloudflare D1 Northwind Demo](https://github.com/cloudflare/d1-northwind)
 
