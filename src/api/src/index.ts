@@ -53,7 +53,7 @@ router.get('/db', async ({ env }) => {
 router.get('/sessions', async ({ req, env }) => {
 	const currentPage: number = 1;
 	const rowsPerPage: number = 100;
-	const { data, count, log } = await getTableData(env.DB, 'sessions', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(env.DB, 'sessions', currentPage, rowsPerPage, 'created_at', 'desc');
 
 	return Response.json({
 		data: data,
