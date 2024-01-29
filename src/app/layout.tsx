@@ -87,7 +87,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   }}
                   padding="md"
                 >
-                  <AppShell.Header>
+                  <AppShell.Header px='lg'>
                     <Flex align="center" h={50}>
                       <Burger
                         opened={opened}
