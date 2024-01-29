@@ -24,7 +24,7 @@ const data = [
   { link: "/suppliers", label: "Suppliers", icon: IconFileDatabase },
   { link: "/products", label: "Products", icon: IconShoppingCartStar },
   { link: "/orders", label: "Orders", icon: IconShoppingCart },
-  { link: "employees", label: "Employees", icon: IconBriefcase },
+  { link: "/employees", label: "Employees", icon: IconBriefcase },
   { link: "/customers", label: "Customers", icon: IconUser },
 ];
 
