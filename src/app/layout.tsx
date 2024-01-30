@@ -13,6 +13,7 @@ import {
   Text,
   rem,
   Group,
+  Paper,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState, useEffect } from "react";
@@ -100,7 +101,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                       <Text size={"md"} span={true}>
                         <strong>Northwind</strong> Traders
                       </Text>
-                      <Group align="center" gap='sm' ml="auto">
+                      <Group align="center" gap='xs' ml="auto">
                         <Text size="xs" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
@@ -120,23 +121,23 @@ export default function Document({ children }: { children: React.ReactNode }) {
                     <NavbarSimple onClick={toggle}></NavbarSimple>
                   </AppShell.Navbar>
 
-                  <AppShell.Main>
+                  <AppShell.Main >
                     <Box py="lg" px="md">
                       {children}
                     </Box>
-                  </AppShell.Main>
 
-                  <AppShell.Footer
-                    px="md"
-                    py="lg"
-                    style={{ textAlign: "center" }}
-                  >
-                    <Text size="xs">
-                      Cloudflare, the Cloudflare logo, and Cloudflare Workers are
-                      trademarks and/or registered trademarks of Cloudflare, Inc. in
-                      the United States and other jurisdictions.
-                    </Text>
-                  </AppShell.Footer>
+                    <Box
+                      px="md"
+                      py="md"
+                      style={{position: 'absolute', bottom: 0}}
+                    >
+                      <Text size="xs">
+                        Cloudflare, the Cloudflare logo, and Cloudflare Workers are
+                        trademarks and/or registered trademarks of Cloudflare, Inc. in
+                        the United States and other jurisdictions.
+                      </Text>
+                    </Box>
+                  </AppShell.Main>
                 </AppShell>
               </DbInfoContext.Provider>
             </UserInfoContext.Provider>
