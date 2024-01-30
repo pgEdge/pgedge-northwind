@@ -10,13 +10,15 @@ import {
   Burger,
   AppShell,
   Box,
-  Image,
   Text,
   rem,
-  Container,
+  Group,
+  Paper,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { NavbarSimple } from "./components/NavbarSimple/NavbarSimple";
 import { UserInfo, DbInfo, getUserInfo, getDbInfo } from "./data/api";
 import { DbInfoContext, UserInfoContext } from "./context";
@@ -87,31 +89,31 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   }}
                   padding="md"
                 >
-                  <AppShell.Header>
+                  <AppShell.Header px={28}>
                     <Flex align="center" h={50}>
                       <Burger
                         opened={opened}
                         onClick={toggle}
                         hiddenFrom="sm"
                         size="md"
-                        pl="sm"
+                        mr='xs'
                       />
-                      <Text pl="sm" size={"md"} span={true}>
+                      <Text size={"md"} span={true}>
                         <strong>Northwind</strong> Traders
                       </Text>
-                      <Flex align="center" ml="auto">
+                      <Group align="center" gap='xs' ml="auto">
                         <Text size="xs" fw={500} visibleFrom="md">
                           Powered By
                         </Text>
-                        <Container pl={5}>
+                        <Link href="https://app.pgedge.com" target="_blank" style={{height: 40}} >
                           <Image
-                            src={`/pgedge-cloud-logo.png`}
-                            h={30}
+                            src={'/pgedge-cloud-logo.png'}
+                            height={40}
+                            width={170}
                             alt="pgEdge logo"
-                            ml="auto"
                           />
-                        </Container>
-                      </Flex>
+                        </Link>
+                      </Group>
                     </Flex>
                   </AppShell.Header>
 
@@ -119,10 +121,21 @@ export default function Document({ children }: { children: React.ReactNode }) {
                     <NavbarSimple onClick={toggle}></NavbarSimple>
                   </AppShell.Navbar>
 
-                  <AppShell.Main>
-                    {" "}
+                  <AppShell.Main >
                     <Box py="lg" px="md">
                       {children}
+                    </Box>
+
+                    <Box
+                      px="md"
+                      py="md"
+                      style={{position: 'absolute', bottom: 0}}
+                    >
+                      <Text size="xs">
+                        Cloudflare, the Cloudflare logo, and Cloudflare Workers are
+                        trademarks and/or registered trademarks of Cloudflare, Inc. in
+                        the United States and other jurisdictions.
+                      </Text>
                     </Box>
                   </AppShell.Main>
                 </AppShell>

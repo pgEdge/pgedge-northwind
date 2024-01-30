@@ -1,31 +1,31 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  IconSearch,
   IconHome,
   IconDashboard,
-  IconFileDatabase,
-  IconShoppingCartStar,
   IconShoppingCart,
-  IconBriefcase,
-  IconUser,
-  IconGitBranch,
   IconDatabase,
   IconFlame,
+  IconBrandGithub,
+  IconUsersGroup,
+  IconUsers,
+  IconPackages,
+  IconTruckDelivery,
 } from "@tabler/icons-react";
-import classes from "./NavbarSimple.module.css";
 import React, { useContext } from "react";
-import { DbInfoContext, UserInfoContext } from "../../context";
 import { Text, Loader, Flex, Center } from "@mantine/core";
+import { DbInfoContext, UserInfoContext } from "../../context";
+import classes from "./NavbarSimple.module.css";
+
 
 const data = [
   { link: "/", label: "Home", icon: IconHome },
   { link: "/dashboard", label: "Dashboard", icon: IconDashboard },
-  { link: "/suppliers", label: "Suppliers", icon: IconFileDatabase },
-  { link: "/products", label: "Products", icon: IconShoppingCartStar },
+  { link: "/suppliers", label: "Suppliers", icon: IconTruckDelivery },
+  { link: "/products", label: "Products", icon: IconPackages },
   { link: "/orders", label: "Orders", icon: IconShoppingCart },
-  { link: "employees", label: "Employees", icon: IconBriefcase },
-  { link: "/customers", label: "Customers", icon: IconUser },
+  { link: "/employees", label: "Employees", icon: IconUsers },
+  { link: "/customers", label: "Customers", icon: IconUsersGroup },
 ];
 
 interface NavbarProps {
@@ -93,8 +93,9 @@ export function NavbarSimple(props: NavbarProps) {
         <a
           href="https://github.com/pgedge/pgedge-northwind"
           className={classes.link}
+          target="_blank"
         >
-          <IconGitBranch className={classes.linkIcon} stroke={1.5} />
+          <IconBrandGithub className={classes.linkIcon} stroke={1.5} />
           <span>Github</span>
         </a>
       </div>

@@ -1,11 +1,11 @@
-import { Title, Text, Anchor, Grid, GridCol, Image, Box } from "@mantine/core";
+import { Title, Text, Anchor, Paper, Center } from "@mantine/core";
+import classes from "./Home.module.css";
 
 export default function Home() {
   return (
-    <>
-      <Grid>
-        <GridCol span={{ base: 12, md: 6 }}>
-          <Title mb="lg" order={3}>
+    <Center>
+      <Paper maw={800} p='xl' className={classes.jumbotron}>
+          <Title mb="lg" order={3} className={classes.title}>
             Welcome to Northwind Traders
           </Title>
           <Text mb="lg">
@@ -23,29 +23,12 @@ export default function Home() {
             </Anchor>
             .
           </Text>
-          <Text mb="lg">
+          <Text>
             Use the navigation to browse Supplies, Products, Orders, Customers,
             and Employees, and view the resulting query performance statistics
             on the <Anchor href="/dashboard">Dashboard</Anchor>.
           </Text>
-        </GridCol>
-        <GridCol span={{ base: 12, md: 6 }}>
-          <Box p={20}>
-            <Image
-              src="/pgedge-logo.png"
-              style={{
-                maxWidth: "500px",
-              }}
-              alt="pgEdge logo"
-            />
-          </Box>
-        </GridCol>
-      </Grid>
-      <Text size="xs">
-        Cloudflare, the Cloudflare logo, and Cloudflare Workers are trademarks
-        and/or registered trademarks of Cloudflare, Inc. in the United States
-        and other jurisdictions.
-      </Text>
-    </>
+      </Paper>
+    </Center>
   );
 }
