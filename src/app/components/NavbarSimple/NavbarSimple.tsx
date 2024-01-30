@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  IconSearch,
   IconHome,
   IconDashboard,
   IconFileDatabase,
@@ -93,6 +92,7 @@ export function NavbarSimple(props: NavbarProps) {
         <a
           href="https://github.com/pgedge/pgedge-northwind"
           className={classes.link}
+          target="_blank"
         >
           <IconGitBranch className={classes.linkIcon} stroke={1.5} />
           <span>Github</span>
