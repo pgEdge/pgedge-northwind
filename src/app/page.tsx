@@ -1,10 +1,11 @@
-import { Title, Text, Anchor, Paper, Center } from "@mantine/core";
+import { Title, Text, Anchor, Paper, Center, Box } from "@mantine/core";
 import classes from "./Home.module.css";
 
 export default function Home() {
   return (
-    <Center>
-      <Paper maw={800} p='xl' className={classes.jumbotron}>
+    <>
+      <Center>
+        <Paper maw={800} p="xl" className={classes.jumbotron}>
           <Title mb="lg" order={3} className={classes.title}>
             Welcome to Northwind Traders
           </Title>
@@ -28,7 +29,15 @@ export default function Home() {
             and Employees, and view the resulting query performance statistics
             on the <Anchor href="/dashboard">Dashboard</Anchor>.
           </Text>
-      </Paper>
-    </Center>
+        </Paper>
+      </Center>
+      <Box px="md" py="md">
+        <Text size="xs">
+          Cloudflare, the Cloudflare logo, and Cloudflare Workers are trademarks
+          and/or registered trademarks of Cloudflare, Inc. in the United States
+          and other jurisdictions.
+        </Text>
+      </Box>
+    </>
   );
 }

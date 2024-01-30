@@ -89,7 +89,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   }}
                   padding="md"
                 >
-                  <AppShell.Header px={28}>
+                  <AppShell.Header px={"28"}>
                     <Flex align="center" h={50}>
                       <Burger
                         opened={opened}
@@ -101,8 +101,8 @@ export default function Document({ children }: { children: React.ReactNode }) {
                       <Text size={"md"} span={true}>
                         <strong>Northwind</strong> Traders
                       </Text>
-                      <Group align="center" gap='xs' ml="auto">
-                        <Text size="xs" fw={500} visibleFrom="md">
+                      <Group align="center" gap='xs' ml="auto" visibleFrom="md">
+                        <Text size="xs" fw={500}>
                           Powered By
                         </Text>
                         <Link href="https://app.pgedge.com" target="_blank" style={{height: 40}} >
@@ -124,18 +124,6 @@ export default function Document({ children }: { children: React.ReactNode }) {
                   <AppShell.Main >
                     <Box py="lg" px="md">
                       {children}
-                    </Box>
-
-                    <Box
-                      px="md"
-                      py="md"
-                      style={{position: 'absolute', bottom: 0}}
-                    >
-                      <Text size="xs">
-                        Cloudflare, the Cloudflare logo, and Cloudflare Workers are
-                        trademarks and/or registered trademarks of Cloudflare, Inc. in
-                        the United States and other jurisdictions.
-                      </Text>
                     </Box>
                   </AppShell.Main>
                 </AppShell>
