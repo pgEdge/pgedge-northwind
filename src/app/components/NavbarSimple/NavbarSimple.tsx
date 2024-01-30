@@ -12,10 +12,11 @@ import {
   IconDatabase,
   IconFlame,
 } from "@tabler/icons-react";
-import classes from "./NavbarSimple.module.css";
 import React, { useContext } from "react";
-import { DbInfoContext, UserInfoContext } from "../../context";
 import { Text, Loader, Flex, Center } from "@mantine/core";
+import { DbInfoContext, UserInfoContext } from "../../context";
+import classes from "./NavbarSimple.module.css";
+
 
 const data = [
   { link: "/", label: "Home", icon: IconHome },
