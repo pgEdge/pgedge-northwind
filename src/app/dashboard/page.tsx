@@ -192,7 +192,7 @@ export default function Dashboard() {
       <Box mb="lg">
         {mapEnabled && (
           <DbMap
-            height={400}
+            height={500}
             markers={markers}
             connections={connections}
             enableClustering={false}

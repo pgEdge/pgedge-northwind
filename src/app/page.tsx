@@ -1,4 +1,4 @@
-import { Title, Text, Anchor, Paper, Center, Box } from "@mantine/core";
+import { Title, Text, Anchor, Paper, Box, Center } from "@mantine/core";
 import classes from "./Home.module.css";
 
 export default function Home() {
@@ -31,8 +31,8 @@ export default function Home() {
           </Text>
         </Paper>
       </Center>
-      <Box px="md" py="md">
-        <Text size="xs">
+      <Box px="md" py="md" style={{position: 'absolute', bottom: 0}}>
+        <Text size="10px">
           Cloudflare, the Cloudflare logo, and Cloudflare Workers are trademarks
           and/or registered trademarks of Cloudflare, Inc. in the United States
           and other jurisdictions.
