@@ -20,6 +20,7 @@ import {
   IconDatabase,
   IconFlame,
   IconLocation,
+  IconUser,
 } from "@tabler/icons-react";
 import { Logs, Session, getRecentSessions } from "../data/api";
 import { UserInfoContext, DbInfoContext } from "../context";
@@ -63,7 +64,7 @@ export default function Dashboard() {
           longitude: userInfo.long,
         },
         priority: 4,
-        render: () => <UserPin style={{ fill: "white" }} />,
+        render: () => <UserPin />,
       };
       markers.push(userMarker);
 
@@ -132,7 +133,7 @@ export default function Dashboard() {
                 longitude: session.user_data.long,
                 priority: 1,
               },
-              render: () => <UserPin color={"silver"} />,
+              render: () => <UserPin />,
             };
             markers.push(sessionUserMarker);
 
@@ -144,7 +145,7 @@ export default function Dashboard() {
                   longitude: session.user_data.colo_long,
                   priority: 2,
                 },
-                render: () => <CFPin color={"silver"} />,
+                render: () => <CFPin color={"orange"} />,
               };
               coloMarkers.set(session.user_data.colo, sessionColoMarker);
               markers.push(sessionColoMarker);
@@ -211,7 +212,7 @@ export default function Dashboard() {
               <List.Item
                 icon={
                   <ThemeIcon color="rgb(21, 170, 191)" size={24} radius="xl">
-                    <IconLocation style={{ width: rem(16), height: rem(16) }} />
+                    <IconUser style={{ width: rem(16), height: rem(16) }} />
                   </ThemeIcon>
                 }
               >
