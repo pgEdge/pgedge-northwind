@@ -1,4 +1,5 @@
 import { Text, Card, useMantineTheme } from '@mantine/core';
+import { Sparkline } from '@mantine/charts';
 import classes from './StatusCard.module.css';
 import { useEffect, useState } from 'react';
 import { DbInfo, getDbInfo } from '@/app/data/api';
@@ -7,25 +8,41 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
   const theme = useMantineTheme();
   const [isVisibleDelayed, setIsVisibleDelayed] = useState(isVisible);
   const [dbInfo, setDbInfo] = useState<DbInfo | null>(null);
+  const [latencyData, setLatencyData] = useState({})
 
   useEffect(() => {
     const fetchDbInfo = async () => {
       setDbInfo(await getDbInfo());
     };
     fetchDbInfo();
+    const interval = setInterval(fetchDbInfo, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (!isVisible) {
-      const timeoutId = setTimeout(() => setIsVisibleDelayed(false), 500); // 0.5 seconds delay
-      return () => clearTimeout(timeoutId); // Cleanup function to clear timeout on unmount
+    if (dbInfo) {
+      const latencyDataVar: any = { ...latencyData }; 
+      Object.entries(dbInfo.nodes).forEach(([nodeId, nodeData]) => {
+        if (!latencyDataVar[nodeId]) {
+          latencyDataVar[nodeId] = []; 
+        }
+        latencyDataVar[nodeId].push(nodeData.latency); 
+      });
+
+      setLatencyData(latencyDataVar);
     }
-    // Reset visibility if it becomes true again
+  }, [dbInfo, latencyData]);
+
+  useEffect(() => {
+    if (!isVisible) {
+      const timeoutId = setTimeout(() => setIsVisibleDelayed(false), 500); 
+      return () => clearTimeout(timeoutId); 
+    }
     setIsVisibleDelayed(true);
   }, [isVisible]);
 
   if (!dbInfo) {
-    return null; // or you can render a loading state
+    return null; 
   }
 
   return (
@@ -61,6 +78,13 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                   </Text>
                   <Text mt={5}>
                     <span className={classes.label}>Latency:</span> {nodeData.latency}ms
+                    <Sparkline
+                      w={50}
+                      h={30}
+                      data={latencyData[nodeId] || []}
+                      trendColors={{ positive: 'teal.6', negative: 'red.6', neutral: 'gray.5' }}
+                      fillOpacity={0.2}
+                    />
                   </Text>
                   <Text mt={5}>
                     <span className={classes.label}>Status:</span> Online
