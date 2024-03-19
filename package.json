@@ -14,6 +14,7 @@
     "generate-license-file": "npx generate-license-file"
   },
   "dependencies": {
+    "@mantine/charts": "^7.6.2",
     "@mantine/core": "^7.4.1",
     "@mantine/hooks": "^7.4.1",
     "@tabler/icons-react": "^2.45.0",
