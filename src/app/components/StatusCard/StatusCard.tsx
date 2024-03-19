@@ -107,7 +107,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                   width: 10,
                   height: 10,
                   borderRadius: '50%',
-                  backgroundColor: nodeData.status === 'Online' ? 'green' : 'red',
+                  backgroundColor: nodeData.status ? 'green' : 'red',
                 }}
               />
               <div className={classes.inner}>
