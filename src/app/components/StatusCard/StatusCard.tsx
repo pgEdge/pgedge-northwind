@@ -17,7 +17,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
     };
 
     fetchDbInfo();
-    const interval = setInterval(fetchDbInfo, 3000);
+    const interval = setInterval(fetchDbInfo, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -117,8 +117,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                   </Text>
                   <Group justify="space-between">
                     <Text mt={5} size='16px' color='gray' w={130}>
-                      {nodeData.city}, {nodeData.state + ',' || ''}{' '}
-                      {nodeData.country}
+                      {nodeData.city}, {nodeData.country}
                     </Text>
                     <Card.Section display={'flex'}>
                       <Sparkline
