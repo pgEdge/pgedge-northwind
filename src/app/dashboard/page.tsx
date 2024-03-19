@@ -13,6 +13,8 @@ import {
   Flex,
   Tooltip,
   useMantineTheme,
+  Card,
+  Button,
 } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import {
@@ -21,12 +23,14 @@ import {
   IconFlame,
   IconLocation,
   IconUser,
+  IconActivity
 } from "@tabler/icons-react";
 import { Logs, Session, getRecentSessions } from "../data/api";
 import { UserInfoContext, DbInfoContext } from "../context";
 import React, { useState, useEffect, useContext } from "react";
 import { default as DbMap } from "../components/Map/Map";
 import { CFPin, RegionPin, UserPin } from "../components/MapMarker/MapMarker";
+import { StatusCard } from "../components/StatusCard/StatusCard";
 
 export default function Dashboard() {
   const userInfo = useContext(UserInfoContext);
@@ -34,9 +38,11 @@ export default function Dashboard() {
 
   const theme = useMantineTheme();
 
+
   const mapEnabled = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? true : false;
   const [otherSessions, setOtherSessions] = useState<Session[] | null>(null);
   const [showOtherSessions, setShowOtherSessions] = useState(true);
+  const [showCards, setShowCards] = useState(false);
   useEffect(() => {
     const fetchRecentSessions = async () => {
       const res = await getRecentSessions();
@@ -190,15 +196,45 @@ export default function Dashboard() {
           size="xs"
         />
       </Flex>
-      <Box mb="lg">
+      <Box mb="lg" style={{ position: "relative" }}>
         {mapEnabled && (
-          <DbMap
-            height={500}
-            markers={markers}
-            connections={connections}
-            enableClustering={false}
-            // viewResetDeps={[router.query.databaseId]}
-          />
+          <>
+            <DbMap
+              height={500}
+              markers={markers}
+              connections={connections}
+              enableClustering={false}
+            />
+
+            <StatusCard isVisible={showCards}></StatusCard>
+            <div
+              style={{
+                position: "absolute",
+                top: 10,
+                left: 10,
+                zIndex: 9999,
+              }}
+            >
+              {dbInfo !== null && (
+                <Button
+                  size="xs"
+                  variant="default"
+                  style={{
+                    boxShadow: "3px 3px 5px 0.1px rgba(0, 0, 0, 0.1)",
+                    opacity: dbInfo ? 1 : 0,
+                    transition: "opacity 0.3s ease-in-out",
+                  }}
+                  onClick={() => setShowCards(!showCards)}
+                >
+                  <IconActivity
+                    size={22}
+                    strokeWidth={2}
+                    color={'black'}
+                  />
+                </Button>
+              )} 
+            </div>
+          </>
         )}
       </Box>
       <SimpleGrid cols={3}>
