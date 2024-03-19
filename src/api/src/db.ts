@@ -25,7 +25,7 @@ export async function getTableData(
 	const offset = (currentPage - 1) * rowsPerPage;
 
 	let orderByClause = ""
-	if(orderBy) {
+	if (orderBy) {
 		orderByClause = `ORDER BY ${orderBy} ${orderDirection}`
 	}
 	const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1::integer OFFSET $2::integer`, [rowsPerPage, offset]);
@@ -101,10 +101,12 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 		const start = performance.now();
 		await nodeClient.query('SELECT 1');
 		const end = performance.now();
+		const connectionTime = end - start;
 		nodeClient.end();
 
-		nodeInfo['latency'] = Math.round(end - start);
+		nodeInfo['latency'] = Math.round(connectionTime);
 		nodeLocations[nodeLocation] = nodeInfo;
+		nodeLocations[nodeLocation].status = connectionTime <= 500;
 		if (nodeIP == nearestIP) {
 			nearestLocation = nodeLocation;
 		}

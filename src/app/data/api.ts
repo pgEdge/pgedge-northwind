@@ -41,6 +41,7 @@ export interface NodeInfo {
   lat: number;
   long: number;
   latency: number;
+  status: boolean;
 }
 
 export interface DbInfo {
