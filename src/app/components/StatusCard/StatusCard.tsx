@@ -114,6 +114,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
               <div className={classes.inner}>
                 <div style={{ width: '100%' }}>
                   <Text fz="md" className={classes.label}>
+                <Image src="/database-orange.png" style={{marginRight: 5}} width={14} height={15} alt="map pin" />
                     {nodeId}
                   </Text>
                   <Group justify="space-between">
@@ -131,10 +132,9 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                         curveType='natural'
                         strokeWidth={2}
                       />
-                      <Text mt={5} size='13px' mr={5} color={latencyTextColors[nodeId]}>
+                      <Text mt={5} size='13px' color={latencyTextColors[nodeId]}>
                         {nodeData.latency}ms
                       </Text>
-                      <Image src="/database-orange.png" style={{marginTop: 5}} width={14} height={15} alt="map pin" />
                     </Card.Section>
                   </Group>
                 </div>
