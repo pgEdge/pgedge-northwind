@@ -115,16 +115,16 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                 <div style={{ width: '100%' }}>
                   <Text fz="md" className={classes.label}>
                 <Image src="/database-orange.png" style={{marginRight: 5}} width={14} height={15} alt="map pin" />
-                    {nodeId}
+                    {nodeId.toUpperCase()}
                   </Text>
                   <Group justify="space-between">
                     <Text mt={5} size='13px' color='gray' w={130}>
                       {nodeData.city}, {nodeData.country}
                     </Text>
-                    <Card.Section display={'flex'}>
+                    <Card.Section display={'flex'} mt={-5}>
                       <Sparkline
                         w={50}
-                        h={30}
+                        h={20}
                         mr={10}
                         data={latencyData[nodeId] || []}
                         trendColors={{ positive: 'red.6', negative: 'teal.6', neutral: 'gray.5' }}
@@ -132,7 +132,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                         curveType='natural'
                         strokeWidth={2}
                       />
-                      <Text mt={5} size='13px' color={latencyTextColors[nodeId]}>
+                      <Text mt={1} size='13px' color={latencyTextColors[nodeId]}>
                         {nodeData.latency}ms
                       </Text>
                     </Card.Section>
