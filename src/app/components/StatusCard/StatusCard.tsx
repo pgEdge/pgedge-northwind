@@ -3,6 +3,7 @@ import { Sparkline } from '@mantine/charts';
 import classes from './StatusCard.module.css';
 import { useEffect, useState } from 'react';
 import { DbInfo, getDbInfo } from '@/app/data/api';
+import Image from 'next/image';
 
 export function StatusCard({ isVisible }: { isVisible: boolean }) {
   const theme = useMantineTheme();
@@ -76,7 +77,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
             top: 50,
             left: 10,
             zIndex: 9999,
-            height: '250px',
+            height: '230px',
             overflow: 'auto',
             display: 'flex',
             flexDirection: 'column',
@@ -103,9 +104,9 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                 style={{
                   position: 'absolute',
                   top: 10,
-                  right: 10,
-                  width: 10,
-                  height: 10,
+                  right: 0,
+                  width: 13,
+                  height: 13,
                   borderRadius: '50%',
                   backgroundColor: nodeData.status ? 'green' : 'red',
                 }}
@@ -116,7 +117,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                     {nodeId}
                   </Text>
                   <Group justify="space-between">
-                    <Text mt={5} size='16px' color='gray' w={130}>
+                    <Text mt={5} size='13px' color='gray' w={130}>
                       {nodeData.city}, {nodeData.country}
                     </Text>
                     <Card.Section display={'flex'}>
@@ -130,9 +131,10 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                         curveType='natural'
                         strokeWidth={2}
                       />
-                      <Text mt={5} size='14px' color={latencyTextColors[nodeId]}>
+                      <Text mt={5} size='13px' mr={5} color={latencyTextColors[nodeId]}>
                         {nodeData.latency}ms
                       </Text>
+                      <Image src="/database-orange.png" style={{marginTop: 5}} width={14} height={15} alt="map pin" />
                     </Card.Section>
                   </Group>
                 </div>
