@@ -9,7 +9,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
   const theme = useMantineTheme();
   const [isVisibleDelayed, setIsVisibleDelayed] = useState(isVisible);
   const [dbInfo, setDbInfo] = useState<DbInfo | null>(null);
-  const [latencyData, setLatencyData] = useState({});
+  const [latencyData, setLatencyData] = useState<any>({});
   const [latencyTextColors, setLatencyTextColors] = useState<Record<string, string>>({});
 
   useEffect(() => {
