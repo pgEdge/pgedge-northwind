@@ -2,3 +2,6 @@ name = "northwind-api"
 main = "src/index.ts"
 compatibility_date = "2023-12-18"
 node_compat = true
+
+[env.demo]
+vars = { ENVIRONMENT = "demo" }
