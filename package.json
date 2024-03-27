@@ -14,10 +14,12 @@
     "generate-license-file": "npx generate-license-file"
   },
   "dependencies": {
+    "@mantine/charts": "^7.6.2",
     "@mantine/core": "^7.4.1",
     "@mantine/hooks": "^7.4.1",
     "@tabler/icons-react": "^2.45.0",
     "@turf/turf": "^6.5.0",
+    "animate.css": "^4.1.1",
     "clsx": "^2.1.0",
     "mantine-datatable": "^7.4.3",
     "mapbox-gl": "^3.0.1",
