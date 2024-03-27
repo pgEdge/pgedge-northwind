@@ -30,22 +30,20 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
 
       Object.entries(dbInfo.nodes).forEach(([nodeId, nodeData]) => {
         if (!latencyDataVar[nodeId]) {
-          latencyDataVar[nodeId] = [];
-          latencyTextColorsVar[nodeId] = 'gray.5'; // Initialize with neutral color
+          latencyDataVar[nodeId] = [85];
+          latencyTextColorsVar[nodeId] = 'orange.6';
         }
 
         latencyDataVar[nodeId].push(nodeData.latency);
 
-        const latencyValues = latencyDataVar[nodeId];
-        const firstValue = latencyValues[0];
-        const lastValue = latencyValues[latencyValues.length - 1];
-
-        if (lastValue > firstValue) {
-          latencyTextColorsVar[nodeId] = 'red.6';
-        } else if (lastValue < firstValue) {
+        // Color based on latency value
+        const latency = nodeData.latency;
+        if (latency < 75) {
           latencyTextColorsVar[nodeId] = 'teal.6';
+        } else if (latency < 100) {
+          latencyTextColorsVar[nodeId] = 'orange.6';
         } else {
-          latencyTextColorsVar[nodeId] = 'gray.5';
+          latencyTextColorsVar[nodeId] = 'red.6';
         }
       });
 
@@ -53,8 +51,6 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
       setLatencyTextColors(latencyTextColorsVar);
     }
   }, [dbInfo]);
-
-
 
   useEffect(() => {
     if (!isVisible) {
@@ -81,7 +77,6 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
             overflow: 'auto',
             display: 'flex',
             flexDirection: 'column',
-            // flexWrap: 'wrap',
             gap: '10px',
           }}
 
@@ -114,7 +109,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
               <div className={classes.inner}>
                 <div style={{ width: '100%' }}>
                   <Text fz="md" className={classes.label}>
-                <Image src="/database-orange.png" style={{marginRight: 5}} width={14} height={15} alt="map pin" />
+                    <Image src="/database-orange.png" style={{ marginRight: 5 }} width={14} height={15} alt="map pin" />
                     {nodeId.toUpperCase()}
                   </Text>
                   <Group justify="space-between">
@@ -127,7 +122,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                         h={20}
                         mr={10}
                         data={latencyData[nodeId] || []}
-                        trendColors={{ positive: 'red.6', negative: 'teal.6', neutral: 'gray.5' }}
+                        trendColors={{ positive: 'red.6', negative: 'teal.6', neutral: 'orange.6' }}
                         fillOpacity={0.2}
                         curveType='natural'
                         strokeWidth={2}
