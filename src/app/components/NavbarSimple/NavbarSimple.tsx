@@ -11,11 +11,15 @@ import {
   IconUsers,
   IconPackages,
   IconTruckDelivery,
+  IconAdjustments,
+  IconCaretDown,
+  IconCaretUp,
 } from "@tabler/icons-react";
-import React, { useContext } from "react";
-import { Text, Loader, Flex, Center } from "@mantine/core";
+import React, { useContext, useState, useEffect } from "react";
+import { Text, Loader, Flex, Center, Select, Button, useCombobox, Combobox } from "@mantine/core";
 import { DbInfoContext, UserInfoContext } from "../../context";
 import classes from "./NavbarSimple.module.css";
+import { Router } from "next/router";
 
 
 const data = [
@@ -36,6 +40,34 @@ export function NavbarSimple(props: NavbarProps) {
   const pathname = usePathname();
   const dbInfo = useContext(DbInfoContext);
   const userInfo = useContext(UserInfoContext);
+  const [selectedNode, setSelectedNode] = useState<string>('');
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+
+  useEffect(() => {
+    setSelectedNode(sessionStorage.getItem('selectedNode') || selectedNode || dbInfo?.nearest || '')
+  }, [dbInfo]);
+
+  const nodes = dbInfo?.nodes ? Object.keys(dbInfo?.nodes) : [];
+  nodes.unshift("Nearest")
+
+  const options = nodes.map((item) => (
+    <Combobox.Option value={item} key={item}>
+      <Flex align="center" justify="left">
+        <IconDatabase
+          size={16}
+          style={{ marginRight: 5 }}
+          strokeWidth={2}
+          color={'#79c3d2'}
+        />
+
+        <Text span={true} fw={500} size="xs">
+          <em>pgEdge {item === "Nearest" ? item : item.toUpperCase()}</em>{" "}
+        </Text>
+      </Flex>
+    </Combobox.Option>
+  ));
 
   const links = data.map((item) => (
     <Link
@@ -70,10 +102,44 @@ export function NavbarSimple(props: NavbarProps) {
                 size={5}
               />
               <Text span={true} size="s">
-                <strong>pgEdge {dbInfo.nearest.toUpperCase()}</strong>{" "}
+                <strong>pgEdge {selectedNode.toUpperCase() || dbInfo.nearest.toUpperCase()}</strong>{" "}
                 <em>({dbInfo.nodes[dbInfo.nearest].latency}ms)</em>
               </Text>
+
+
+              <Combobox
+                store={combobox}
+                width={180}
+                position="top-start"
+                withArrow
+                withinPortal={false}
+                onOptionSubmit={(val) => {
+                  if (val === 'Nearest') {
+                    sessionStorage.removeItem('selectedNode');
+                  } else {
+                    setSelectedNode(val);
+                    sessionStorage.setItem('selectedNode', val);
+                  }
+                  combobox.closeDropdown();
+                  window.location.reload();
+                }}
+              >
+                <Combobox.Target>
+                  <IconCaretUp
+                    style={{ outline: '0.5px solid gray', marginLeft: '10px', borderRadius: '5px', cursor: 'pointer' }}
+                    onClick={() => combobox.toggleDropdown()}
+                    size={20}
+                    strokeWidth={2}
+                    color={'black'}
+                  />
+                </Combobox.Target>
+
+                <Combobox.Dropdown>
+                  <Combobox.Options>{options}</Combobox.Options>
+                </Combobox.Dropdown>
+              </Combobox>
             </Flex>
+
             <Flex align="center" justify="left">
               <IconFlame
                 className={classes.linkIcon}

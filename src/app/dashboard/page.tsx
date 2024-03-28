@@ -37,6 +37,23 @@ export default function Dashboard() {
   const mapEnabled = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? true : false;
   const [otherSessions, setOtherSessions] = useState<Session[] | null>(null);
   const [showOtherSessions, setShowOtherSessions] = useState(true);
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      // @ts-ignore
+      setSelectedNode(sessionStorage.getItem('selectedNode'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    handleStorageChange();
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+
   useEffect(() => {
     const fetchRecentSessions = async () => {
       const res = await getRecentSessions();
@@ -278,7 +295,7 @@ export default function Dashboard() {
                     </ThemeIcon>
                   }
                 >
-                  pgEdge {dbInfo.nearest.toUpperCase()}
+                  pgEdge {(selectedNode || dbInfo.nearest).toUpperCase()}
                 </List.Item>
                 <List.Item
                   icon={
@@ -289,11 +306,11 @@ export default function Dashboard() {
                     </ThemeIcon>
                   }
                 >
-                  {dbInfo.nodes[dbInfo.nearest].city},{" "}
-                  {dbInfo.nodes[dbInfo.nearest].state && (
-                    <>{dbInfo.nodes[dbInfo.nearest].state.toUpperCase()}, </>
+                  {dbInfo.nodes[selectedNode || dbInfo.nearest].city},{" "}
+                  {dbInfo.nodes[selectedNode || dbInfo.nearest].state && (
+                    <>{dbInfo.nodes[selectedNode || dbInfo.nearest].state.toUpperCase()}, </>
                   )}
-                  {dbInfo.nodes[dbInfo.nearest].country.toUpperCase()}
+                  {dbInfo.nodes[selectedNode || dbInfo.nearest].country.toUpperCase()}
                 </List.Item>
                 <Tooltip label="This is the latency from the Cloudflare Colocation to the nearest pgEdge Node">
                   <List.Item
@@ -305,7 +322,7 @@ export default function Dashboard() {
                       </ThemeIcon>
                     }
                   >
-                    {dbInfo.nodes[dbInfo.nearest].latency}
+                    {dbInfo.nodes[selectedNode || dbInfo.nearest].latency}
                     <em>ms</em>
                   </List.Item>
                 </Tooltip>

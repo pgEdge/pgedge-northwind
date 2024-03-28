@@ -57,8 +57,7 @@ export async function getTableData(
   });
 
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "/" + table + "?" + params.toString(),
-  );
+    process.env.NEXT_PUBLIC_API + "/" + table + "?" + params.toString() + `${sessionStorage.getItem('selectedNode') ? "&nodeAddress=" + sessionStorage.getItem('selectedNode') : ""}`)
 
   const json: any = await res.json<DataResponse<any>>();
   for (const log of json.log) {
@@ -69,7 +68,7 @@ export async function getTableData(
 
 export async function getUserInfo(): Promise<UserInfo> {
   const start = performance.now();
-  const res = await fetch(process.env.NEXT_PUBLIC_API + "/user");
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/user" + `${sessionStorage.getItem('selectedNode') ? "?nodeAddress=" + sessionStorage.getItem('selectedNode') : ""}`);
   const end = performance.now();
 
   const json = await res.json<UserInfo>();
@@ -79,7 +78,7 @@ export async function getUserInfo(): Promise<UserInfo> {
 }
 
 export async function getRecentSessions(): Promise<DataResponse<Session>> {
-  const res = await fetch(process.env.NEXT_PUBLIC_API + "/sessions");
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/sessions" + `${sessionStorage.getItem('selectedNode') ? "?nodeAddress=" + sessionStorage.getItem('selectedNode') : ""}`);
   const json = await res.json<DataResponse<Session>>();
   for (const log of json.log) {
     Logs.unshift(log);
@@ -88,7 +87,7 @@ export async function getRecentSessions(): Promise<DataResponse<Session>> {
 }
 
 export async function getDbInfo(): Promise<DbInfo> {
-  const res = await fetch(process.env.NEXT_PUBLIC_API + "/db");
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/db" + `${sessionStorage.getItem('selectedNode') ? "?nodeAddress=" + sessionStorage.getItem('selectedNode') : ""}`);
 
   const json = await res.json<DbInfo>();
   return json;
