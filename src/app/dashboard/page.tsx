@@ -348,20 +348,22 @@ export default function Dashboard() {
                   )}
                   {dbInfo.nodes[selectedNode || dbInfo.nearest].country.toUpperCase()}
                 </List.Item>
-                <Tooltip label="This is the latency from the Cloudflare Colocation to the nearest pgEdge Node">
-                  <List.Item
-                    icon={
-                      <ThemeIcon color="yellow" size={24} radius="xl">
-                        <IconClock
-                          style={{ width: rem(16), height: rem(16) }}
-                        />
-                      </ThemeIcon>
-                    }
-                  >
-                    {dbInfo.nodes[selectedNode || dbInfo.nearest].latency}
-                    <em>ms</em>
-                  </List.Item>
-                </Tooltip>
+                {dbInfo.nodes[selectedNode || dbInfo.nearest].latency && (
+                  <Tooltip label="This is the latency from the Cloudflare Colocation to the nearest pgEdge Node">
+                    <List.Item
+                      icon={
+                        <ThemeIcon color="yellow" size={24} radius="xl">
+                          <IconClock
+                            style={{ width: rem(16), height: rem(16) }}
+                          />
+                        </ThemeIcon>
+                      }
+                    >
+                      {dbInfo.nodes[selectedNode || dbInfo.nearest].latency}
+                      <em>ms</em>
+                    </List.Item>
+                  </Tooltip>
+                )}
               </List>
             </>
           )}

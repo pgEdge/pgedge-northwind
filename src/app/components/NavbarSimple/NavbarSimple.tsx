@@ -114,7 +114,9 @@ export function NavbarSimple(props: NavbarProps) {
               />
               <Text span={true} size="s">
                 <strong>pgEdge {selectedNode.toUpperCase() || dbInfo.nearest.toUpperCase()}</strong>{" "}
-                <em>({dbInfo.nodes[selectedNode || dbInfo.nearest].latency}ms)</em>
+                {dbInfo.nodes[selectedNode || dbInfo.nearest].latency && (
+                  <em>({dbInfo.nodes[selectedNode || dbInfo.nearest].latency}ms)</em>
+                )}
               </Text>
 
 

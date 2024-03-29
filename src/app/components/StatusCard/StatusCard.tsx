@@ -112,7 +112,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                   </Text>
                   <Group justify="space-between">
                     <Text mt={5} size='13px' color='gray' w={130} ml={-15 }>
-                      {nodeData.city}, {nodeData.country}
+                      {nodeData.city}, {nodeData.country.toUpperCase()}
                     </Text>
                     <Card.Section display={'flex'} mt={-5}>
                       <Sparkline
@@ -125,9 +125,11 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                         curveType='natural'
                         strokeWidth={2}
                       />
-                      <Text mt={1} size='13px' color={latencyTextColors[nodeId]}>
-                        {nodeData.latency}ms
-                      </Text>
+                      {nodeData.latency && (
+                        <Text mt={1} size='13px' color={latencyTextColors[nodeId]}>
+                          {nodeData.latency}ms
+                        </Text>
+                      )}
                     </Card.Section>
                   </Group>
                 </div>
