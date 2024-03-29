@@ -38,12 +38,10 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
 
         // Color based on latency value
         const latency = nodeData.latency;
-        if (latency < 75) {
+        if (latency < 85) {
           latencyTextColorsVar[nodeId] = 'teal.6';
-        } else if (latency < 100) {
-          latencyTextColorsVar[nodeId] = 'orange.6';
         } else {
-          latencyTextColorsVar[nodeId] = 'red.6';
+          latencyTextColorsVar[nodeId] = 'yellow.6';
         }
       });
 
@@ -108,12 +106,12 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
               />
               <div className={classes.inner}>
                 <div style={{ width: '100%' }}>
-                  <Text fz="md" className={classes.label}>
+                  <Text fz="md" className={classes.label} ml={-15}>
                     <Image src="/database-orange.png" style={{ marginRight: 5 }} width={14} height={15} alt="map pin" />
                     {nodeId.toUpperCase()}
                   </Text>
                   <Group justify="space-between">
-                    <Text mt={5} size='13px' color='gray' w={130}>
+                    <Text mt={5} size='13px' color='gray' w={130} ml={-15 }>
                       {nodeData.city}, {nodeData.country}
                     </Text>
                     <Card.Section display={'flex'} mt={-5}>
@@ -122,7 +120,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
                         h={20}
                         mr={10}
                         data={latencyData[nodeId] || []}
-                        trendColors={{ positive: 'red.6', negative: 'teal.6', neutral: 'orange.6' }}
+                        trendColors={{ positive: 'yellow.6', negative: 'teal.6'}}
                         fillOpacity={0.2}
                         curveType='natural'
                         strokeWidth={2}

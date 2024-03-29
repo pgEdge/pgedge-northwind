@@ -86,7 +86,7 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 	const nodeClients: Client[] = [];
 	let connectPromises: Promise<void>[] = [];
   
-	const TIMEOUT_DURATION = 5000;
+	const TIMEOUT_DURATION = 2000;
   
 	for (const node of nodeList) {
 	  const nodeDB = db.replace(nearestClient.host, node);
