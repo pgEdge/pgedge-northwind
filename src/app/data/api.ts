@@ -87,7 +87,7 @@ export async function getRecentSessions(): Promise<DataResponse<Session>> {
 }
 
 export async function getDbInfo(): Promise<DbInfo> {
-  const res = await fetch(process.env.NEXT_PUBLIC_API + "/db" + `${sessionStorage.getItem('selectedNode') ? "?nodeAddress=" + sessionStorage.getItem('selectedNode') : ""}`);
+  const res = await fetch(process.env.NEXT_PUBLIC_API + "/db");
 
   const json = await res.json<DbInfo>();
   return json;

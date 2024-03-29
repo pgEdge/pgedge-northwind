@@ -14,6 +14,8 @@ import {
   IconAdjustments,
   IconCaretDown,
   IconCaretUp,
+  IconArrowsLeftRight,
+  IconCheck,
 } from "@tabler/icons-react";
 import React, { useContext, useState, useEffect } from "react";
 import { Text, Loader, Flex, Center, Select, Button, useCombobox, Combobox } from "@mantine/core";
@@ -65,6 +67,15 @@ export function NavbarSimple(props: NavbarProps) {
         <Text span={true} fw={500} size="xs">
           <em>pgEdge {item === "Nearest" ? item : item.toUpperCase()}</em>{" "}
         </Text>
+        {
+          item === selectedNode ?
+            <IconCheck
+              size={16}
+              style={{ marginLeft: 'auto' }}
+              strokeWidth={2}
+              color={'green'}
+            /> : null
+        }
       </Flex>
     </Combobox.Option>
   ));
@@ -103,7 +114,7 @@ export function NavbarSimple(props: NavbarProps) {
               />
               <Text span={true} size="s">
                 <strong>pgEdge {selectedNode.toUpperCase() || dbInfo.nearest.toUpperCase()}</strong>{" "}
-                <em>({dbInfo.nodes[dbInfo.nearest].latency}ms)</em>
+                <em>({dbInfo.nodes[selectedNode || dbInfo.nearest].latency}ms)</em>
               </Text>
 
 
@@ -125,13 +136,17 @@ export function NavbarSimple(props: NavbarProps) {
                 }}
               >
                 <Combobox.Target>
-                  <IconCaretUp
-                    style={{ outline: '0.5px solid gray', marginLeft: '10px', borderRadius: '5px', cursor: 'pointer' }}
+                  <Button variant="default" size="xs" w={35} ml={10} p={0}
+                    style={{ borderRadius: '5px', cursor: 'pointer' }}
                     onClick={() => combobox.toggleDropdown()}
-                    size={20}
-                    strokeWidth={2}
-                    color={'black'}
-                  />
+                  >
+                    <IconArrowsLeftRight
+                      style={{ marginRight: 0, padding: 0 }}
+                      size={20}
+                      strokeWidth={2}
+                      color={'black'}
+                    />
+                  </Button>
                 </Combobox.Target>
 
                 <Combobox.Dropdown>
