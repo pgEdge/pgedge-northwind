@@ -24,11 +24,14 @@ export async function getTableData(
 	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM ${table}`);
 	const offset = (currentPage - 1) * rowsPerPage;
 
-	let orderByClause = ""
+	let orderByClause = '';
 	if (orderBy) {
-		orderByClause = `ORDER BY ${orderBy} ${orderDirection}`
+		orderByClause = `ORDER BY ${orderBy} ${orderDirection}`;
 	}
-	const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1::integer OFFSET $2::integer`, [rowsPerPage, offset]);
+	const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1::integer OFFSET $2::integer`, [
+		rowsPerPage,
+		offset,
+	]);
 	client.end();
 
 	return { data: dataRes.rows, count: countRes.rows[0].count, log: queryLog };
@@ -80,76 +83,80 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 	const nearestClient = new Client(db);
 	const nearestIP = await getNodeIP(nearestClient.host);
 	let nearestLocation = '';
-  
+
 	let nodeLocations: any = {};
-  
+
 	const nodeClients: Client[] = [];
 	let connectPromises: Promise<void>[] = [];
-  
-	const TIMEOUT_DURATION = 2000;
-  
+
+	const TIMEOUT_DURATION = 500;
+
 	for (const node of nodeList) {
-	  const nodeDB = db.replace(nearestClient.host, node);
-	  const nodeClient = new Client(nodeDB);
-	  nodeClients.push(nodeClient);
-  
-	  const connectPromise = new Promise<void>((resolve, reject) => {
-		const timeout = setTimeout(() => {
-		  nodeClient.end();
-		  reject(new Error(`Connection timed out for node ${node}`));
-		}, TIMEOUT_DURATION);
-  
-		nodeClient.connect((err) => {
-		  clearTimeout(timeout);
-		  if (err) {
-			nodeClient.end();
-			reject(err);
-		  } else {
-			resolve();
-		  }
+		const nodeDB = db.replace(nearestClient.host, node);
+		const nodeClient = new Client(nodeDB);
+		nodeClients.push(nodeClient);
+
+		const connectPromise = new Promise<void>((resolve, reject) => {
+			const timeout = setTimeout(() => {
+				nodeClient.end();
+				reject(new Error(`Connection timed out for node ${node}`));
+			}, TIMEOUT_DURATION);
+
+			nodeClient.connect((err) => {
+				clearTimeout(timeout);
+				if (err) {
+					nodeClient.end();
+					reject(err);
+				} else {
+					resolve();
+				}
+			});
 		});
-	  });
-  
-	  connectPromises.push(connectPromise);
+
+		connectPromises.push(connectPromise);
 	}
-  
+
 	const connectedNodes = await Promise.allSettled(connectPromises);
-  
+
 	for (const [index, result] of connectedNodes.entries()) {
-	  const nodeClient = nodeClients[index];
-	  if (result.status === 'fulfilled') {
+		const nodeClient = nodeClients[index];
+
 		const nodeIP = await getNodeIP(nodeClient.host);
 		const nodeLocation = getNodeLocation(nodeClient.host);
 		const nodeInfo = pgEdgeLocations[nodeLocation];
-  
+		nodeInfo['status'] = false;
+
 		const start = performance.now();
 		try {
-		  await nodeClient.query('SELECT 1');
-		  const end = performance.now();
-		  const connectionTime = end - start;
-  
-		  nodeInfo['latency'] = Math.round(connectionTime);
-		  nodeLocations[nodeLocation] = nodeInfo;
-		  nodeLocations[nodeLocation].status = connectionTime <= 500;
-  
-		  if (nodeIP === nearestIP) {
-			nearestLocation = nodeLocation;
-		  }
+			if (result.status === 'fulfilled') {
+				// Measure latency only if the connection was successful
+				await nodeClient.query('SELECT 1');
+				const end = performance.now();
+				const connectionTime = end - start;
+
+				nodeInfo['latency'] = Math.round(connectionTime);
+				nodeInfo['status'] = connectionTime <= 500;
+			} else {
+				console.error(result.reason);
+			}
+
+			if (nodeIP === nearestIP) {
+				nearestLocation = nodeLocation;
+			}
 		} catch (err) {
-		  console.error(`Error querying node ${nodeClient.host}:`, err);
+			console.error(`Error querying node ${nodeClient.host}:`, err);
 		} finally {
-		  nodeClient.end();
+			nodeClient.end();
 		}
-	  } else {
-		console.error(result.reason);
-	  }
+
+		nodeLocations[nodeLocation] = nodeInfo;
 	}
-  
+
 	return {
-	  nearest: nearestLocation,
-	  nodes: nodeLocations,
+		nearest: nearestLocation,
+		nodes: nodeLocations,
 	};
-  }
+}
 
 async function getNodeIP(host: string) {
 	const response = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(host)}&ct=application/dns-json`, {
