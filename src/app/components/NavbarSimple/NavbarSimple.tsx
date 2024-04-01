@@ -68,13 +68,26 @@ export function NavbarSimple(props: NavbarProps) {
           <em>pgEdge {item === "Nearest" ? item : item.toUpperCase()}</em>{" "}
         </Text>
         {
-          item === selectedNode ?
+          typeof window != "undefined" &&
+          sessionStorage.getItem('selectedNearest') === 'true' ?
+            (
+              item === "Nearest" &&
+              <IconCheck
+                size={16}
+                style={{ marginLeft: 'auto' }}
+                strokeWidth={2}
+                color={'green'}
+              />
+            )
+            :
+            (item === selectedNode) &&
             <IconCheck
               size={16}
               style={{ marginLeft: 'auto' }}
               strokeWidth={2}
               color={'green'}
-            /> : null
+            />
+
         }
       </Flex>
     </Combobox.Option>
@@ -129,8 +142,11 @@ export function NavbarSimple(props: NavbarProps) {
                 onOptionSubmit={(val) => {
                   if (val === 'Nearest') {
                     sessionStorage.removeItem('selectedNode');
+                    sessionStorage.setItem('selectedNearest', 'true');
+                    setSelectedNode('');
                   } else {
                     setSelectedNode(val);
+                    sessionStorage.removeItem('selectedNearest');
                     sessionStorage.setItem('selectedNode', val);
                   }
                   combobox.closeDropdown();

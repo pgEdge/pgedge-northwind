@@ -18,7 +18,10 @@ export async function getTableData(
 	orderDirection: 'asc' | 'desc' = 'asc'
 ) {
 	const queryLog: any[] = [];
-	const client = new Client(db);
+	const client = new Client({
+		connectionString: db,
+		statement_timeout: 5000
+	  });
 	await client.connect();
 
 	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM ${table}`);
@@ -39,7 +42,10 @@ export async function getTableData(
 
 export async function getOrders(db: string, currentPage: number = 1, rowsPerPage: number = 20) {
 	const queryLog: any[] = [];
-	const client = new Client(db);
+	const client = new Client({
+		connectionString: db,
+		statement_timeout: 5000
+	  });
 	await client.connect();
 
 	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM orders`);
@@ -65,7 +71,10 @@ export async function getOrders(db: string, currentPage: number = 1, rowsPerPage
 
 export async function recordUser(db: string, userData: any) {
 	const queryLog: any[] = [];
-	const client = new Client(db);
+	const client = new Client({
+		connectionString: db,
+		statement_timeout: 5000
+	  });
 	await client.connect();
 
 	const res = await query(
@@ -80,7 +89,10 @@ export async function recordUser(db: string, userData: any) {
 }
 
 export async function getDbNodes(db: string, nodeList: string[]) {
-	const nearestClient = new Client(db);
+	const nearestClient = new Client({
+		connectionString: db,
+		statement_timeout: 5000
+	  });
 	const nearestIP = await getNodeIP(nearestClient.host);
 	let nearestLocation = '';
 
@@ -93,7 +105,10 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 
 	for (const node of nodeList) {
 		const nodeDB = db.replace(nearestClient.host, node);
-		const nodeClient = new Client(nodeDB);
+		const nodeClient = new Client({
+			connectionString: nodeDB,
+			statement_timeout: 5000
+		  });
 		nodeClients.push(nodeClient);
 
 		const connectPromise = new Promise<void>((resolve, reject) => {
