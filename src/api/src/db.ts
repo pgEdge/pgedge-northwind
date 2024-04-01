@@ -20,7 +20,7 @@ export async function getTableData(
 	const queryLog: any[] = [];
 	const client = new Client({
 		connectionString: db,
-		statement_timeout: 5000
+		connectionTimeoutMillis: 1000
 	  });
 	await client.connect();
 
@@ -44,7 +44,7 @@ export async function getOrders(db: string, currentPage: number = 1, rowsPerPage
 	const queryLog: any[] = [];
 	const client = new Client({
 		connectionString: db,
-		statement_timeout: 5000
+		connectionTimeoutMillis: 1000
 	  });
 	await client.connect();
 
@@ -73,7 +73,7 @@ export async function recordUser(db: string, userData: any) {
 	const queryLog: any[] = [];
 	const client = new Client({
 		connectionString: db,
-		statement_timeout: 5000
+		connectionTimeoutMillis: 1000
 	  });
 	await client.connect();
 
@@ -91,7 +91,7 @@ export async function recordUser(db: string, userData: any) {
 export async function getDbNodes(db: string, nodeList: string[]) {
 	const nearestClient = new Client({
 		connectionString: db,
-		statement_timeout: 5000
+		connectionTimeoutMillis: 1000
 	  });
 	const nearestIP = await getNodeIP(nearestClient.host);
 	let nearestLocation = '';
@@ -107,7 +107,7 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 		const nodeDB = db.replace(nearestClient.host, node);
 		const nodeClient = new Client({
 			connectionString: nodeDB,
-			statement_timeout: 5000
+			connectionTimeoutMillis: 1000
 		  });
 		nodeClients.push(nodeClient);
 
