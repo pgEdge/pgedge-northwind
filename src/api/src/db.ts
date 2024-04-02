@@ -94,6 +94,140 @@ export async function recordUser(db: string, userData: any) {
 	return res.rowCount;
 }
 
+export async function createSupplier(connectionString: string, data: any) {
+	const queryLog: any[] = [];
+	const client = new Client({
+	  connectionString,
+	  statement_timeout: 1000,
+	  query_timeout: 1000,
+	  connectionTimeoutMillis: 1000
+	});
+	await client.connect();
+  
+	const {
+	  company_name,
+	  contact_name,
+	  contact_title,
+	  address,
+	  city,
+	  region,
+	  postal_code,
+	  country,
+	  phone,
+	  fax,
+	  homepage,
+	} = data;
+  
+	// Get the maximum supplier_id from the suppliers table
+	const maxSupplierIdRes = await query(client, queryLog, 'SELECT MAX(supplier_id) FROM suppliers');
+	const maxSupplierId = maxSupplierIdRes.rows[0].max || 0;
+	const newSupplierId = maxSupplierId + 1;
+  
+	const res = await query(
+	  client,
+	  queryLog,
+	  `INSERT INTO suppliers (
+		supplier_id,
+		company_name,
+		contact_name,
+		contact_title,
+		address,
+		city,
+		region,
+		postal_code,
+		country,
+		phone,
+		fax,
+		homepage
+	  ) VALUES (
+		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+	  ) RETURNING supplier_id;`,
+	  [
+		newSupplierId,
+		company_name,
+		contact_name,
+		contact_title,
+		address,
+		city,
+		region,
+		postal_code,
+		country,
+		phone,
+		fax,
+		homepage,
+	  ]
+	);
+  
+	client.end();
+  
+	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
+  }
+
+  export async function updateSupplier(connectionString: string, data: any, supplierId: number) {
+	console.log("connectionString", connectionString);
+	const queryLog: any[] = [];
+	const client = new Client({
+	  connectionString,
+	  statement_timeout: 1000,
+	  query_timeout: 1000,
+	  connectionTimeoutMillis: 1000
+	});
+	await client.connect();
+  
+	const {
+	  company_name,
+	  contact_name,
+	  contact_title,
+	  address,
+	  city,
+	  region,
+	  postal_code,
+	  country,
+	  phone,
+	  fax,
+	  homepage,
+	} = data;
+  
+	const res = await query(
+	  client,
+	  queryLog,
+	  `UPDATE suppliers SET
+		company_name = $1,
+		contact_name = $2,
+		contact_title = $3,
+		address = $4,
+		city = $5,
+		region = $6,
+		postal_code = $7,
+		country = $8,
+		phone = $9,
+		fax = $10,
+		homepage = $11
+	  WHERE supplier_id = $12
+	  RETURNING supplier_id;`,
+	  [
+		company_name,
+		contact_name,
+		contact_title,
+		address,
+		city,
+		region,
+		postal_code,
+		country,
+		phone,
+		fax,
+		homepage,
+		supplierId,
+	  ]
+	);
+  
+	client.end();
+  
+	console.log(res.rows, "queryLog");
+  
+	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
+  }
+
 export async function getDbNodes(db: string, nodeList: string[]) {
 	const nearestClient = new Client({
 		connectionString: db,

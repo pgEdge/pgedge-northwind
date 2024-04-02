@@ -1,5 +1,5 @@
 import { Router } from '@tsndr/cloudflare-worker-router';
-import { getTableData, getDbNodes, recordUser, getOrders } from './db';
+import { getTableData, getDbNodes, recordUser, getOrders, createSupplier, updateSupplier } from './db';
 import { cfLocations } from './cloudflare';
 
 // Env Types
@@ -87,7 +87,7 @@ router.get('/suppliers', async ({ req, env }) => {
 	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'suppliers', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'suppliers', currentPage, rowsPerPage, 'supplier_id', 'desc');
 
 	return Response.json({
 		data: data,
@@ -95,6 +95,35 @@ router.get('/suppliers', async ({ req, env }) => {
 		log: log,
 	});
 });
+
+router.post('/suppliers', async ({ req, env }) => {
+  const nodeAddress = req.query.nodeAddress as string | undefined;
+  const data = await req.json();
+
+  try {
+    const connectionString = getConnectionString(env, nodeAddress);
+    const result = await createSupplier(connectionString, data);
+    return Response.json(result);
+  } catch (error:any) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+});
+
+router.put('/suppliers/:supplierId', async ({ req, env }) => {
+  const nodeAddress = req.query.nodeAddress as string | undefined;
+  const supplierId = parseInt(req.params.supplierId, 10);
+  const data = await req.json();
+
+  try {
+    const connectionString = getConnectionString(env, nodeAddress);
+    const result = await updateSupplier(connectionString, data, supplierId);
+    return Response.json(result);
+  } catch (error: any) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+});
+
+
 
 router.get('/products', async ({ req, env }) => {
 	const nodeAddress = req.query.nodeAddress as string | undefined;

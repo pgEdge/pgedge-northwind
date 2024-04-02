@@ -1,5 +1,6 @@
 "use client";
 
+import { Box, Button } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
@@ -18,6 +19,15 @@ export function Table(props: TableProps) {
   const router = useRouter();
   const pathname = usePathname();
   const columnData = props.columns.map((col) => ({ accessor: col }));
+  // columnData.push({
+  //   accessor: "actions",
+  //   //@ts-ignore
+  //   render: () => (
+  //     <Button type="submit" mb="lg" onClick={() => router.push("/suppliers/create")}>
+  //       Create
+  //     </Button>
+  //   ),
+  // })
 
   return (
     <DataTable
