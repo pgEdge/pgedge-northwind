@@ -13,5 +13,8 @@ export default function Suppliers() {
     "city",
     "country",
   ];
-  return <TablePage title={title} table={table} columns={columns}></TablePage>;
+  return (
+    <>
+    <TablePage title={title} table={table} columns={columns}></TablePage>;</>
+  )
 }
