@@ -15,15 +15,15 @@ export async function getTableData(
 	currentPage: number = 1,
 	rowsPerPage: number = 20,
 	orderBy: string | null = null,
-	orderDirection: 'asc' | 'desc' = 'asc'
+	orderDirection: 'asc' | 'desc' = 'asc',
 ) {
 	const queryLog: any[] = [];
 	const client = new Client({
 		connectionString: db,
 		statement_timeout: 1000,
 		query_timeout: 1000,
-		connectionTimeoutMillis: 1000
-	  });
+		connectionTimeoutMillis: 1000,
+	});
 	await client.connect();
 
 	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM ${table}`);
@@ -48,8 +48,8 @@ export async function getOrders(db: string, currentPage: number = 1, rowsPerPage
 		connectionString: db,
 		statement_timeout: 1000,
 		query_timeout: 1000,
-		connectionTimeoutMillis: 1000
-	  });
+		connectionTimeoutMillis: 1000,
+	});
 	await client.connect();
 
 	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM orders`);
@@ -66,7 +66,7 @@ export async function getOrders(db: string, currentPage: number = 1, rowsPerPage
 		FROM orders o, order_details od 
 		WHERE od.order_id = o.order_id 
 		GROUP BY o.order_id LIMIT $1::integer OFFSET $2::integer`,
-		[rowsPerPage, offset]
+		[rowsPerPage, offset],
 	);
 	client.end();
 
@@ -79,15 +79,15 @@ export async function recordUser(db: string, userData: any) {
 		connectionString: db,
 		statement_timeout: 1000,
 		query_timeout: 1000,
-		connectionTimeoutMillis: 1000
-	  });
+		connectionTimeoutMillis: 1000,
+	});
 	await client.connect();
 
 	const res = await query(
 		client,
 		queryLog,
 		`INSERT into sessions (id, created_at, user_data) VALUES ($1::uuid, $2::timestamp, $3::jsonb)`,
-		[crypto.randomUUID(), new Date(), userData]
+		[crypto.randomUUID(), new Date(), userData],
 	);
 	client.end();
 
@@ -99,8 +99,8 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 		connectionString: db,
 		statement_timeout: 1000,
 		query_timeout: 1000,
-		connectionTimeoutMillis: 1000
-	  });
+		connectionTimeoutMillis: 1000,
+	});
 	const nearestIP = await getNodeIP(nearestClient.host);
 	let nearestLocation = '';
 
@@ -117,8 +117,8 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 			connectionString: nodeDB,
 			statement_timeout: 1000,
 			query_timeout: 1000,
-			connectionTimeoutMillis: 1000
-		  });
+			connectionTimeoutMillis: 1000,
+		});
 		nodeClients.push(nodeClient);
 
 		const connectPromise = new Promise<void>((resolve, reject) => {
