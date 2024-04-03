@@ -14,6 +14,7 @@
     "generate-license-file": "npx generate-license-file"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@mantine/charts": "^7.6.2",
     "@mantine/core": "^7.4.1",
     "@mantine/form": "^7.7.1",
@@ -22,6 +23,7 @@
     "@turf/turf": "^6.5.0",
     "animate.css": "^4.1.1",
     "clsx": "^2.1.0",
+    "js-cookie": "^3.0.5",
     "mantine-datatable": "^7.4.3",
     "mapbox-gl": "^3.0.1",
     "next": "14.0.4",
@@ -35,6 +37,7 @@
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.5",
     "@cloudflare/workers-types": "^4.20231218.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/mapbox-gl": "^2.7.19",
     "@types/node": "^20",
     "@types/pg": "^8.10.9",

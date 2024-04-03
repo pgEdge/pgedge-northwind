@@ -22,6 +22,8 @@ import Image from "next/image";
 import { NavbarSimple } from "./components/NavbarSimple/NavbarSimple";
 import { UserInfo, DbInfo, getUserInfo, getDbInfo } from "./data/api";
 import { DbInfoContext, UserInfoContext } from "./context";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+import LogoutLoginButton from "./components/NavbarSimple/LogoutLoginButton";
 
 export default function Document({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure();
@@ -43,94 +45,101 @@ export default function Document({ children }: { children: React.ReactNode }) {
   return (
     <>
       <html lang="en">
-        <head>
-          <ColorSchemeScript />
-          <title>pgEdge Northwind Traders Demo</title>
-          <link rel="icon" href="/favicon/favicon.ico" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/favicon/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon/favicon-16x16.png"
-          />
-        </head>
-        <body>
-          <MantineProvider
-            theme={{
-              primaryColor: "cyan",
-              fontSizes: {
-                xs: rem(14),
-                sm: rem(16),
-                md: rem(18),
-                lg: rem(20),
-                xl: rem(22),
-              },
-            }}
-          >
-            <UserInfoContext.Provider value={userInfo}>
-              <DbInfoContext.Provider value={dbInfo}>
-                <AppShell
-                  header={{ height: 50 }}
-                  navbar={{
-                    width: 300,
-                    breakpoint: "sm",
-                    collapsed: { mobile: !opened },
-                  }}
-                  padding="md"
-                >
-                  <AppShell.Header px={"28"}>
-                    <Flex align="center" h={50}>
-                      <Burger
-                        opened={opened}
-                        onClick={toggle}
-                        hiddenFrom="sm"
-                        size="md"
-                        mr='xs'
-                      />
-                      <Text size={"md"} span={true}>
-                        <strong>Northwind</strong> Traders
-                      </Text>
-                      <Group align="center" gap='xs' ml="auto" visibleFrom="md">
-                        <Text size="xs" fw={500}>
-                          Powered By
+        <UserProvider>
+
+          <head>
+            <ColorSchemeScript />
+            <title>pgEdge Northwind Traders Demo</title>
+            <link rel="icon" href="/favicon/favicon.ico" />
+            <link
+              rel="apple-touch-icon"
+              sizes="180x180"
+              href="/favicon/apple-touch-icon.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="/favicon/favicon-32x32.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="/favicon/favicon-16x16.png"
+            />
+          </head>
+          <body>
+            <MantineProvider
+              theme={{
+                primaryColor: "cyan",
+                fontSizes: {
+                  xs: rem(14),
+                  sm: rem(16),
+                  md: rem(18),
+                  lg: rem(20),
+                  xl: rem(22),
+                },
+              }}
+            >
+              <UserInfoContext.Provider value={userInfo}>
+                <DbInfoContext.Provider value={dbInfo}>
+                  <AppShell
+                    header={{ height: 50 }}
+                    navbar={{
+                      width: 300,
+                      breakpoint: "sm",
+                      collapsed: { mobile: !opened },
+                    }}
+                    padding="md"
+                  >
+                    <AppShell.Header px={"28"}>
+                      <Flex align="center" h={50}>
+                        <Burger
+                          opened={opened}
+                          onClick={toggle}
+                          hiddenFrom="sm"
+                          size="md"
+                          mr='xs'
+                        />
+                        <Text size={"md"} span={true}>
+                          <strong>Northwind</strong> Traders
                         </Text>
-                        <Link href="https://app.pgedge.com" target="_blank" style={{height: 40}} >
-                          <Image
-                            src={'/pgedge-cloud-logo.png'}
-                            height={40}
-                            width={170}
-                            alt="pgEdge logo"
-                          />
-                        </Link>
-                      </Group>
-                    </Flex>
-                  </AppShell.Header>
+                        <Group align="center" gap='xs' ml="auto" visibleFrom="md">
+                          <Text size="xs" fw={500}>
+                            Powered By
+                          </Text>
+                          <Link href="https://app.pgedge.com" target="_blank" style={{ height: 40 }} >
+                            <Image
+                              src={'/pgedge-cloud-logo.png'}
+                              height={40}
+                              width={170}
+                              alt="pgEdge logo"
+                            />
+                          </Link>
+                        </Group>
 
-                  <AppShell.Navbar p="md">
-                    <NavbarSimple onClick={toggle}></NavbarSimple>
-                  </AppShell.Navbar>
+                        <LogoutLoginButton/>
+                      
 
-                  <AppShell.Main >
-                    <Box py="lg" px="md">
-                      {children}
-                    </Box>
-                  </AppShell.Main>
-                </AppShell>
-              </DbInfoContext.Provider>
-            </UserInfoContext.Provider>
-          </MantineProvider>
-        </body>
+                      </Flex>
+                    </AppShell.Header>
+
+                    <AppShell.Navbar p="md">
+                      <NavbarSimple onClick={toggle}></NavbarSimple>
+                    </AppShell.Navbar>
+
+                    <AppShell.Main >
+                      <Box py="lg" px="md">
+                        {children}
+                      </Box>
+                    </AppShell.Main>
+                  </AppShell>
+                </DbInfoContext.Provider>
+              </UserInfoContext.Provider>
+            </MantineProvider>
+          </body>
+        </UserProvider>
       </html>
     </>
   );
