@@ -16,10 +16,29 @@ export type Env = {
 // Initialize Router
 const router = new Router<Env>();
 
+const getConnectionString = (env: Env, nodeName?: string): string => {
+	const defaultConnectionString = env.DB?.toString() || '';
+	const connectionStringParts = defaultConnectionString.split('@');
+	const credentialsPart = connectionStringParts[0];
+	const [username, password] = credentialsPart.split('://')[1].split(':');
+	const databasePart = connectionStringParts[1].split('/')[1];
+	const databaseName = databasePart.split('?')[0];
+	const defaultNodeAddress = connectionStringParts[1].split('/')[0];
+	const domainPart = defaultNodeAddress.split('.')[0];
+
+	if (nodeName) {
+		const nodeAddress = `${domainPart}-${nodeName}.a1.pgedge.io`;
+		return `postgresql://${username}:${password}@${nodeAddress}/${databaseName}?sslmode=require`;
+	}
+
+	return defaultConnectionString;
+};
+
 // Enabling build in CORS support
 router.cors();
 
 router.get('/user', async ({ ctx, req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const user = {
 		colo: req.cf?.colo,
 		colo_lat: cfLocations[req.cf?.colo || ''].lat,
@@ -35,9 +54,9 @@ router.get('/user', async ({ ctx, req, env }) => {
 	};
 
 	const recordUserInfo = async () => {
-		const dbInfo = await getDbNodes(env.DB, env.NODELIST.split(','));
+		const dbInfo = await getDbNodes(getConnectionString(env, nodeAddress), env.NODELIST.split(','));
 		user.pgedge_nearest_node = dbInfo.nearest;
-		return recordUser(env.DB, user);
+		return recordUser(getConnectionString(env, nodeAddress), user);
 	};
 
 	ctx?.waitUntil(recordUserInfo());
@@ -46,14 +65,23 @@ router.get('/user', async ({ ctx, req, env }) => {
 	return response;
 });
 
-router.get('/db', async ({ env }) => {
-	return Response.json(await getDbNodes(env.DB, env.NODELIST.split(',')));
+router.get('/db', async ({ env, req }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	return Response.json(await getDbNodes(getConnectionString(env, nodeAddress), env.NODELIST.split(',')));
 });
 
 router.get('/sessions', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = 1;
 	const rowsPerPage: number = 100;
-	const { data, count, log } = await getTableData(env.DB, 'sessions', currentPage, rowsPerPage, 'created_at', 'desc');
+	const { data, count, log } = await getTableData(
+		getConnectionString(env, nodeAddress),
+		'sessions',
+		currentPage,
+		rowsPerPage,
+		'created_at',
+		'desc',
+	);
 
 	return Response.json({
 		data: data,
@@ -63,9 +91,10 @@ router.get('/sessions', async ({ req, env }) => {
 });
 
 router.get('/suppliers', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(env.DB, 'suppliers', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'suppliers', currentPage, rowsPerPage);
 
 	return Response.json({
 		data: data,
@@ -75,9 +104,10 @@ router.get('/suppliers', async ({ req, env }) => {
 });
 
 router.get('/products', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(env.DB, 'products', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'products', currentPage, rowsPerPage);
 
 	return Response.json({
 		data: data,
@@ -87,9 +117,10 @@ router.get('/products', async ({ req, env }) => {
 });
 
 router.get('/orders', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getOrders(env.DB, currentPage, rowsPerPage);
+	const { data, count, log } = await getOrders(getConnectionString(env, nodeAddress), currentPage, rowsPerPage);
 
 	return Response.json({
 		data: data,
@@ -99,9 +130,10 @@ router.get('/orders', async ({ req, env }) => {
 });
 
 router.get('/employees', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(env.DB, 'employees', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'employees', currentPage, rowsPerPage);
 
 	return Response.json({
 		data: data,
@@ -111,9 +143,10 @@ router.get('/employees', async ({ req, env }) => {
 });
 
 router.get('/customers', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(env.DB, 'customers', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'customers', currentPage, rowsPerPage);
 
 	return Response.json({
 		data: data,

@@ -11,12 +11,21 @@ import {
   IconUsers,
   IconPackages,
   IconTruckDelivery,
+  IconArrowsLeftRight,
+  IconCheck,
 } from "@tabler/icons-react";
-import React, { useContext } from "react";
-import { Text, Loader, Flex, Center } from "@mantine/core";
+import React, { useContext, useState, useEffect } from "react";
+import {
+  Text,
+  Loader,
+  Flex,
+  Center,
+  Button,
+  useCombobox,
+  Combobox,
+} from "@mantine/core";
 import { DbInfoContext, UserInfoContext } from "../../context";
 import classes from "./NavbarSimple.module.css";
-
 
 const data = [
   { link: "/", label: "Home", icon: IconHome },
@@ -36,6 +45,57 @@ export function NavbarSimple(props: NavbarProps) {
   const pathname = usePathname();
   const dbInfo = useContext(DbInfoContext);
   const userInfo = useContext(UserInfoContext);
+  const [selectedNearest, setSelectedNearest] = useState<boolean>(true);
+  const [selectedNode, setSelectedNode] = useState<string>("");
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+
+  useEffect(() => {
+    setSelectedNode(sessionStorage.getItem("selectedNode") || "");
+    if (!selectedNode) {
+      setSelectedNearest(true);
+    } else {
+      setSelectedNearest(sessionStorage.getItem("selectedNearest") === "true");
+    }
+  }, [dbInfo]);
+
+  const nodes = dbInfo?.nodes ? Object.keys(dbInfo?.nodes) : [];
+  nodes.unshift("Nearest");
+
+  const options = nodes.map((item) => (
+    <Combobox.Option value={item} key={item}>
+      <Flex align="center" justify="left">
+        <IconDatabase
+          size={16}
+          style={{ marginRight: 5 }}
+          strokeWidth={2}
+          color={"#79c3d2"}
+        />
+
+        <Text span={true} fw={500} size="xs">
+          <em>pgEdge {item === "Nearest" ? item : item.toUpperCase()}</em>{" "}
+        </Text>
+        {selectedNearest && !selectedNode
+          ? item === "Nearest" && (
+              <IconCheck
+                size={16}
+                style={{ marginLeft: "auto" }}
+                strokeWidth={2}
+                color={"green"}
+              />
+            )
+          : item === selectedNode && (
+              <IconCheck
+                size={16}
+                style={{ marginLeft: "auto" }}
+                strokeWidth={2}
+                color={"green"}
+              />
+            )}
+      </Flex>
+    </Combobox.Option>
+  ));
 
   const links = data.map((item) => (
     <Link
@@ -70,10 +130,62 @@ export function NavbarSimple(props: NavbarProps) {
                 size={5}
               />
               <Text span={true} size="s">
-                <strong>pgEdge {dbInfo.nearest.toUpperCase()}</strong>{" "}
-                <em>({dbInfo.nodes[dbInfo.nearest].latency}ms)</em>
+                <strong>
+                  pgEdge{" "}
+                  {selectedNode.toUpperCase() || dbInfo.nearest.toUpperCase()}
+                </strong>{" "}
+                {dbInfo.nodes[selectedNode || dbInfo.nearest].latency && (
+                  <em>
+                    ({dbInfo.nodes[selectedNode || dbInfo.nearest].latency}ms)
+                  </em>
+                )}
               </Text>
+
+              <Combobox
+                store={combobox}
+                width={180}
+                position="top-start"
+                withArrow
+                withinPortal={false}
+                onOptionSubmit={(val) => {
+                  if (val === "Nearest") {
+                    sessionStorage.removeItem("selectedNode");
+                    sessionStorage.setItem("selectedNearest", "true");
+                    setSelectedNode("");
+                  } else {
+                    setSelectedNode(val);
+                    sessionStorage.removeItem("selectedNearest");
+                    sessionStorage.setItem("selectedNode", val);
+                  }
+                  combobox.closeDropdown();
+                  window.location.reload();
+                }}
+              >
+                <Combobox.Target>
+                  <Button
+                    variant="default"
+                    size="xs"
+                    w={35}
+                    ml={10}
+                    p={0}
+                    style={{ borderRadius: "5px", cursor: "pointer" }}
+                    onClick={() => combobox.toggleDropdown()}
+                  >
+                    <IconArrowsLeftRight
+                      style={{ marginRight: 0, padding: 0 }}
+                      size={20}
+                      strokeWidth={2}
+                      color={"black"}
+                    />
+                  </Button>
+                </Combobox.Target>
+
+                <Combobox.Dropdown>
+                  <Combobox.Options>{options}</Combobox.Options>
+                </Combobox.Dropdown>
+              </Combobox>
             </Flex>
+
             <Flex align="center" justify="left">
               <IconFlame
                 className={classes.linkIcon}

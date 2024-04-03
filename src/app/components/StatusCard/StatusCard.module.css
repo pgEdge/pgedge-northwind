@@ -1,0 +1,74 @@
+
+  .label {
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .lead {
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    font-weight: 700;
+    font-size: rem(22px);
+    line-height: 1;
+  }
+  
+  .inner {
+    display: flex;
+  
+    @media (max-width: $mantine-breakpoint-xs) {
+      flex-direction: column;
+    }
+  }
+  
+  .ring {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  
+    @media (max-width: $mantine-breakpoint-xs) {
+      justify-content: center;
+      margin-top: var(--mantine-spacing-md);
+    }
+  }
+
+  .card {
+    background-color: var(--mantine-color-body);
+  }
+  
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-20%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOutLeft {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-20%);
+    }
+  }
+
+  .slideInLeft {
+    opacity: 0;
+    transform: translateX(-20%);
+    animation: slideInLeft 0.5s forwards;
+  }
+  
+  .slideOutLeftClass {
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideOutLeft 0.5s forwards;
+  }
