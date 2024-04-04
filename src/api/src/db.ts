@@ -109,7 +109,7 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 	const nodeClients: Client[] = [];
 	let connectPromises: Promise<void>[] = [];
 
-	const TIMEOUT_DURATION = 500;
+	const TIMEOUT_DURATION = 1000;
 
 	for (const node of nodeList) {
 		const nodeDB = db.replace(nearestClient.host, node);
@@ -157,10 +157,10 @@ export async function getDbNodes(db: string, nodeList: string[]) {
 				// Measure latency only if the connection was successful
 				await nodeClient.query('SELECT 1');
 				const end = performance.now();
-				const connectionTime = end - start;
+				const queryLatency = end - start;
 
-				nodeInfo['latency'] = Math.round(connectionTime);
-				nodeInfo['status'] = connectionTime <= 500;
+				nodeInfo['latency'] = Math.round(queryLatency);
+				nodeInfo['status'] = queryLatency <= 500;
 			} else {
 				console.error(result.reason);
 			}
