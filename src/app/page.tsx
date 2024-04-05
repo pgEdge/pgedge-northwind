@@ -31,7 +31,7 @@ export default function Home() {
           </Text>
         </Paper>
       </Center>
-      <Box px="md" py="md" style={{position: 'absolute', bottom: 0}}>
+      <Box px="md" py="md" style={{ position: "absolute", bottom: 0 }}>
         <Text size="10px">
           Cloudflare, the Cloudflare logo, and Cloudflare Workers are trademarks
           and/or registered trademarks of Cloudflare, Inc. in the United States

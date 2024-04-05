@@ -23,7 +23,7 @@ import {
   IconFlame,
   IconLocation,
   IconUser,
-  IconActivity
+  IconActivity,
 } from "@tabler/icons-react";
 import { Logs, Session, getRecentSessions } from "../data/api";
 import { UserInfoContext, DbInfoContext } from "../context";
@@ -47,17 +47,16 @@ export default function Dashboard() {
   useEffect(() => {
     const handleStorageChange = () => {
       // @ts-ignore
-      setSelectedNode(sessionStorage.getItem('selectedNode'));
+      setSelectedNode(sessionStorage.getItem("selectedNode"));
     };
 
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
     handleStorageChange();
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
-
 
   const [showCards, setShowCards] = useState(false);
   useEffect(() => {
@@ -243,13 +242,9 @@ export default function Dashboard() {
                   }}
                   onClick={() => setShowCards(!showCards)}
                 >
-                  <IconActivity
-                    size={22}
-                    strokeWidth={2}
-                    color={'black'}
-                  />
+                  <IconActivity size={22} strokeWidth={2} color={"black"} />
                 </Button>
-              )} 
+              )}
             </div>
           </>
         )}
@@ -344,9 +339,16 @@ export default function Dashboard() {
                 >
                   {dbInfo.nodes[selectedNode || dbInfo.nearest].city},{" "}
                   {dbInfo.nodes[selectedNode || dbInfo.nearest].state && (
-                    <>{dbInfo.nodes[selectedNode || dbInfo.nearest].state.toUpperCase()}, </>
+                    <>
+                      {dbInfo.nodes[
+                        selectedNode || dbInfo.nearest
+                      ].state.toUpperCase()}
+                      ,{" "}
+                    </>
                   )}
-                  {dbInfo.nodes[selectedNode || dbInfo.nearest].country.toUpperCase()}
+                  {dbInfo.nodes[
+                    selectedNode || dbInfo.nearest
+                  ].country.toUpperCase()}
                 </List.Item>
                 {dbInfo.nodes[selectedNode || dbInfo.nearest].latency && (
                   <Tooltip label="This is the latency from the Cloudflare Colocation to the nearest pgEdge Node">

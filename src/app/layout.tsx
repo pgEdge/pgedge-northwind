@@ -46,7 +46,6 @@ export default function Document({ children }: { children: React.ReactNode }) {
     <>
       <html lang="en">
         <UserProvider>
-
           <head>
             <ColorSchemeScript />
             <title>pgEdge Northwind Traders Demo</title>
@@ -100,18 +99,27 @@ export default function Document({ children }: { children: React.ReactNode }) {
                           onClick={toggle}
                           hiddenFrom="sm"
                           size="md"
-                          mr='xs'
+                          mr="xs"
                         />
                         <Text size={"md"} span={true}>
                           <strong>Northwind</strong> Traders
                         </Text>
-                        <Group align="center" gap='xs' ml="auto" visibleFrom="md">
+                        <Group
+                          align="center"
+                          gap="xs"
+                          ml="auto"
+                          visibleFrom="md"
+                        >
                           <Text size="xs" fw={500}>
                             Powered By
                           </Text>
-                          <Link href="https://app.pgedge.com" target="_blank" style={{ height: 40 }} >
+                          <Link
+                            href="https://app.pgedge.com"
+                            target="_blank"
+                            style={{ height: 40 }}
+                          >
                             <Image
-                              src={'/pgedge-cloud-logo.png'}
+                              src={"/pgedge-cloud-logo.png"}
                               height={40}
                               width={170}
                               alt="pgEdge logo"
@@ -119,9 +127,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                           </Link>
                         </Group>
 
-                        <LogoutLoginButton/>
-                      
-
+                        <LogoutLoginButton />
                       </Flex>
                     </AppShell.Header>
 
@@ -129,7 +135,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
                       <NavbarSimple onClick={toggle}></NavbarSimple>
                     </AppShell.Navbar>
 
-                    <AppShell.Main >
+                    <AppShell.Main>
                       <Box py="lg" px="md">
                         {children}
                       </Box>
