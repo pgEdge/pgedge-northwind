@@ -108,16 +108,18 @@ export async function getDbInfo(): Promise<DbInfo> {
   return json;
 }
 
-
-export async function createSupplier(supplierData: any, token:string): Promise<number | null> {
+export async function createSupplier(
+  supplierData: any,
+  token: string,
+): Promise<number | null> {
   const start = performance.now();
 
   try {
-    const res = await fetch(process.env.NEXT_PUBLIC_API + '/suppliers', {
-      method: 'POST',
+    const res = await fetch(process.env.NEXT_PUBLIC_API + "/suppliers", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(supplierData),
     });
@@ -126,34 +128,41 @@ export async function createSupplier(supplierData: any, token:string): Promise<n
       throw new Error(`HTTP error ${res.status}`);
     }
 
-    const json:any = await res.json();
+    const json: any = await res.json();
     const end = performance.now();
 
     Logs.unshift({
-      query: 'INSERT INTO suppliers ...',
+      query: "INSERT INTO suppliers ...",
       results: 1,
       execution_time: Math.round(end - start),
     });
 
     return json.supplier_id;
   } catch (error) {
-    console.error('Error creating supplier:', error);
+    console.error("Error creating supplier:", error);
     return null;
   }
 }
 
-export async function updateSupplier(supplierId: number, supplierData: any, token:string): Promise<number | null> {
+export async function updateSupplier(
+  supplierId: number,
+  supplierData: any,
+  token: string,
+): Promise<number | null> {
   const start = performance.now();
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/suppliers/${supplierId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/suppliers/${supplierId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(supplierData),
       },
-      body: JSON.stringify(supplierData),
-    });
+    );
 
     if (!res.ok) {
       throw new Error(`HTTP error ${res.status}`);
@@ -170,20 +179,22 @@ export async function updateSupplier(supplierId: number, supplierData: any, toke
 
     return json.supplier_id;
   } catch (error) {
-    console.error('Error updating supplier:', error);
+    console.error("Error updating supplier:", error);
     return null;
   }
 }
 
-
 export async function fetchSupplier(supplierId: number): Promise<any> {
   const start = performance.now();
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/suppliers/${supplierId}`, {
-      headers: {
-        'Content-Type': 'application/json',
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/suppliers/${supplierId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     if (!res.ok) {
       throw new Error(`HTTP error ${res.status}`);
@@ -200,7 +211,7 @@ export async function fetchSupplier(supplierId: number): Promise<any> {
 
     return json;
   } catch (error) {
-    console.error('Error fetching supplier:', error);
+    console.error("Error fetching supplier:", error);
     return null;
   }
 }

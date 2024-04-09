@@ -19,7 +19,7 @@ export default function TablePage(props: TablePageProps) {
   const searchParams = useSearchParams();
   const { user, isLoading } = useUser();
   const rowsPerPage: number = 20;
-  const columns = props.columns
+  const columns = props.columns;
 
   //   columnData.push({
   //   accessor: "actions",
@@ -30,7 +30,6 @@ export default function TablePage(props: TablePageProps) {
   //     </Button>
   //   ),
   // })
-
 
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(
@@ -58,7 +57,11 @@ export default function TablePage(props: TablePageProps) {
           {props.title}
         </Title>
         {props.title === "Suppliers" && !isLoading && user && (
-          <Button type="submit" mb="lg" onClick={() => router.push("/suppliers/create")}>
+          <Button
+            type="submit"
+            mb="lg"
+            onClick={() => router.push("/suppliers/create")}
+          >
             Create
           </Button>
         )}

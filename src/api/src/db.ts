@@ -17,7 +17,7 @@ export async function getTableData(
 	rowsPerPage: number | null = null,
 	orderBy: string | null = null,
 	orderDirection: 'asc' | 'desc' = 'asc',
-	singleItemId: string | null = null
+	singleItemId: string | null = null,
 ) {
 	const queryLog: any[] = [];
 	const client = new Client({
@@ -40,16 +40,12 @@ export async function getTableData(
 		if (orderBy) {
 			orderByClause = `ORDER BY ${orderBy} ${orderDirection}`;
 		}
-		const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1 OFFSET $2`, [
-			rowsPerPage,
-			offset,
-		]);
+		const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1 OFFSET $2`, [rowsPerPage, offset]);
 		client.end();
 
 		return { data: dataRes.rows, count: countRes.rows[0].count, log: queryLog };
 	}
 }
-
 
 export async function getOrders(db: string, currentPage: number = 1, rowsPerPage: number = 20) {
 	const queryLog: any[] = [];
@@ -106,36 +102,24 @@ export async function recordUser(db: string, userData: any) {
 export async function createSupplier(connectionString: string, data: any) {
 	const queryLog: any[] = [];
 	const client = new Client({
-	  connectionString,
-	  statement_timeout: 1000,
-	  query_timeout: 1000,
-	  connectionTimeoutMillis: 1000
+		connectionString,
+		statement_timeout: 1000,
+		query_timeout: 1000,
+		connectionTimeoutMillis: 1000,
 	});
 	await client.connect();
-  
-	const {
-	  company_name,
-	  contact_name,
-	  contact_title,
-	  address,
-	  city,
-	  region,
-	  postal_code,
-	  country,
-	  phone,
-	  fax,
-	  homepage,
-	} = data;
-  
+
+	const { company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax, homepage } = data;
+
 	// Get the maximum supplier_id from the suppliers table
 	const maxSupplierIdRes = await query(client, queryLog, 'SELECT MAX(supplier_id) FROM suppliers');
 	const maxSupplierId = maxSupplierIdRes.rows[0].max || 0;
 	const newSupplierId = maxSupplierId + 1;
-  
+
 	const res = await query(
-	  client,
-	  queryLog,
-	  `INSERT INTO suppliers (
+		client,
+		queryLog,
+		`INSERT INTO suppliers (
 		supplier_id,
 		company_name,
 		contact_name,
@@ -151,56 +135,31 @@ export async function createSupplier(connectionString: string, data: any) {
 	  ) VALUES (
 		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
 	  ) RETURNING supplier_id;`,
-	  [
-		newSupplierId,
-		company_name,
-		contact_name,
-		contact_title,
-		address,
-		city,
-		region,
-		postal_code,
-		country,
-		phone,
-		fax,
-		homepage,
-	  ]
+		[newSupplierId, company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax, homepage],
 	);
-  
-	client.end();
-  
-	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
-  }
 
-  export async function updateSupplier(connectionString: string, data: any, supplierId: number) {
-	console.log("connectionString", connectionString);
+	client.end();
+
+	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
+}
+
+export async function updateSupplier(connectionString: string, data: any, supplierId: number) {
+	console.log('connectionString', connectionString);
 	const queryLog: any[] = [];
 	const client = new Client({
-	  connectionString,
-	  statement_timeout: 1000,
-	  query_timeout: 1000,
-	  connectionTimeoutMillis: 1000
+		connectionString,
+		statement_timeout: 1000,
+		query_timeout: 1000,
+		connectionTimeoutMillis: 1000,
 	});
 	await client.connect();
-  
-	const {
-	  company_name,
-	  contact_name,
-	  contact_title,
-	  address,
-	  city,
-	  region,
-	  postal_code,
-	  country,
-	  phone,
-	  fax,
-	  homepage,
-	} = data;
-  
+
+	const { company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax, homepage } = data;
+
 	const res = await query(
-	  client,
-	  queryLog,
-	  `UPDATE suppliers SET
+		client,
+		queryLog,
+		`UPDATE suppliers SET
 		company_name = $1,
 		contact_name = $2,
 		contact_title = $3,
@@ -214,53 +173,40 @@ export async function createSupplier(connectionString: string, data: any) {
 		homepage = $11
 	  WHERE supplier_id = $12
 	  RETURNING supplier_id;`,
-	  [
-		company_name,
-		contact_name,
-		contact_title,
-		address,
-		city,
-		region,
-		postal_code,
-		country,
-		phone,
-		fax,
-		homepage,
-		supplierId,
-	  ]
+		[company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax, homepage, supplierId],
 	);
-  
+
 	client.end();
-  
-	console.log(res.rows, "queryLog");
-  
+
+	console.log(res.rows, 'queryLog');
+
 	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
-  }
+}
 
- export async function isValidJwt(token:string, env: Env) {
+export async function isValidJwt(token: string, env: Env) {
 	const toDecodetoken = decodeJwt(token);
-	const isValid = await isValidJwtSignature(toDecodetoken, env)
-  
-	return isValid
-  }
+	const isValid = await isValidJwtSignature(toDecodetoken, env);
 
-  function decodeJwt(token:string) {
+	return isValid;
+}
+
+function decodeJwt(token: string) {
 	const parts = token.split('.');
 	const header = JSON.parse(atob(parts[0]));
 	const payload = JSON.parse(atob(parts[1]));
 	const signature = atob(parts[2].replace(/_/g, '/').replace(/-/g, '+'));
 	return {
-	  header: header,
-	  payload: payload,
-	  signature: signature,
-	  raw: { header: parts[0], payload: parts[1], signature: parts[2] }
-	}
-  }
+		header: header,
+		payload: payload,
+		signature: signature,
+		raw: { header: parts[0], payload: parts[1], signature: parts[2] },
+	};
+}
 
-  async function isValidJwtSignature(token:any, env: Env) {
+async function isValidJwtSignature(token: any, env: Env) {
 	const encoder = new TextEncoder();
 	const data = encoder.encode([token.raw.header, token.raw.payload].join('.'));
-	const signature = new Uint8Array(Array.from(token.signature).map(c => c.charCodeAt(0)));
+	const signature = new Uint8Array(Array.from(token.signature).map((c) => c.charCodeAt(0)));
 	const jwk = {
 		kty: env.KTY,
 		use: env.USE,
@@ -269,11 +215,11 @@ export async function createSupplier(connectionString: string, data: any) {
 		kid: env.KID,
 		x5t: env.X5T,
 		x5c: [env.X5C],
-		alg: "RS256"
-	  }
+		alg: 'RS256',
+	};
 	const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
-	return crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, signature, data)
-  }
+	return crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, signature, data);
+}
 
 export async function getDbNodes(db: string, nodeList: string[]) {
 	const nearestClient = new Client({

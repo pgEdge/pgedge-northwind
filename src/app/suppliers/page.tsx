@@ -15,6 +15,7 @@ export default function Suppliers() {
   ];
   return (
     <>
-    <TablePage title={title} table={table} columns={columns}></TablePage>;</>
-  )
+      <TablePage title={title} table={table} columns={columns}></TablePage>;
+    </>
+  );
 }

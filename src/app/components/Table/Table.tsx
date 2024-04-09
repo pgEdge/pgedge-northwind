@@ -23,11 +23,14 @@ export function Table(props: TableProps) {
     accessor: "actions",
     //@ts-ignore
     render: (supplier) => (
-      <Button type="submit" onClick={() => router.push(`/suppliers/${supplier.supplier_id}`)}>
+      <Button
+        type="submit"
+        onClick={() => router.push(`/suppliers/${supplier.supplier_id}`)}
+      >
         Edit
       </Button>
     ),
-  })
+  });
   return (
     <DataTable
       withTableBorder

@@ -38,7 +38,6 @@ export default function Dashboard() {
 
   const theme = useMantineTheme();
 
-
   const mapEnabled = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? true : false;
   const [otherSessions, setOtherSessions] = useState<Session[] | null>(null);
   const [showOtherSessions, setShowOtherSessions] = useState(true);

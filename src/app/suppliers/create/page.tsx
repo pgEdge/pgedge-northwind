@@ -6,8 +6,8 @@ export default function SupplierFormWrapper() {
   const { accessToken } = use(SupplierFormLoader());
 
   if (!accessToken) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
-  return <SupplierForm token={String(accessToken)} />
+  return <SupplierForm token={String(accessToken)} />;
 }
