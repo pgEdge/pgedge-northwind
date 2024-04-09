@@ -19,16 +19,15 @@ export function Table(props: TableProps) {
   const router = useRouter();
   const pathname = usePathname();
   const columnData = props.columns.map((col) => ({ accessor: col }));
-  // columnData.push({
-  //   accessor: "actions",
-  //   //@ts-ignore
-  //   render: () => (
-  //     <Button type="submit" mb="lg" onClick={() => router.push("/suppliers/create")}>
-  //       Create
-  //     </Button>
-  //   ),
-  // })
-
+  columnData.push({
+    accessor: "actions",
+    //@ts-ignore
+    render: (supplier) => (
+      <Button type="submit" onClick={() => router.push(`/suppliers/${supplier.supplier_id}`)}>
+        Edit
+      </Button>
+    ),
+  })
   return (
     <DataTable
       withTableBorder

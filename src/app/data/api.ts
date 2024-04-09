@@ -174,3 +174,33 @@ export async function updateSupplier(supplierId: number, supplierData: any, toke
     return null;
   }
 }
+
+
+export async function fetchSupplier(supplierId: number): Promise<any> {
+  const start = performance.now();
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/suppliers/${supplierId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error ${res.status}`);
+    }
+
+    const json: any = await res.json();
+    const end = performance.now();
+
+    Logs.unshift({
+      query: `SELECT * FROM suppliers WHERE supplier_id = ${supplierId}`,
+      results: 1,
+      execution_time: Math.round(end - start),
+    });
+
+    return json;
+  } catch (error) {
+    console.error('Error fetching supplier:', error);
+    return null;
+  }
+}

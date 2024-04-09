@@ -120,6 +120,26 @@ router.get('/suppliers', async ({ req, env }) => {
 	});
 });
 
+router.get('/suppliers/:supplierId', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const supplierId = req.params.supplierId;
+	
+	const { data, log } = await getTableData(getConnectionString(env, nodeAddress), 'suppliers', null, null, null, 'asc', supplierId);
+
+	if (data) {
+		return Response.json({
+			data: data,
+			log: log,
+		});
+	} else {
+		return Response.json({
+			message: 'Supplier not found',
+			log: log,
+		}, { status: 404 });
+	}
+});
+
+
 router.post('/suppliers', async ({ req, env }) => {
 	const token = req.headers.get('Authorization');
 	const nodeAddress = req.query.nodeAddress as string | undefined;

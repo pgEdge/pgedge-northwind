@@ -13,10 +13,11 @@ async function query(client: Client, queryLog: any[], query: string, params?: an
 export async function getTableData(
 	db: string,
 	table: string,
-	currentPage: number = 1,
-	rowsPerPage: number = 20,
+	currentPage: number | null = null,
+	rowsPerPage: number | null = null,
 	orderBy: string | null = null,
 	orderDirection: 'asc' | 'desc' = 'asc',
+	singleItemId: string | null = null
 ) {
 	const queryLog: any[] = [];
 	const client = new Client({
@@ -27,21 +28,28 @@ export async function getTableData(
 	});
 	await client.connect();
 
-	const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM ${table}`);
-	const offset = (currentPage - 1) * rowsPerPage;
+	if (singleItemId) {
+		const dataRes = await query(client, queryLog, `SELECT * FROM ${table} WHERE supplier_id = $1`, [singleItemId]);
+		client.end();
+		return { data: dataRes.rows[0], log: queryLog };
+	} else {
+		const countRes = await query(client, queryLog, `SELECT COUNT(*) FROM ${table}`);
+		const offset = (currentPage - 1) * rowsPerPage;
 
-	let orderByClause = '';
-	if (orderBy) {
-		orderByClause = `ORDER BY ${orderBy} ${orderDirection}`;
+		let orderByClause = '';
+		if (orderBy) {
+			orderByClause = `ORDER BY ${orderBy} ${orderDirection}`;
+		}
+		const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1 OFFSET $2`, [
+			rowsPerPage,
+			offset,
+		]);
+		client.end();
+
+		return { data: dataRes.rows, count: countRes.rows[0].count, log: queryLog };
 	}
-	const dataRes = await query(client, queryLog, `SELECT * FROM ${table} ${orderByClause} LIMIT $1::integer OFFSET $2::integer`, [
-		rowsPerPage,
-		offset,
-	]);
-	client.end();
-
-	return { data: dataRes.rows, count: countRes.rows[0].count, log: queryLog };
 }
+
 
 export async function getOrders(db: string, currentPage: number = 1, rowsPerPage: number = 20) {
 	const queryLog: any[] = [];
