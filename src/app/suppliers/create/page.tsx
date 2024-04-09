@@ -1,17 +1,13 @@
-"use client";
-
 import SupplierForm from "@/app/components/SupplierForm/SupplierForm";
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import SupplierFormLoader from "@/app/components/SupplierForm/SupplierFormLoader";
+import { use } from "react";
 
+export default function SupplierFormWrapper() {
+  const { accessToken } = use(SupplierFormLoader());
 
-function Suppliers() {
+  if (!accessToken) {
+    return <p>Loading...</p>
+  }
 
-  return <SupplierForm />
+  return <SupplierForm token={String(accessToken)} />
 }
-
-export default withPageAuthRequired(Suppliers, {
-  // onRedirecting: () => <Loading />,
-  onRedirecting: () => <>Loading</>,
-  // onError: error => <ErrorMessage>{error.message}</ErrorMessage>
-  onError: error => <>{error.message}</>
-});

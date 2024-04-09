@@ -109,7 +109,7 @@ export async function getDbInfo(): Promise<DbInfo> {
 }
 
 
-export async function createSupplier(supplierData: any): Promise<number | null> {
+export async function createSupplier(supplierData: any, token:string): Promise<number | null> {
   const start = performance.now();
 
   try {
@@ -117,6 +117,7 @@ export async function createSupplier(supplierData: any): Promise<number | null> 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(supplierData),
     });
@@ -141,7 +142,7 @@ export async function createSupplier(supplierData: any): Promise<number | null> 
   }
 }
 
-export async function updateSupplier(supplierId: number, supplierData: any): Promise<number | null> {
+export async function updateSupplier(supplierId: number, supplierData: any, token:string): Promise<number | null> {
   const start = performance.now();
 
   try {
@@ -149,6 +150,7 @@ export async function updateSupplier(supplierId: number, supplierData: any): Pro
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(supplierData),
     });

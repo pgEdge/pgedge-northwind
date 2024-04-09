@@ -1,9 +1,11 @@
+"use client";
 import { useForm } from '@mantine/form';
 import { TextInput, Textarea, SimpleGrid, Button, Title } from '@mantine/core';
 import { createSupplier, updateSupplier } from '@/app/data/api';
 import { useRouter } from 'next/navigation';
 
 interface SupplierFormProps {
+  token: string;
   supplier?: {
     supplier_id: number;
     company_name: string;
@@ -21,7 +23,7 @@ interface SupplierFormProps {
   onSuccess?: (supplierId: number) => void;
 }
 
-const SupplierForm = ({ supplier, onSuccess }: SupplierFormProps) => {
+const SupplierForm = ({token, supplier, onSuccess }: SupplierFormProps) => {
   const router = useRouter();
   const form = useForm({
     initialValues: {
@@ -45,8 +47,8 @@ const SupplierForm = ({ supplier, onSuccess }: SupplierFormProps) => {
     try {
       const result =
         supplierId > 0
-          ? await updateSupplier(supplierId, values)
-          : await createSupplier(values);
+          ? await updateSupplier(supplierId, values, token)
+          : await createSupplier(values, token);
 
       if (result.supplier_id) {
         console.log(`Supplier ${supplierId > 0 ? 'updated' : 'created'} with ID: ${result.supplier_id}`);

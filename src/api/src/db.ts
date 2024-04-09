@@ -1,5 +1,6 @@
 import { Client, QueryResult } from 'pg';
 import { pgEdgeLocations } from './pgedge';
+import { Env } from '.';
 
 async function query(client: Client, queryLog: any[], query: string, params?: any[]) {
 	const start = performance.now();
@@ -226,6 +227,44 @@ export async function createSupplier(connectionString: string, data: any) {
 	console.log(res.rows, "queryLog");
   
 	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
+  }
+
+ export async function isValidJwt(token:string, env: Env) {
+	const toDecodetoken = decodeJwt(token);
+	const isValid = await isValidJwtSignature(toDecodetoken, env)
+  
+	return isValid
+  }
+
+  function decodeJwt(token:string) {
+	const parts = token.split('.');
+	const header = JSON.parse(atob(parts[0]));
+	const payload = JSON.parse(atob(parts[1]));
+	const signature = atob(parts[2].replace(/_/g, '/').replace(/-/g, '+'));
+	return {
+	  header: header,
+	  payload: payload,
+	  signature: signature,
+	  raw: { header: parts[0], payload: parts[1], signature: parts[2] }
+	}
+  }
+
+  async function isValidJwtSignature(token:any, env: Env) {
+	const encoder = new TextEncoder();
+	const data = encoder.encode([token.raw.header, token.raw.payload].join('.'));
+	const signature = new Uint8Array(Array.from(token.signature).map(c => c.charCodeAt(0)));
+	const jwk = {
+		kty: env.KTY,
+		use: env.USE,
+		n: env.N,
+		e: env.E,
+		kid: env.KID,
+		x5t: env.X5T,
+		x5c: [env.X5C],
+		alg: "RS256"
+	  }
+	const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+	return crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, signature, data)
   }
 
 export async function getDbNodes(db: string, nodeList: string[]) {

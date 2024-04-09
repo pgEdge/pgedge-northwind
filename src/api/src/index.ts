@@ -1,5 +1,5 @@
 import { Router } from '@tsndr/cloudflare-worker-router';
-import { getTableData, getDbNodes, recordUser, getOrders, createSupplier, updateSupplier } from './db';
+import { getTableData, getDbNodes, recordUser, getOrders, createSupplier, updateSupplier, isValidJwt } from './db';
 import { cfLocations } from './cloudflare';
 
 // Env Types
@@ -7,10 +7,20 @@ export type Var<T = string> = T;
 export type Secret<T = string> = T;
 
 export type Env = {
-  ENVIRONMENT: Var<'dev' | 'prod'>;
+	ENVIRONMENT: Var<'dev' | 'prod'>;
 
-  DB: Secret<string>;
-  NODELIST: Secret<string>;
+	DB: Secret<string>;
+	NODELIST: Secret<string>;
+
+	KTY: Secret<string>;
+	USE: Secret<string>;
+	N: Secret<string>;
+	E: Secret<string>;
+	KID: Secret<string>;
+	X5T: Secret<string>;
+	X5C: Secret<string>;
+
+	
 };
 
 // Initialize Router
@@ -35,7 +45,14 @@ const getConnectionString = (env: Env, nodeName?: string): string => {
 };
 
 // Enabling build in CORS support
-router.cors();
+router.cors(
+	{
+		allowOrigin: '*',
+		allowMethods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+		allowHeaders: 'Content-Type,Authorization',
+		allowCredentials: true,
+	}
+);
 
 router.get('/user', async ({ ctx, req, env }) => {
 	const nodeAddress = req.query.nodeAddress as string | undefined;
@@ -59,10 +76,10 @@ router.get('/user', async ({ ctx, req, env }) => {
 		return recordUser(getConnectionString(env, nodeAddress), user);
 	};
 
-  ctx?.waitUntil(recordUserInfo());
-  const response = Response.json(user);
-  response.headers.append('Cache-Control', 'max-age=3600;');
-  return response;
+	ctx?.waitUntil(recordUserInfo());
+	const response = Response.json(user);
+	response.headers.append('Cache-Control', 'max-age=3600;');
+	return response;
 });
 
 router.get('/db', async ({ env, req }) => {
@@ -83,11 +100,11 @@ router.get('/sessions', async ({ req, env }) => {
 		'desc',
 	);
 
-  return Response.json({
-    data: data,
-    count: count,
-    log: log,
-  });
+	return Response.json({
+		data: data,
+		count: count,
+		log: log,
+	});
 });
 
 router.get('/suppliers', async ({ req, env }) => {
@@ -104,30 +121,48 @@ router.get('/suppliers', async ({ req, env }) => {
 });
 
 router.post('/suppliers', async ({ req, env }) => {
-  const nodeAddress = req.query.nodeAddress as string | undefined;
-  const data = await req.json();
+	const token = req.headers.get('Authorization');
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const data = await req.json();
 
-  try {
-    const connectionString = getConnectionString(env, nodeAddress);
-    const result = await createSupplier(connectionString, data);
-    return Response.json(result);
-  } catch (error:any) {
-    return Response.json({ error: error.message }, { status: 500 });
-  }
+	try {
+		if (!token) {
+			return Response.json({ error: 'No token provided' }, { status: 401 });
+		}
+		const tokenVerified = await isValidJwt(token.replace('Bearer ', ''),env);
+		if(!tokenVerified) {
+			return Response.json({ error: 'Invalid token' }, { status: 401 });
+		}
+	
+		const connectionString = getConnectionString(env, nodeAddress);
+		const result = await createSupplier(connectionString, data);
+		return Response.json(result);
+	} catch (error: any) {
+		return Response.json({ error: error.message }, { status: 500 });
+	}
 });
 
 router.put('/suppliers/:supplierId', async ({ req, env }) => {
-  const nodeAddress = req.query.nodeAddress as string | undefined;
-  const supplierId = parseInt(req.params.supplierId, 10);
-  const data = await req.json();
+	const token = req.headers.get('Authorization');
+	if (!token) {
+		return Response.json({ error: 'No token provided' }, { status: 401 });
+	}
+	const tokenVerified = await isValidJwt(token.replace('Bearer ', ''),env);
+	if(!tokenVerified) {
+		return Response.json({ error: 'Invalid token' }, { status: 401 });
+	}
+	
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const supplierId = parseInt(req.params.supplierId, 10);
+	const data = await req.json();
 
-  try {
-    const connectionString = getConnectionString(env, nodeAddress);
-    const result = await updateSupplier(connectionString, data, supplierId);
-    return Response.json(result);
-  } catch (error: any) {
-    return Response.json({ error: error.message }, { status: 500 });
-  }
+	try {
+		const connectionString = getConnectionString(env, nodeAddress);
+		const result = await updateSupplier(connectionString, data, supplierId);
+		return Response.json(result);
+	} catch (error: any) {
+		return Response.json({ error: error.message }, { status: 500 });
+	}
 });
 
 
