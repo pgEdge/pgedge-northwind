@@ -21,7 +21,7 @@ interface Supplier {
 }
 interface SupplierFormProps {
   token: string;
-  supplier_id: number;
+  supplier_id?: number;
   onSuccess?: (supplierId: number) => void;
 }
 
@@ -47,16 +47,15 @@ const SupplierForm = ({ token, supplier_id, onSuccess }: SupplierFormProps) => {
 
   useEffect(() => {
     (async () => {
+      if (!supplier_id) return;
       try {
         const result = await fetchSupplier(supplier_id);
-        console.log("result", result.data);
         setSupplier(result.data);
         form.setValues(result.data);
       } catch (error) {
         console.error("Error fetching supplier:", error);
       }
     })();
-    console.log("supplier_id", supplier_id);
   }, [supplier_id, token]);
 
   const router = useRouter();
