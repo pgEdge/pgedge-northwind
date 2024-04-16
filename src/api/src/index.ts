@@ -12,13 +12,8 @@ export type Env = {
 	DB: Secret<string>;
 	NODELIST: Secret<string>;
 
-	KTY: Secret<string>;
-	USE: Secret<string>;
-	N: Secret<string>;
-	E: Secret<string>;
-	KID: Secret<string>;
-	X5T: Secret<string>;
-	X5C: Secret<string>;
+	AUTH0_ISSUER_BASE_URL: Secret<string>;
+	AUTH0_AUDIENCE: Secret<string>;
 };
 
 // Initialize Router
