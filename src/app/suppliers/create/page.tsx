@@ -5,11 +5,11 @@ import { use } from "react";
 export const runtime = "edge";
 
 export default function SupplierFormWrapper() {
-  const { accessToken } = use(SupplierFormLoader());
+  const token = use(SupplierFormLoader());
 
-  if (!accessToken) {
+  if (!token?.accessToken) {
     return <p>Loading...</p>;
   }
 
-  return <SupplierForm token={String(accessToken)} />;
+  return <SupplierForm token={token?.accessToken as string} />;
 }

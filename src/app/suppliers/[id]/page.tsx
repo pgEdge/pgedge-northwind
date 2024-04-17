@@ -9,12 +9,12 @@ export default function SupplierFormWrapper({
 }: {
   params: { id: string };
 }) {
-  const { accessToken } = use(SupplierFormLoader());
-  if (!accessToken) {
+  const token = use(SupplierFormLoader());
+  if (!token?.accessToken) {
     return <p>Loading...</p>;
   }
 
   return (
-    <SupplierForm token={String(accessToken)} supplier_id={Number(params.id)} />
+    <SupplierForm token={token?.accessToken as string} supplier_id={Number(params.id)} />
   );
 }
