@@ -2,7 +2,7 @@ import SupplierForm from "@/app/components/SupplierForm/SupplierForm";
 import SupplierFormLoader from "@/app/components/SupplierForm/SupplierFormLoader";
 import { use } from "react";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 export default function SupplierFormWrapper({
   params,
@@ -10,7 +10,6 @@ export default function SupplierFormWrapper({
   params: { id: string };
 }) {
   const { accessToken } = use(SupplierFormLoader());
-  console.log("accessToken", params.id);
   if (!accessToken) {
     return <p>Loading...</p>;
   }

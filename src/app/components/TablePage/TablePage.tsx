@@ -12,6 +12,7 @@ interface TablePageProps {
   title: string;
   table: string;
   columns: string[] | any[];
+  token?: string;
 }
 
 export default function TablePage(props: TablePageProps) {
@@ -74,6 +75,7 @@ export default function TablePage(props: TablePageProps) {
         records={records}
         columns={columns}
         onPageChange={setCurrentPage}
+        token={props.token}
       />
     </>
   );

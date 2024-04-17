@@ -126,7 +126,6 @@ export default function Dashboard() {
         }
       }
 
-      console.log(markers);
       //Connect all the DB nodes
       // @ts-ignore
       connectionSets.push([...nodeMarkers.values()]);

@@ -2,7 +2,7 @@ import SupplierForm from "@/app/components/SupplierForm/SupplierForm";
 import SupplierFormLoader from "@/app/components/SupplierForm/SupplierFormLoader";
 import { use } from "react";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 export default function SupplierFormWrapper() {
   const { accessToken } = use(SupplierFormLoader());

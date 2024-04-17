@@ -1,8 +1,11 @@
-"use client";
-
 import TablePage from "../components/TablePage/TablePage";
+import SupplierFormLoader from "@/app/components/SupplierForm/SupplierFormLoader";
+import { use } from "react";
+
+export const runtime = "edge";
 
 export default function Suppliers() {
+  const token = use(SupplierFormLoader());
   const title = "Suppliers";
   const table = "suppliers";
   const columns = [
@@ -15,7 +18,12 @@ export default function Suppliers() {
   ];
   return (
     <>
-      <TablePage title={title} table={table} columns={columns}></TablePage>;
+      <TablePage
+        title={title}
+        table={table}
+        columns={columns}
+        token={token?.accessToken as string}
+      ></TablePage>
     </>
   );
 }

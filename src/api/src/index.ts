@@ -1,5 +1,5 @@
 import { Router } from '@tsndr/cloudflare-worker-router';
-import { getTableData, getDbNodes, recordUser, getOrders, createSupplier, updateSupplier, isValidJwt } from './db';
+import { getTableData, getDbNodes, recordUser, getOrders, createSupplier, updateSupplier, isValidJwt, deleteSupplier } from './db';
 import { cfLocations } from './cloudflare';
 
 // Env Types
@@ -179,6 +179,28 @@ router.put('/suppliers/:supplierId', async ({ req, env }) => {
 	try {
 		const connectionString = getConnectionString(env, nodeAddress);
 		const result = await updateSupplier(connectionString, data, supplierId);
+		return Response.json(result);
+	} catch (error: any) {
+		return Response.json({ error: error.message }, { status: 500 });
+	}
+});
+
+router.delete('/suppliers/:supplierId', async ({ req, env }) => {
+	const token = req.headers.get('Authorization');
+	if (!token) {
+		return Response.json({ error: 'No token provided' }, { status: 401 });
+	}
+	const tokenVerified = await isValidJwt(token.replace('Bearer ', ''), env);
+	if (!tokenVerified) {
+		return Response.json({ error: 'Invalid token' }, { status: 401 });
+	}
+
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const supplierId = parseInt(req.params.supplierId, 10);
+
+	try {
+		const connectionString = getConnectionString(env, nodeAddress);
+		const result = await deleteSupplier(connectionString, supplierId);
 		return Response.json(result);
 	} catch (error: any) {
 		return Response.json({ error: error.message }, { status: 500 });

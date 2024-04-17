@@ -145,7 +145,6 @@ export async function createSupplier(connectionString: string, data: any) {
 }
 
 export async function updateSupplier(connectionString: string, data: any, supplierId: number) {
-	console.log('connectionString', connectionString);
 	const queryLog: any[] = [];
 	const client = new Client({
 		connectionString,
@@ -179,7 +178,22 @@ export async function updateSupplier(connectionString: string, data: any, suppli
 
 	client.end();
 
-	console.log(res.rows, 'queryLog');
+	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
+}
+
+export async function deleteSupplier(connectionString: string, supplierId: number) {
+	const queryLog: any[] = [];
+	const client = new Client({
+		connectionString,
+		statement_timeout: 1000,
+		query_timeout: 1000,
+		connectionTimeoutMillis: 1000,
+	});
+	await client.connect();
+
+	const res = await query(client, queryLog, `DELETE FROM suppliers WHERE supplier_id = $1`, [supplierId]);
+
+	client.end();
 
 	return { supplier_id: res.rows[0].supplier_id, log: queryLog };
 }
