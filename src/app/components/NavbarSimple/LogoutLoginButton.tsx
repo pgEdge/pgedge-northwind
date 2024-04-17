@@ -1,12 +1,11 @@
-import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { Button } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function LogoutLoginButton() {
   const router = useRouter();
   const { user, isLoading } = useUser();
-  const authEnabled = process.env.AUTH0_ENABLED ? true : false;
+  const authEnabled = process.env.NEXT_PUBLIC_AUTH0_ENABLED ? true : false;
 
   return (
     <>

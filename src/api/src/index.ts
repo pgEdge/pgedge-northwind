@@ -14,6 +14,7 @@ export type Env = {
 
 	AUTH0_ISSUER_BASE_URL: Secret<string>;
 	AUTH0_AUDIENCE: Secret<string>;
+	AUTH0_ENABLED: Var<string>;
 };
 
 // Initialize Router
@@ -141,6 +142,9 @@ router.get('/suppliers/:supplierId', async ({ req, env }) => {
 });
 
 router.post('/suppliers', async ({ req, env }) => {
+	if(env.AUTH0_ENABLED != "true"){
+		return Response.json({ error: 'Auth0 is not enabled' }, { status: 500 });
+	}
 	const token = req.headers.get('Authorization');
 	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const data = await req.json();
@@ -163,6 +167,9 @@ router.post('/suppliers', async ({ req, env }) => {
 });
 
 router.put('/suppliers/:supplierId', async ({ req, env }) => {
+	if(env.AUTH0_ENABLED != "true"){
+		return Response.json({ error: 'Auth0 is not enabled' }, { status: 500 });
+	}
 	const token = req.headers.get('Authorization');
 	if (!token) {
 		return Response.json({ error: 'No token provided' }, { status: 401 });
@@ -186,6 +193,9 @@ router.put('/suppliers/:supplierId', async ({ req, env }) => {
 });
 
 router.delete('/suppliers/:supplierId', async ({ req, env }) => {
+	if(env.AUTH0_ENABLED != "true"){
+		return Response.json({ error: 'Auth0 is not enabled' }, { status: 500 });
+	}
 	const token = req.headers.get('Authorization');
 	if (!token) {
 		return Response.json({ error: 'No token provided' }, { status: 401 });
