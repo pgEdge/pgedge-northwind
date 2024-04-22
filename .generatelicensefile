@@ -6,9 +6,10 @@
   "output": "./THIRD-PARTY-LICENSES",
   "lineEnding": "lf",
   "replace": {
-    "wrangler@3.22.4": "LICENSE",
-    "@cloudflare/kv-asset-handler@0.2.0": "LICENSE",
-    "type-fest@3.13.1": "LICENSE"
+    "wrangler@3.50.0": "LICENSE",
+    "@cloudflare/kv-asset-handler@0.3.1": "LICENSE",
+    "@cloudflare/workers-types@4.20240405.0": "LICENSE",
+    "type-fest@4.12.0": "LICENSE"
   },
   "exclude": [
     "turf-jsts@1.2.3"

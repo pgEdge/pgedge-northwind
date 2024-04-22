@@ -126,7 +126,6 @@ export default function Dashboard() {
         }
       }
 
-      console.log(markers);
       //Connect all the DB nodes
       // @ts-ignore
       connectionSets.push([...nodeMarkers.values()]);
@@ -227,7 +226,7 @@ export default function Dashboard() {
                 position: "absolute",
                 top: 10,
                 left: 10,
-                zIndex: 9999,
+                zIndex: 100,
               }}
             >
               {dbInfo !== null && (

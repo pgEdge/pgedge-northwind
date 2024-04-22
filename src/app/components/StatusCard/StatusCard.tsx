@@ -74,7 +74,7 @@ export function StatusCard({ isVisible }: { isVisible: boolean }) {
             position: "absolute",
             top: 50,
             left: 10,
-            zIndex: 9999,
+            zIndex: 100,
             height: "230px",
             overflow: "auto",
             display: "flex",

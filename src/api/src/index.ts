@@ -1,5 +1,5 @@
 import { Router } from '@tsndr/cloudflare-worker-router';
-import { getTableData, getDbNodes, recordUser, getOrders } from './db';
+import { getTableData, getDbNodes, recordUser, getOrders, createSupplier, updateSupplier, isValidJwt, deleteSupplier } from './db';
 import { cfLocations } from './cloudflare';
 
 // Env Types
@@ -11,6 +11,10 @@ export type Env = {
 
 	DB: Secret<string>;
 	NODELIST: Secret<string>;
+
+	AUTH0_ISSUER_BASE_URL: Secret<string>;
+	AUTH0_AUDIENCE: Secret<string>;
+	AUTH0_ENABLED: Var<string>;
 };
 
 // Initialize Router
@@ -35,7 +39,12 @@ const getConnectionString = (env: Env, nodeName?: string): string => {
 };
 
 // Enabling build in CORS support
-router.cors();
+router.cors({
+	allowOrigin: '*',
+	allowMethods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+	allowHeaders: 'Content-Type,Authorization',
+	allowCredentials: true,
+});
 
 router.get('/user', async ({ ctx, req, env }) => {
 	const nodeAddress = req.query.nodeAddress as string | undefined;
@@ -94,13 +103,118 @@ router.get('/suppliers', async ({ req, env }) => {
 	const nodeAddress = req.query.nodeAddress as string | undefined;
 	const currentPage: number = Number(req.query?.page ?? 1);
 	const rowsPerPage: number = 20;
-	const { data, count, log } = await getTableData(getConnectionString(env, nodeAddress), 'suppliers', currentPage, rowsPerPage);
+	const { data, count, log } = await getTableData(
+		getConnectionString(env, nodeAddress),
+		'suppliers',
+		currentPage,
+		rowsPerPage,
+		'supplier_id',
+		'desc',
+	);
 
 	return Response.json({
 		data: data,
 		count: count,
 		log: log,
 	});
+});
+
+router.get('/suppliers/:supplierId', async ({ req, env }) => {
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const supplierId = req.params.supplierId;
+
+	const { data, log } = await getTableData(getConnectionString(env, nodeAddress), 'suppliers', null, null, null, 'asc', supplierId);
+
+	if (data) {
+		return Response.json({
+			data: data,
+			log: log,
+		});
+	} else {
+		return Response.json(
+			{
+				message: 'Supplier not found',
+				log: log,
+			},
+			{ status: 404 },
+		);
+	}
+});
+
+router.post('/suppliers', async ({ req, env }) => {
+	if(env.AUTH0_ENABLED != "true"){
+		return Response.json({ error: 'Auth0 is not enabled' }, { status: 500 });
+	}
+	const token = req.headers.get('Authorization');
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const data = await req.json();
+
+	try {
+		if (!token) {
+			return Response.json({ error: 'No token provided' }, { status: 401 });
+		}
+		const tokenVerified = await isValidJwt(token.replace('Bearer ', ''), env);
+		if (!tokenVerified) {
+			return Response.json({ error: 'Invalid token' }, { status: 401 });
+		}
+
+		const connectionString = getConnectionString(env, nodeAddress);
+		const result = await createSupplier(connectionString, data);
+		return Response.json(result);
+	} catch (error: any) {
+		return Response.json({ error: error.message }, { status: 500 });
+	}
+});
+
+router.put('/suppliers/:supplierId', async ({ req, env }) => {
+	if(env.AUTH0_ENABLED != "true"){
+		return Response.json({ error: 'Auth0 is not enabled' }, { status: 500 });
+	}
+	const token = req.headers.get('Authorization');
+	if (!token) {
+		return Response.json({ error: 'No token provided' }, { status: 401 });
+	}
+	const tokenVerified = await isValidJwt(token.replace('Bearer ', ''), env);
+	if (!tokenVerified) {
+		return Response.json({ error: 'Invalid token' }, { status: 401 });
+	}
+
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const supplierId = parseInt(req.params.supplierId, 10);
+	const data = await req.json();
+
+	try {
+		const connectionString = getConnectionString(env, nodeAddress);
+		const result = await updateSupplier(connectionString, data, supplierId);
+		return Response.json(result);
+	} catch (error: any) {
+		return Response.json({ error: error.message }, { status: 500 });
+	}
+});
+
+router.delete('/suppliers/:supplierId', async ({ req, env }) => {
+	if(env.AUTH0_ENABLED != "true"){
+		return Response.json({ error: 'Auth0 is not enabled' }, { status: 500 });
+	}
+	const token = req.headers.get('Authorization');
+	if (!token) {
+		return Response.json({ error: 'No token provided' }, { status: 401 });
+	}
+	const tokenVerified = await isValidJwt(token.replace('Bearer ', ''), env);
+	if (!tokenVerified) {
+		return Response.json({ error: 'Invalid token' }, { status: 401 });
+	}
+
+	const nodeAddress = req.query.nodeAddress as string | undefined;
+	const supplierId = parseInt(req.params.supplierId, 10);
+
+	try {
+		const connectionString = getConnectionString(env, nodeAddress);
+		const result = await deleteSupplier(connectionString, supplierId);
+		return Response.json(result);
+	} catch (error: any) {
+		return Response.json({ error: error.message }, { status: 500 });
+	}
 });
 
 router.get('/products', async ({ req, env }) => {

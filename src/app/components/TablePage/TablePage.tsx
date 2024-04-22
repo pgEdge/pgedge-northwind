@@ -1,21 +1,36 @@
 "use client";
 
-import { Title } from "@mantine/core";
+import { Button, Flex, Title } from "@mantine/core";
 import { Table } from "../Table/Table";
 import { getTableData } from "../../data/api";
 import { useSearchParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 interface TablePageProps {
   title: string;
   table: string;
-  columns: string[];
+  columns: string[] | any[];
+  token?: string;
 }
 
 export default function TablePage(props: TablePageProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const { user, isLoading } = useUser();
   const rowsPerPage: number = 20;
   const columns = props.columns;
+
+  //   columnData.push({
+  //   accessor: "actions",
+  //   //@ts-ignore
+  //   render: () => (
+  //     <Button type="submit" mb="lg" onClick={() => router.push("/suppliers/create")}>
+  //       Create
+  //     </Button>
+  //   ),
+  // })
 
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(
@@ -38,9 +53,20 @@ export default function TablePage(props: TablePageProps) {
 
   return (
     <>
-      <Title order={3} fw={600} mb="lg">
-        {props.title}
-      </Title>
+      <Flex justify="space-between">
+        <Title order={3} fw={600} mb="lg">
+          {props.title}
+        </Title>
+        {props.title === "Suppliers" && !isLoading && user && (
+          <Button
+            type="submit"
+            mb="lg"
+            onClick={() => router.push("/suppliers/create")}
+          >
+            Create
+          </Button>
+        )}
+      </Flex>
       <Table
         loading={loading}
         currentPage={currentPage}
@@ -49,6 +75,7 @@ export default function TablePage(props: TablePageProps) {
         records={records}
         columns={columns}
         onPageChange={setCurrentPage}
+        token={props.token}
       />
     </>
   );
