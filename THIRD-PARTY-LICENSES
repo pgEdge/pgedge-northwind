@@ -9,7 +9,7 @@ This package contains the following license and notice below:
 
 BSD 3-Clause License
 
-Copyright (c) 2017, Mapbox
+Copyright (c) 2025, Mapbox
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -46,7 +46,7 @@ The following npm packages may be included in this product:
 
 These packages each contain the following license and notice below:
 
-Copyright (c) 2009-2011, Mozilla Foundation and contributors
+Copyright (c) 2009-2025, Mozilla Foundation and contributors
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -83,7 +83,7 @@ The following npm package may be included in this product:
 This package contains the following license and notice below:
 
 Apache License
-                        Version 2.0, January 2004
+                        Version 2.0, January 2025
                      http://www.apache.org/licenses/
 
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
@@ -331,7 +331,7 @@ This package contains the following license and notice below:
 
 (The MIT License)
 
-Copyright (c) 2011 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2025 TJ Holowaychuk <tj@vision-media.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -362,8 +362,8 @@ This package contains the following license and notice below:
 
 (The MIT License)
 
-Copyright (c) 2012-2014 Roman Shtylman <shtylman@gmail.com>
-Copyright (c) 2015 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2012-2025 Roman Shtylman <shtylman@gmail.com>
+Copyright (c) 2025 Douglas Christopher Wilson <doug@somethingdoug.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -394,8 +394,8 @@ This package contains the following license and notice below:
 
 (The MIT License)
 
-Copyright (c) 2014-2017 TJ Holowaychuk <tj@vision-media.ca>
-Copyright (c) 2018-2021 Josh Junon
+Copyright (c) 2014-2025 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2018-2025 Josh Junon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software
 and associated documentation files (the 'Software'), to deal in the Software without restriction,
@@ -847,7 +847,7 @@ This package contains the following license and notice below:
 
 BSD-2-Clause
 
-Copyright (C) 2008 Apple Inc. All Rights Reserved.
+Copyright (C) 2025 Apple Inc. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
@@ -883,7 +883,7 @@ The following npm package may be included in this product:
 This package contains the following license and notice below:
 
 BSD-2-Clause
-Copyright (c) 2016-2022 Mapbox, Inc.
+Copyright (c) 2016-2025 Mapbox, Inc.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -900,9 +900,9 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2011 Einar Otto Stangvik <einaros@gmail.com>
-Copyright (c) 2013 Arnout Kazemier and contributors
-Copyright (c) 2016 Luigi Pinca and contributors
+Copyright (c) 2025 Einar Otto Stangvik <einaros@gmail.com>
+Copyright (c) 2025 Arnout Kazemier and contributors
+Copyright (c) 2025 Luigi Pinca and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -929,7 +929,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2013 Raynos.
+Copyright (c) 2025 Raynos.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -957,7 +957,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2014-2016, Michael Bostock
+Copyright (c) 2014-2025, Michael Bostock
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -992,7 +992,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2014-2018, Matteo Collina <hello@matteocollina.com>
+Copyright (c) 2014-2025, Matteo Collina <hello@matteocollina.com>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -1014,7 +1014,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2014, Mapbox
+Copyright (c) 2025, Mapbox
 
 
 All rights reserved.
@@ -1051,7 +1051,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2015-2021, Brandon Jones, Colin MacKenzie IV.
+Copyright (c) 2015-2025, Brandon Jones, Colin MacKenzie IV.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1079,7 +1079,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2015, Mapbox <>
+Copyright (c) 2025, Mapbox <>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -1101,7 +1101,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2016, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1123,7 +1123,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2017-2018 Fredrik Nicol
+Copyright (c) 2017-2025 Fredrik Nicol
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1151,7 +1151,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2017, Mapbox
+Copyright (c) 2025, Mapbox
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -1187,7 +1187,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2018 virk.officials@gmail.com
+Copyright (c) 2025 virk.officials@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -1215,7 +1215,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2020 Urban Computing Foundation
+Copyright (c) 2025 Urban Computing Foundation
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1237,7 +1237,7 @@ THE SOFTWARE.
 
 This contains code from  MapboxGL-js
 
-Copyright (c) 2014, Mapbox
+Copyright (c) 2025, Mapbox
 
 All rights reserved.
 Redistribution and use in source and binary forms, with or without modification,
@@ -1268,7 +1268,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Contains code from Mapbox GL Style JSON
 
-Mapbox Open Styles are copyright (c) 2014, Mapbox, all rights reserved.
+Mapbox Open Styles are copyright (c) 2025, Mapbox, all rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -1283,7 +1283,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2020, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -1305,7 +1305,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright (c) 2020, MapLibre contributors
+Copyright (c) 2025, MapLibre contributors
 
 All rights reserved.
 
@@ -1340,7 +1340,7 @@ Contains code from mapbox-gl-js v1.13 and earlier
 
 Version v1.13 of mapbox-gl-js and earlier are licensed under a BSD-3-Clause license
 
-Copyright (c) 2020, Mapbox
+Copyright (c) 2025, Mapbox
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
@@ -1370,7 +1370,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Contains code from glfx.js
 
-Copyright (C) 2011 by Evan Wallace
+Copyright (C) 2025 by Evan Wallace
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1394,7 +1394,7 @@ THE SOFTWARE.
 
 Contains a portion of d3-color https://github.com/d3/d3-color
 
-Copyright 2010-2016 Mike Bostock
+Copyright 2010-2025 Mike Bostock
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -1451,7 +1451,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright © 2017, Charmander <~@charmander.me>
+Copyright © 2025, Charmander <~@charmander.me>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -1473,7 +1473,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2008 Fair Oaks Labs, Inc.
+Copyright 2025 Fair Oaks Labs, Inc.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -1493,7 +1493,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2010-2016 Mike Bostock
+Copyright 2010-2025 Mike Bostock
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -1529,7 +1529,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2010-2016 Mike Bostock
+Copyright 2010-2025 Mike Bostock
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -1557,7 +1557,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Copyright (C) 2010-2013 Raymond Hill
+Copyright (C) 2010-2025 Raymond Hill
 https://github.com/gorhill/Javascript-Voronoi
 
 Licensed under The MIT License
@@ -1588,7 +1588,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2010-2016 Mike Bostock
+Copyright 2010-2025 Mike Bostock
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -1618,7 +1618,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 This license applies to GeographicLib, versions 1.12 and later.
 
-Copyright (c) 2008-2012, Charles Karney
+Copyright (c) 2008-2025, Charles Karney
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -1646,7 +1646,7 @@ The following npm packages may be included in this product:
 
 These packages each contain the following license and notice below:
 
-Copyright 2012-2019 Michael Bostock
+Copyright 2012-2025 Michael Bostock
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1668,7 +1668,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2018 Rich Harris
+Copyright 2025 Rich Harris
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -1684,7 +1684,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2019 Justin Ridgewell <jridgewell@google.com>
+Copyright 2025 Justin Ridgewell <jridgewell@google.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1712,7 +1712,7 @@ The following npm package may be included in this product:
 
 This package contains the following license and notice below:
 
-Copyright 2022 Justin Ridgewell <justin@ridgewell.name>
+Copyright 2025 Justin Ridgewell <justin@ridgewell.name>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1830,7 +1830,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2015, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1855,7 +1855,7 @@ These packages each contain the following license and notice below:
 
 ISC License
 
-Copyright (c) 2016, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1879,7 +1879,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2017, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1903,7 +1903,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2017, Vladimir Agafonkin
+Copyright (c) 2025, Vladimir Agafonkin
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1927,7 +1927,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2018, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1953,7 +1953,7 @@ These packages each contain the following license and notice below:
 
 ISC License
 
-Copyright (c) 2018, Vladimir Agafonkin
+Copyright (c) 2025, Vladimir Agafonkin
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -1977,7 +1977,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2020, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -2001,7 +2001,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2021 Alexey Raspopov, Kostiantyn Denysov, Anton Verinov
+Copyright (c) 2025 Alexey Raspopov, Kostiantyn Denysov, Anton Verinov
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -2025,7 +2025,7 @@ This package contains the following license and notice below:
 
 ISC License
 
-Copyright (c) 2021, Mapbox
+Copyright (c) 2025, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -2051,7 +2051,7 @@ mapbox-gl-js v2.0
 
 Mapbox Web SDK
 
-Copyright © 2021 - 2023 Mapbox, Inc. All rights reserved.
+Copyright © 2021 - 2025 Mapbox, Inc. All rights reserved.
 
 The software and files in this repository (collectively, "Software") are
 licensed under the Mapbox TOS for use only with the relevant Mapbox product(s)
@@ -2066,7 +2066,7 @@ Product Terms at www.mapbox.com/legal/service-terms.  If this Software is a
 SDK, modifications that change or interfere with marked portions of the code
 related to billing, accounting, or data collection are not authorized and the
 SDK sends limited de-identified location and usage data which is used in
-accordance with the Mapbox TOS. [Updated 2023-01]
+accordance with the Mapbox TOS. [Updated 2025-01]
 
 -------------------------------------------------------------------------------
 
@@ -2074,7 +2074,7 @@ Contains code from mapbox-gl-js v1.13 and earlier
 
 Version v1.13 of mapbox-gl-js and earlier are licensed under a BSD-3-Clause license
 
-Copyright (c) 2020, Mapbox
+Copyright (c) 2025, Mapbox
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
@@ -2105,7 +2105,7 @@ Contains a portion of d3-color https://github.com/d3/d3-color
 Contains a portion of d3-geo https://github.com/d3/d3-geo
 Contains a portion of d3-geo-projection https://github.com/d3/d3-geo-projection
 
-Copyright 2010-2021 Mike Bostock
+Copyright 2010-2025 Mike Bostock
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -2137,7 +2137,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Contains code from glfx.js
 
-Copyright (C) 2011 by Evan Wallace
+Copyright (C) 2025 by Evan Wallace
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2205,7 +2205,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2010 - 2021 Brian Carlson
+Copyright (c) 2010 - 2025 Brian Carlson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2235,7 +2235,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2012-2019 Thorsten Lorenz, Paul Miller (https://paulmillr.com)
+Copyright (c) 2012-2025 Thorsten Lorenz, Paul Miller (https://paulmillr.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2265,7 +2265,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (C) 2012-2020 by various contributors (see AUTHORS)
+Copyright (C) 2012-2025 by various contributors (see AUTHORS)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2295,7 +2295,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (C) 2012-2022 by various contributors (see AUTHORS)
+Copyright (C) 2012-2025 by various contributors (see AUTHORS)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2325,7 +2325,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2012, 2013, 2014 James Halliday <mail@substack.net>, 2009 Thomas Robinson <280north.com>
+Copyright (c) 2012, 2025, 2014, 2025 James Halliday <mail@substack.net>, 2009 - present Thomas Robinson <280north.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2355,7 +2355,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2013 José F. Romaniello
+Copyright (c) 2025 José F. Romaniello
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2386,7 +2386,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2013-present, Facebook, Inc.
+Copyright (c) 2025-present, Facebook, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2477,7 +2477,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2016 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2508,7 +2508,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2016 Vitaly Gordon (https://github.com/xpl)
+Copyright (c) 2025 Vitaly Gordon (https://github.com/xpl)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2539,7 +2539,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2016 Vladimir Agafonkin
+Copyright (c) 2025 Vladimir Agafonkin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2602,7 +2602,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2017 Anton Korzunov
+Copyright (c) 2025 Anton Korzunov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2632,7 +2632,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2017 Brian M. Carlson
+Copyright (c) 2025 Brian M. Carlson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2662,7 +2662,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2017 Ilya Kantor
+Copyright (c) 2025 Ilya Kantor
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2692,7 +2692,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2019 Connor Peet
+Copyright (c) 2025 Connor Peet
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2722,7 +2722,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2019 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2753,7 +2753,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2019 Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com), Paul Miller (https://paulmillr.com)
+Copyright (c) 2025 Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com), Paul Miller (https://paulmillr.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -2771,7 +2771,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2020 Anton Korzunov
+Copyright (c) 2025 Anton Korzunov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2801,7 +2801,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2020 Colin McDonnell
+Copyright (c) 2025 Colin McDonnell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2832,7 +2832,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2020 Evan Wallace
+Copyright (c) 2025 Evan Wallace
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2863,7 +2863,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2020 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2894,7 +2894,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2020-2023 Paweł Kuna
+Copyright (c) 2025-2025 Paweł Kuna
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2954,7 +2954,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2021 Floating UI contributors
+Copyright (c) 2025 Floating UI contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2984,7 +2984,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2021 Inspect JS
+Copyright (c) 2025 Inspect JS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3014,7 +3014,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2021 Tobias Schneider
+Copyright (c) 2025 Tobias Schneider
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3046,7 +3046,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2021 Vitaly Rtishchev
+Copyright (c) 2025 Vitaly Rtishchev
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3074,7 +3074,7 @@ mapbox-gl-js v2.0
 
 Mapbox Web SDK
 
-Copyright © 2021 - 2023 Mapbox, Inc. All rights reserved.
+Copyright © 2021 - 2025 Mapbox, Inc. All rights reserved.
 
 The software and files in this repository (collectively, "Software") are
 licensed under the Mapbox TOS for use only with the relevant Mapbox product(s)
@@ -3089,7 +3089,7 @@ Product Terms at www.mapbox.com/legal/service-terms.  If this Software is a
 SDK, modifications that change or interfere with marked portions of the code
 related to billing, accounting, or data collection are not authorized and the
 SDK sends limited de-identified location and usage data which is used in
-accordance with the Mapbox TOS. [Updated 2023-01]
+accordance with the Mapbox TOS. [Updated 2025-01]
 
 -------------------------------------------------------------------------------
 
@@ -3097,7 +3097,7 @@ Contains code from mapbox-gl-js v1.13 and earlier
 
 Version v1.13 of mapbox-gl-js and earlier are licensed under a BSD-3-Clause license
 
-Copyright (c) 2020, Mapbox
+Copyright (c) 2025, Mapbox
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
@@ -3165,7 +3165,7 @@ These packages each contain the following license and notice below:
 
 MIT License
 
-Copyright (c) 2022 Inspect JS
+Copyright (c) 2025 Inspect JS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3195,7 +3195,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2022 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3225,7 +3225,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2023 Ionuț-Cristian Florescu
+Copyright (c) 2025 Ionuț-Cristian Florescu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3255,7 +3255,7 @@ This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2023 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3450,7 +3450,7 @@ This package contains the following license and notice below:
 MIT License
 -----------
 
-Copyright (C) 2010-2020 by Philipp Dunkel, Ben Noordhuis, Elan Shankar, Paul Miller
+Copyright (C) 2010-2025 by Philipp Dunkel, Ben Noordhuis, Elan Shankar, Paul Miller
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3480,7 +3480,7 @@ This package contains the following license and notice below:
 
 The ISC License
 
-Copyright (c) 2011-2022 Isaac Z. Schlueter, Ben Noordhuis, and Contributors
+Copyright (c) 2025 Isaac Z. Schlueter, Ben Noordhuis, and Contributors
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -3504,7 +3504,7 @@ This package contains the following license and notice below:
 
 The ISC License
 
-Copyright (c) 2015, 2019 Elan Shanker
+Copyright (c) 2015, 2025 Elan Shanker
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -3528,7 +3528,7 @@ This package contains the following license and notice below:
 
 The ISC License
 
-Copyright (c) 2019 Elan Shanker, Paul Miller (https://paulmillr.com)
+Copyright (c) 2025 Elan Shanker, Paul Miller (https://paulmillr.com)
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -3552,9 +3552,9 @@ This package contains the following license and notice below:
 
 The MIT License
 
-Copyright (c) 2009 Chris Wanstrath (Ruby)
-Copyright (c) 2010-2014 Jan Lehnardt (JavaScript)
-Copyright (c) 2010-2015 The mustache.js community
+Copyright (c) 2025 Chris Wanstrath (Ruby)
+Copyright (c) 2010-2025 Jan Lehnardt (JavaScript)
+Copyright (c) 2010-2025 The mustache.js community
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -3573,7 +3573,7 @@ These packages each contain the following license and notice below:
 
 The MIT License
 
-Copyright (c) 2015 Rich Harris
+Copyright (c) 2025 Rich Harris
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3605,7 +3605,7 @@ The MIT License
 
 
 
-Copyright © 2013 Abeja Inc.
+Copyright © 2025 Abeja Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the “Software”), to deal in the
@@ -3634,7 +3634,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2010 Benjamin Thomas, Robert Kieffer
+Copyright (c) 2025 Benjamin Thomas, Robert Kieffer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3664,7 +3664,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2012-2019 Paul Miller (https://paulmillr.com), Elan Shanker
+Copyright (c) 2012-2025 Paul Miller (https://paulmillr.com), Elan Shanker
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
@@ -3694,7 +3694,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Andrey Popp
+Copyright (c) 2025 Andrey Popp
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -3723,7 +3723,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (C) 2013 Jordan Harband
+Copyright (C) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3753,7 +3753,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Blake Embrey (hello@blakeembrey.com)
+Copyright (c) 2025 Blake Embrey (hello@blakeembrey.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3783,7 +3783,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Evan Wallace
+Copyright (c) 2025 Evan Wallace
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3813,7 +3813,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Gagan Bansal
+Copyright (c) 2025 Gagan Bansal
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3843,7 +3843,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Iced Development
+Copyright (c) 2025 Iced Development
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3873,7 +3873,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (C) 2014 Jordan Harband
+Copyright (C) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3905,7 +3905,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -3934,7 +3934,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Mathias Buus
+Copyright (c) 2025 Mathias Buus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3964,7 +3964,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Mathias Buus
+Copyright (c) 2025 Mathias Buus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3994,7 +3994,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2015, 2017, Jon Schlinkert.
+Copyright (c) 2014-2015, 2017, 2025 Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4024,7 +4024,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2015, Jon Schlinkert.
+Copyright (c) 2014-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4054,7 +4054,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2016, Brian Woodward.
+Copyright (c) 2014-2025, Brian Woodward.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4084,7 +4084,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2016, Jon Schlinkert
+Copyright (c) 2014-2025, Jon Schlinkert
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4115,7 +4115,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2016, Jon Schlinkert.
+Copyright (c) 2014-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4145,7 +4145,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2017, Jon Schlinkert
+Copyright (c) 2014-2025, Jon Schlinkert
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4175,7 +4175,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2017, Jon Schlinkert.
+Copyright (c) 2014-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4206,7 +4206,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2017, Jon Schlinkert.
+Copyright (c) 2014-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4237,7 +4237,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2018, Jon Schlinkert.
+Copyright (c) 2014-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4299,7 +4299,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014, 2015 Jon Schlinkert.
+Copyright (c) 2014, 2015, 2025 Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -4332,7 +4332,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014, 2015, 2016, 2017, 2018 Simon Lydell
+Copyright (c) 2014, 2015, 2016, 2017, 2018, 2025 Simon Lydell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4362,7 +4362,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2014, 2016, 2017, 2019, 2021 Simon Lydell
+Copyright (c) 2014, 2016, 2017, 2019, 2021, 2025 Simon Lydell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4392,7 +4392,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Anand Thakker
+Copyright (c) 2025 Anand Thakker
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4416,7 +4416,7 @@ SOFTWARE.
 
 Contains geojson_wrapper.js from https://github.com/mapbox/mapbox-gl-js
 
-Copyright (c) 2014, Mapbox
+Copyright (c) 2025, Mapbox
 
 All rights reserved.
 
@@ -4454,7 +4454,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Andres Suarez <zertosh@gmail.com>
+Copyright (c) 2025 Andres Suarez <zertosh@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4484,7 +4484,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015 David Clark
+Copyright (c) 2025 David Clark
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4515,7 +4515,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Dean Landolt
+Copyright (c) 2025 Dean Landolt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4545,7 +4545,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (C) 2015 Jordan Harband
+Copyright (C) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4575,7 +4575,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Jordan Harband
+Copyright (c) 2025 Jordan Harband
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4605,7 +4605,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2017, Jon Schlinkert
+Copyright (c) 2015-2025, Jon Schlinkert
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4635,7 +4635,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2017, Jon Schlinkert.
+Copyright (c) 2015-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4665,7 +4665,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2017, Jon Schlinkert.
+Copyright (c) 2015-2025, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4756,7 +4756,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2016 James Halliday
+Copyright (c) 2025 James Halliday
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4786,7 +4786,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Zeit, Inc.
+Copyright (c) 2025 Zeit, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4816,7 +4816,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2017 Hunter Loftis <hunter@hunterloftis.com>
+Copyright (c) 2025 Hunter Loftis <hunter@hunterloftis.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -4952,7 +4952,7 @@ These packages each contain the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2017 TurfJS
+Copyright (c) 2025 TurfJS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -4981,7 +4981,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2017-present, Jon Schlinkert.
+Copyright (c) 2025-present, Jon Schlinkert.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -5011,7 +5011,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Denis Carriere
+Copyright (c) 2025 Denis Carriere
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -5040,9 +5040,9 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Mike Fogel <mike@fogel.ca> - covers everything not specially attributed to others below.
+Copyright (c) 2025 Mike Fogel <mike@fogel.ca> - covers everything not specially attributed to others below.
 
-Copyright (c) 2016 Alexander Milevski <info@w8r.name> - covers all portions originally part of github:w8r/martinez, from which this project was forked on Febuary 2, 2018.
+Copyright (c) 2025 Alexander Milevski <info@w8r.name> - covers all portions originally part of github:w8r/martinez, from which this project was forked on Febuary 2, 2018.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -5060,7 +5060,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2019 these people
+Copyright (c) 2025 these people
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -5078,7 +5078,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright (c) 2023 Vercel, Inc.
+Copyright (c) 2025 Vercel, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -5201,7 +5201,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright 2013 Andrey Sitnik <andrey@sitnik.ru>
+Copyright 2025 Andrey Sitnik <andrey@sitnik.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -5230,7 +5230,7 @@ This package contains the following license and notice below:
 
 The MIT License (MIT)
 
-Copyright 2017 Andrey Sitnik <andrey@sitnik.ru>
+Copyright 2025 Andrey Sitnik <andrey@sitnik.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -5288,7 +5288,7 @@ This package contains the following license and notice below:
 The MIT License (MIT)
 =====================
 
-Copyright © 2017 Michael Jungo
+Copyright © 2025 Michael Jungo
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -5320,7 +5320,7 @@ The following npm package may be included in this product:
 This package contains the following license and notice below:
 
 The MIT License (MIT)
-Copyright (c) 2012-2014 Raynos.
+Copyright (c) 2012-2025 Raynos.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -5469,7 +5469,7 @@ commercial entities for our efforts.
 
 -------------------------------------------------------------------------------
 New BSD License (3-clause)
-Copyright (c) 2010, Digital Bazaar, Inc.
+Copyright (c) 2025, Digital Bazaar, Inc.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
